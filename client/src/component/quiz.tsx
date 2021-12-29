@@ -1,16 +1,45 @@
 import React from 'react';
 
+interface QuizProperty {
+  [key: string]: any;
+}
+
 function Quiz() {
+  const questions: Array<object> = [
+    {
+      questionText: '첫번째 화면 입니다.',
+      answerOptions: [
+        { answerText: '1' },
+        { answerText: '2' },
+        { answerText: '3' },
+        { answerText: '4' },
+        { answerText: '5' },
+      ],
+    },
+    {
+      questionText: '두번째 화면 입니다.',
+      answerOptions: [
+        { answerText: '1' },
+        { answerText: '2' },
+        { answerText: '3' },
+        { answerText: '4' },
+        { answerText: '5' },
+      ],
+    },
+  ];
+
+  const questionArr = questions.map((el: QuizProperty) => el);
+
+  //   console.log(answerArr);
+  //   const answerOption:String = questions.map((el:QuizProperty))
+
   return (
     <div>
       <h1>1/6</h1>
-      <div>당신은 지금 휴양지에 와있습니다. 어디로 가고 싶으신가요?</div>
-      <div>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-      </div>
+      <h2>{questionArr[0].questionText}</h2>
+      {questionArr[0].answerOptions.map((el: QuizProperty, idx: number) => (
+        <button key={idx}>{el.answerText}</button>
+      ))}
     </div>
   );
 }
