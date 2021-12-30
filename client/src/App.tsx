@@ -1,12 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import Quiz from './component/quiz';
+import Main from './page/main';
 
 function App() {
   return (
-    <div className='App'>
-      <Quiz />
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <Route path='/'>
+          <Main />
+        </Route>
+      </div>
+    </BrowserRouter>
   );
 }
 
