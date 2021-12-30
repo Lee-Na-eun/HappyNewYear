@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface QuizIndex {
+export type QuizIndex = {
   index: number;
+};
+
+interface QuizProperty {
+  [key: string]: { index: number };
 }
 
 const initialState: QuizIndex = {
@@ -14,12 +18,12 @@ export const quizIndexSlice = createSlice({
   name: 'QuizIndex',
   initialState,
   reducers: {
-    nextIndex: (state: QuizIndex, action: PayloadAction<QuizIndex>) => {
-      action.payload.index = state.index++;
+    nextIndex: (state: QuizIndex) => {
+      state.index += 1;
     },
   },
 });
 
 export const { nextIndex } = quizIndexSlice.actions;
-export const QuizIndexStatus = (state: QuizIndex) => state.index; // ??
+export const QuizIndexStatus = (state: QuizProperty) => state.quizIndex; // ??
 export default quizIndexSlice.reducer;
