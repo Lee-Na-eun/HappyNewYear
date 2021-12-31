@@ -125,3 +125,5 @@ export const questions: Array<object> = [
     ],
   },
 ];
+
+export const resultTest: Array<string> = ['1번', '2번', '3번', '4번', '5번'];
