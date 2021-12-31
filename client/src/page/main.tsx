@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Quiz from '../component/quiz';
+import { MainWrap } from '../style/StyleQuiz';
 
 function Main() {
   const [isTest, setIsTest] = useState(false);
@@ -9,7 +10,7 @@ function Main() {
   };
 
   return (
-    <div>
+    <MainWrap>
       {isTest ? (
         <Quiz />
       ) : (
@@ -23,7 +24,7 @@ function Main() {
           <button onClick={handleTestStart}>시작하기</button>
         </div>
       )}
-    </div>
+    </MainWrap>
   );
 }
 
