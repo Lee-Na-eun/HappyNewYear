@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Quiz from './quiz';
+import Quiz from '../component/quiz';
 
 function Main() {
   const [isTest, setIsTest] = useState(false);
