@@ -84,7 +84,10 @@ export const questions: Array<object> = [
     questionText:
       '당신에게 하나의 초능력을 가질 수 있다면, 가장 가지고 싶은 초능력은?',
     answerOptions: [
-      { answerText: '1' },
+      {
+        answerText:
+          '먹고 싶은 건 무엇이든! 먹어도 살찌기는 커녕 근육이 붙는 헐크(?) 능력',
+      },
       {
         answerText:
           '회사 입사 뚝딱! 앨리트 되는 것도 뚝딱! 미래를 볼 수 있는 예지 능력',
