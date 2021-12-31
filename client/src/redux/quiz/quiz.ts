@@ -25,5 +25,5 @@ export const quizIndexSlice = createSlice({
 });
 
 export const { nextIndex } = quizIndexSlice.actions;
-export const QuizIndexStatus = (state: QuizProperty) => state.quizIndex; // ??
+export const QuizIndexStatus = (state: QuizProperty) => state.quizIndex;
 export default quizIndexSlice.reducer;
