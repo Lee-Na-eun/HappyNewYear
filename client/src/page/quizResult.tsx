@@ -6,9 +6,14 @@ function QuizResult() {
   const resultArrState = useSelector(resultStatus);
   const resultArr: Array<number> = resultArrState.resultOption.selectOptionArr;
 
-  const resultMaxIdx = resultArr.indexOf(Math.max(...resultArr));
+  const resultMaxIdx: number = resultArr.indexOf(Math.max(...resultArr));
 
-  return <div>{resultTest[resultMaxIdx]}</div>;
+  return (
+    <div>
+      <h3>{resultTest[resultMaxIdx].mainText}</h3>
+      <p>{resultTest[resultMaxIdx].subText}</p>
+    </div>
+  );
 }
 
 export default QuizResult;

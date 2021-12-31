@@ -126,4 +126,10 @@ export const questions: Array<object> = [
   },
 ];
 
-export const resultTest: Array<string> = ['1번', '2번', '3번', '4번', '5번'];
+export const resultTest: Array<{ mainText: String; subText: String }> = [
+  { mainText: '1', subText: '1' },
+  { mainText: '2', subText: '2' },
+  { mainText: '3', subText: '3' },
+  { mainText: '4', subText: '4' },
+  { mainText: '5', subText: '5' },
+];
