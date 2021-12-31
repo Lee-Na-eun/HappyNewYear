@@ -1,4 +1,4 @@
-import { combineReducers, Store } from 'redux';
+import { combineReducers } from 'redux';
 import quizIndexReducer from './quiz/quiz';
 import resultOptionReducer from './quiz/result';
 

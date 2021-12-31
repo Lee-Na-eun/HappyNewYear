@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { ReducerType } from '../redux/rootReducer';
+// import { ReducerType } from '../redux/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { nextIndex, QuizIndexStatus } from '../redux/quiz/quiz';
-import { resultArr, resultStatus, OptionArr } from '../redux/quiz/result';
+import { resultArr, resultStatus } from '../redux/quiz/result';
 import { questions } from '../quizData/quizData';
 
 function Quiz() {
   const dispatch = useDispatch();
   const quizState = useSelector(QuizIndexStatus);
   const resultArrState = useSelector(resultStatus);
-
-  const [arr, setArr] = useState([0, 0, 0, 0, 0]);
 
   const [isEnd, setIsEnd] = useState(false);
 
