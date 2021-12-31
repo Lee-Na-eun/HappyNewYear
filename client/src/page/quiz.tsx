@@ -1,72 +1,10 @@
 import React, { useState } from 'react';
 import { ReducerType } from '../redux/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { nextIndex, QuizIndex, QuizIndexStatus } from '../redux/quizIndex/quiz';
+import { nextIndex, QuizIndexStatus } from '../redux/quizIndex/quiz';
+import { questions } from '../quizData/quizData';
 
 function Quiz() {
-  const questions: Array<object> = [
-    {
-      questionText: '첫번째 화면 입니다.',
-      answerOptions: [
-        { answerText: '1' },
-        { answerText: '2' },
-        { answerText: '3' },
-        { answerText: '4' },
-        { answerText: '5' },
-      ],
-    },
-    {
-      questionText: '두번째 화면 입니다.',
-      answerOptions: [
-        { answerText: 'one' },
-        { answerText: 'two' },
-        { answerText: 'three' },
-        { answerText: 'four' },
-        { answerText: 'five' },
-      ],
-    },
-    {
-      questionText: '세번째 화면 입니다.',
-      answerOptions: [
-        { answerText: '1' },
-        { answerText: '2' },
-        { answerText: '3' },
-        { answerText: '4' },
-        { answerText: '5' },
-      ],
-    },
-    {
-      questionText: '네번째 화면 입니다.',
-      answerOptions: [
-        { answerText: '1' },
-        { answerText: '2' },
-        { answerText: '3' },
-        { answerText: '4' },
-        { answerText: '5' },
-      ],
-    },
-    {
-      questionText: '다섯번째 화면 입니다.',
-      answerOptions: [
-        { answerText: '1' },
-        { answerText: '2' },
-        { answerText: '3' },
-        { answerText: '4' },
-        { answerText: '5' },
-      ],
-    },
-    {
-      questionText: '여섯번째 화면 입니다.',
-      answerOptions: [
-        { answerText: '1' },
-        { answerText: '2' },
-        { answerText: '3' },
-        { answerText: '4' },
-        { answerText: '5' },
-      ],
-    },
-  ];
-
   const dispatch = useDispatch();
   const quizState = useSelector(QuizIndexStatus);
 
@@ -84,7 +22,9 @@ function Quiz() {
 
   return (
     <div>
-      <h1>1/6</h1>
+      <h1>
+        {quizState.index + 1}/{questions.length}
+      </h1>
       <h2>{questionArr[quizState.index].questionText}</h2>
       {questionArr[quizState.index].answerOptions.map(
         (el: QuizProperty, idx: number) => (
