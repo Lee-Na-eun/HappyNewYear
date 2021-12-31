@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import { ReducerType } from '../redux/rootReducer';
+import QuizResult from './quizResult';
 import { useDispatch, useSelector } from 'react-redux';
 import { nextIndex, QuizIndexStatus } from '../redux/quiz/quiz';
 import { resultArr, resultStatus } from '../redux/quiz/result';
@@ -23,16 +24,15 @@ function Quiz() {
     if (quizStaeIdx > 4) {
       setIsEnd(true);
     }
-    console.log(idx);
     dispatch(resultArr({ idx }));
     dispatch(nextIndex());
   };
 
-  console.log(resultArrState.resultOption.selectOptionArr);
-
   return (
     <div>
-      {isEnd ? null : (
+      {isEnd ? (
+        <QuizResult />
+      ) : (
         <>
           <h1>
             {quizState.index + 1}/{questions.length}
