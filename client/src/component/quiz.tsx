@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nextIndex, QuizIndexStatus } from '../redux/quiz/quiz';
 import { resultArr, resultStatus } from '../redux/quiz/result';
 import { questions } from '../quizData/quizData';
+import { Button } from '../style/StyleQuiz';
 
 function Quiz() {
   const dispatch = useDispatch();
@@ -40,12 +41,12 @@ function Quiz() {
           <h2>{questionArr[quizState.index].questionText}</h2>
           {questionArr[quizState.index].answerOptions.map(
             (el: QuizProperty, idx: number) => (
-              <button
+              <Button
                 key={idx}
                 onClick={() => handlePlusIndex(quizState.index, idx)}
               >
                 {el.answerText}
-              </button>
+              </Button>
             )
           )}
         </>
