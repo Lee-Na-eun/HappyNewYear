@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nextIndex, QuizIndexStatus } from '../redux/quiz/quiz';
 import { resultArr, resultStatus } from '../redux/quiz/result';
 import { questions } from '../quizData/quizData';
-import { Button } from '../style/StyleQuiz';
+import { Button, QuestionWrap } from '../style/StyleQuiz';
 
 function Quiz() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function Quiz() {
       {isEnd ? (
         <QuizResult />
       ) : (
-        <>
+        <QuestionWrap>
           <h1>
             {quizState.index + 1}/{questions.length}
           </h1>
@@ -49,7 +49,7 @@ function Quiz() {
               </Button>
             )
           )}
-        </>
+        </QuestionWrap>
       )}
     </div>
   );
