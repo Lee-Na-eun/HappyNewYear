@@ -20,6 +20,9 @@ export const MainWrap = styled.div`
   justify-content: center;
   background-color: #fff;
   border-radius: 50px;
+  @media (max-width: 800px) {
+    width: 70%;
+  }
 `;
 
 export const StartButton = styled.button`
@@ -36,11 +39,17 @@ export const StartButton = styled.button`
   :hover {
     background-color: #ffb4b4;
   }
+  @media (max-width: 800px) {
+    width: 70%;
+  }
 `;
 
 export const QuestionWrap = styled.div`
   width: 500px;
   margin: 0 auto;
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `;
 
 export const Button = styled.button`
@@ -56,6 +65,7 @@ export const Button = styled.button`
   color: #fff;
   cursor: pointer;
   transition: 0.2s;
+  padding: 0 20px;
   :hover {
     background-color: #ffb4b4;
   }
