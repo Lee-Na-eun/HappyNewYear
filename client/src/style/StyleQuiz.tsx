@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const MainWrapBox = styled.div`
   height: 100vh;
@@ -149,7 +149,7 @@ export const Button = styled.button`
 export const ResultWrap = styled.div`
   > h3 {
     font-size: 25px;
-    padding: 30px 20px;
+    padding: 20px 20px;
     @media (max-width: 420px) {
       font-size: 15px;
     }
@@ -169,5 +169,48 @@ export const ResultWrap = styled.div`
       width: 100px;
       height: 100px;
     }
+  }
+`;
+
+const blinkEffect = keyframes`
+   0% {
+      background-color: #FFDCDC;
+    }
+    50% {
+      background-color: #ffb4b4;
+    }
+    100%{
+      background-color: #FFDCDC;
+    }
+`;
+
+export const GoRoomButton = styled.div`
+  background-color: #fff;
+  width: 30%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background-color: #ffb4b4;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  margin: 0 auto;
+  animation: ${blinkEffect} 1.5s ease;
+  animation-iteration-count: 5;
+  font-size: 13px;
+  > a {
+    display: block;
+    line-height: 50px;
+    text-decoration: none;
+    color: #fff;
+    @media (max-width: 420px) {
+      height: 30px;
+      line-height: 30px;
+      font-size: 9px;
+    }
+  }
+  @media (max-width: 420px) {
+    height: 30px;
   }
 `;
