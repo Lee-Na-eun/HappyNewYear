@@ -39,5 +39,13 @@ export const HiddenMenuWrap = styled.div`
     > li:nth-child(1) {
       margin-top: 0;
     }
+    > li:nth-child(2) {
+      > a {
+        display: block;
+        width: 120px;
+        height: 50px;
+        color: #fff;
+      }
+    }
   }
 `;

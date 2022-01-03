@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
 import { navOpen, navBooleanStatus, navClose } from '../redux/nav/nav';
+import { Link } from 'react-router-dom';
 
 function Nav() {
   const isNavOpen = useSelector(navBooleanStatus);
@@ -33,7 +34,9 @@ function Nav() {
           <ul>
             <li>로그인 / 회원가입</li>
             {/* <li>내 방으로 가기</li> */}
-            <li>테스트 다시 하기</li>
+            <li>
+              <Link to='/'>테스트 다시 하기</Link>
+            </li>
             <li onClick={handleNavClose}>닫기</li>
           </ul>
         </HiddenMenuWrap>
