@@ -23,7 +23,21 @@ function Nav() {
 
   return (
     <div>
-      {statusResult.isModalOpen.open ? <LoginSignup /> : null}
+      {statusResult.isModalOpen.open ? (
+        <div>
+          <LoginSignup />
+        </div>
+      ) : (
+        <div
+          style={{
+            opacity: 0,
+            zIndex: -999,
+            transition: '0.3s',
+          }}
+        >
+          <LoginSignup />
+        </div>
+      )}
       <NavWrap>
         <ul>
           <li onClick={handleNavOpen}>이거슨 로고</li>

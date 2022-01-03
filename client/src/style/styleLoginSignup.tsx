@@ -1,4 +1,32 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+    0% {
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+`;
+
+const fadeOut = keyframes`
+    0% {
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+`;
+
+export const LoginSignupModal = styled.div`
+  > .fadeIn {
+    animation: ${fadeIn} 0.3s ease;
+  }
+
+  > .fadeOut {
+    animation: ${fadeOut} 0.3s ease;
+  }
+`;
 
 export const ModalWrap = styled.div`
   position: fixed;
@@ -9,6 +37,9 @@ export const ModalWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  > .fadeIn {
+    background-color: red;
+  }
 `;
 
 export const ModalBox = styled.div`

@@ -1,4 +1,5 @@
 import {
+  LoginSignupModal,
   ModalWrap,
   ModalBox,
   SelectLoginSignup,
@@ -30,9 +31,11 @@ function LoginSignup() {
     dispatch(modalClose());
   };
 
+  console.log(statusResult);
+
   return (
-    <div>
-      <ModalWrap>
+    <LoginSignupModal>
+      <ModalWrap className={statusResult.isModalOpen.open ? 'fadeIn' : ''}>
         <ModalBox>
           <SelectLoginSignup>
             <li
@@ -89,7 +92,7 @@ function LoginSignup() {
           )}
         </ModalBox>
       </ModalWrap>
-    </div>
+    </LoginSignupModal>
   );
 }
 
