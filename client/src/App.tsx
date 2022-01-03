@@ -3,11 +3,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Main from './page/main';
 import MyRoom from './page/myRoom';
+import Nav from './component/nav';
 
 function App() {
   return (
     <BrowserRouter>
       <div className='App'>
+        <Switch>
+          <Nav />
+        </Switch>
         <Switch>
           <Route exact path='/'>
             <Main />

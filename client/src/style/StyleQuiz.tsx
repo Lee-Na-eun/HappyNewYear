@@ -174,13 +174,13 @@ export const ResultWrap = styled.div`
 
 const blinkEffect = keyframes`
    0% {
-      background-color: #FFDCDC;
-    }
-    50% {
       background-color: #ffb4b4;
     }
-    100%{
+    50% {
       background-color: #FFDCDC;
+    }
+    100%{
+      background-color: #ffb4b4;
     }
 `;
 
@@ -197,7 +197,7 @@ export const GoRoomButton = styled.div`
   transition: 0.2s;
   margin: 0 auto;
   animation: ${blinkEffect} 1.5s ease;
-  animation-iteration-count: 5;
+  animation-iteration-count: 4;
   font-size: 13px;
   > a {
     display: block;
