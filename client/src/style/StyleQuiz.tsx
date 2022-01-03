@@ -21,13 +21,60 @@ export const MainWrap = styled.div`
   background-color: #fff;
   border-radius: 50px;
   @media (max-width: 800px) {
-    width: 70%;
+    width: 90%;
+  }
+  @media (max-width: 420px) {
+    height: 400px;
+  }
+`;
+
+export const StartWrap = styled.div`
+  /* height: 400px; */
+  display: flex;
+  flex-direction: column;
+  > h1 {
+    padding: 0 20px 20px 20px;
+    @media (max-width: 800px) {
+      font-size: 25px;
+    }
+    @media (max-width: 420px) {
+      font-size: 16px;
+    }
+    @media (max-width: 320px) {
+      font-size: 12px;
+    }
+  }
+  > p {
+    padding: 0 20px 40px 20px;
+    line-height: 30px;
+    @media (max-width: 800px) {
+      font-size: 15px;
+    }
+    @media (max-width: 420px) {
+      font-size: 12px;
+    }
+    @media (max-width: 320px) {
+      font-size: 8px;
+    }
+  }
+  > div {
+    /* padding-bottom: 30px; */
+  }
+  > img {
+    width: 150px;
+    height: 150px;
+    /* background-color: orange; */
+    margin: 0 auto;
+    @media (max-width: 420px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 `;
 
 export const StartButton = styled.button`
   background-color: #fff;
-  width: 200px;
+  width: 70%;
   height: 50px;
   border: none;
   border-radius: 50px;
@@ -36,11 +83,18 @@ export const StartButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+  margin: 0 auto;
   :hover {
     background-color: #ffb4b4;
   }
-  @media (max-width: 800px) {
-    width: 70%;
+  @media (max-width: 420px) {
+    width: 60%;
+    height: 35px;
+    font-size: 10px;
+  }
+  @media (max-width: 320px) {
+    height: 30px;
+    font-size: 8px;
   }
 `;
 
@@ -48,7 +102,9 @@ export const QuestionWrap = styled.div`
   width: 500px;
   margin: 0 auto;
   @media (max-width: 800px) {
-    width: 90%;
+    width: 94%;
+  }
+  > h1 {
   }
 `;
 
