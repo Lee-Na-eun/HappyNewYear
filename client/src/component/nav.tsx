@@ -34,8 +34,8 @@ function Nav() {
           <ul>
             <li>로그인 / 회원가입</li>
             {/* <li>내 방으로 가기</li> */}
-            <li>
-              <Link to='/'>테스트 다시 하기</Link>
+            <li onClick={() => window.location.replace('/')}>
+              테스트 다시 하기
             </li>
             <li onClick={handleNavClose}>닫기</li>
           </ul>
@@ -47,14 +47,7 @@ function Nav() {
             zIndex: -1,
             transition: '0.3s',
           }}
-        >
-          <ul>
-            <li>로그인 / 회원가입</li>
-            {/* <li>내 방으로 가기</li> */}
-            <li>테스트 다시 하기</li>
-            <li onClick={handleNavClose}>닫기</li>
-          </ul>
-        </HiddenMenuWrap>
+        />
       )}
     </div>
   );
