@@ -3,6 +3,7 @@ import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
 import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen, modalClose } from '../redux/nav/loginSignup';
 import { resultStatus } from '../redux/quiz/result';
+import LoginSignup from '../modal/loginSignup';
 
 function Nav() {
   const statusResult = useSelector(resultStatus);
@@ -20,14 +21,11 @@ function Nav() {
     dispatch(modalOpen());
   };
 
-  const handleModalClose = () => {
-    dispatch(modalClose());
-  };
-
   console.log(statusResult);
 
   return (
     <div>
+      {statusResult.isModalOpen.open ? <LoginSignup /> : null}
       <NavWrap>
         <ul>
           <li onClick={handleNavOpen}>이거슨 로고</li>
