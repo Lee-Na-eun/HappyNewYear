@@ -19,12 +19,12 @@ export const MainWrap = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  border-radius: 50px;
+  border-radius: 30px;
   @media (max-width: 800px) {
     width: 90%;
   }
   @media (max-width: 420px) {
-    height: 400px;
+    height: 450px;
   }
 `;
 
@@ -35,7 +35,7 @@ export const StartWrap = styled.div`
   > h1 {
     padding: 0 20px 20px 20px;
     @media (max-width: 800px) {
-      font-size: 25px;
+      font-size: 24px;
     }
     @media (max-width: 420px) {
       font-size: 16px;
@@ -45,16 +45,19 @@ export const StartWrap = styled.div`
     }
   }
   > p {
-    padding: 0 20px 40px 20px;
+    padding: 0 15px 40px 15px;
     line-height: 30px;
     @media (max-width: 800px) {
       font-size: 15px;
     }
     @media (max-width: 420px) {
       font-size: 12px;
+      line-height: 25px;
+      padding-bottom: 25px;
     }
     @media (max-width: 320px) {
       font-size: 8px;
+      line-height: 20px;
     }
   }
   > div {
@@ -101,10 +104,18 @@ export const StartButton = styled.button`
 export const QuestionWrap = styled.div`
   width: 500px;
   margin: 0 auto;
-  @media (max-width: 800px) {
-    width: 94%;
+  @media (max-width: 600px) {
+    width: 80vw;
   }
   > h1 {
+    @media (max-width: 600px) {
+      font-size: 25px;
+    }
+  }
+  > h2 {
+    @media (max-width: 600px) {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -124,5 +135,9 @@ export const Button = styled.button`
   padding: 0 20px;
   :hover {
     background-color: #ffb4b4;
+  }
+  @media (max-width: 420px) {
+    font-size: 10px;
+    height: 40px;
   }
 `;
