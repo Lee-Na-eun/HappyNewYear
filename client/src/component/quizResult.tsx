@@ -1,7 +1,8 @@
 import { resultStatus } from '../redux/quiz/result';
 import { useSelector } from 'react-redux';
 import { resultTest } from '../quizData/quizData';
-import { ResultWrap } from '../style/StyleQuiz';
+import { ResultWrap, GoRoomButton } from '../style/StyleQuiz';
+import { Link } from 'react-router-dom';
 
 function QuizResult() {
   const resultArrState = useSelector(resultStatus);
@@ -9,12 +10,19 @@ function QuizResult() {
 
   const resultMaxIdx: number = resultArr.indexOf(Math.max(...resultArr));
 
+  console.log(resultMaxIdx);
+
   return (
-    <ResultWrap>
-      <h3>{resultTest[resultMaxIdx].mainText}</h3>
-      <p>{resultTest[resultMaxIdx].subText}</p>
-      <img />
-    </ResultWrap>
+    <div>
+      <ResultWrap>
+        <img />
+        <h3>{resultTest[resultMaxIdx].mainText}</h3>
+        <p>{resultTest[resultMaxIdx].subText}</p>
+        <GoRoomButton>
+          <Link to='/myRoom'>내 방 꾸미러 가기</Link>
+        </GoRoomButton>
+      </ResultWrap>
+    </div>
   );
 }
 
