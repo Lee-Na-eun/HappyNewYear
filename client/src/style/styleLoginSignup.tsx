@@ -22,9 +22,9 @@ export const LoginSignupModal = styled.div`
   > .fadeIn {
     animation: ${fadeIn} 0.3s ease;
   }
-
   > .fadeOut {
-    animation: ${fadeOut} 0.3s ease;
+    display: none;
+    transition: 0.3s;
   }
 `;
 

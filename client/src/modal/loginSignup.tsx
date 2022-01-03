@@ -35,7 +35,9 @@ function LoginSignup() {
 
   return (
     <LoginSignupModal>
-      <ModalWrap className={statusResult.isModalOpen.open ? 'fadeIn' : ''}>
+      <ModalWrap
+        className={statusResult.isModalOpen.open ? 'fadeIn' : 'fadeOut'}
+      >
         <ModalBox>
           <SelectLoginSignup>
             <li
