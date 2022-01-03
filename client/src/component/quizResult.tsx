@@ -10,8 +10,6 @@ function QuizResult() {
 
   const resultMaxIdx: number = resultArr.indexOf(Math.max(...resultArr));
 
-  console.log(resultMaxIdx);
-
   return (
     <div>
       <ResultWrap>

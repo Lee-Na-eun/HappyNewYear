@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const NavWrap = styled.div`
   position: fixed;
@@ -9,7 +9,6 @@ export const NavWrap = styled.div`
     height: 70px;
     line-height: 70px;
     > li {
-      flex: 1 1 auto;
       padding: 0 50px;
     }
   }
