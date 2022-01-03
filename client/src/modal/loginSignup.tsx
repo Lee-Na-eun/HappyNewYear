@@ -5,6 +5,7 @@ import {
   LoginWrap,
   SignupWrap,
   InputWrap,
+  ButtonWrap,
 } from '../style/styleLoginSignup';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -59,8 +60,10 @@ function LoginSignup() {
                   <input />
                 </div>
               </InputWrap>
-              <button>로그인</button>
-              <button onClick={handleCloseModal}>취소</button>
+              <ButtonWrap>
+                <button>로그인</button>
+                <button onClick={handleCloseModal}>취소</button>
+              </ButtonWrap>
             </LoginWrap>
           ) : (
             <SignupWrap>
@@ -78,8 +81,10 @@ function LoginSignup() {
                   <input />
                 </div>
               </InputWrap>
-              <button>회원가입</button>
-              <button onClick={handleCloseModal}>취소</button>
+              <ButtonWrap>
+                <button>회원가입</button>
+                <button onClick={handleCloseModal}>취소</button>
+              </ButtonWrap>
             </SignupWrap>
           )}
         </ModalBox>
