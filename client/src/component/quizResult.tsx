@@ -1,6 +1,7 @@
 import { resultStatus } from '../redux/quiz/result';
 import { useSelector } from 'react-redux';
 import { resultTest } from '../quizData/quizData';
+import { ResultWrap } from '../style/StyleQuiz';
 
 function QuizResult() {
   const resultArrState = useSelector(resultStatus);
@@ -9,10 +10,11 @@ function QuizResult() {
   const resultMaxIdx: number = resultArr.indexOf(Math.max(...resultArr));
 
   return (
-    <div>
+    <ResultWrap>
       <h3>{resultTest[resultMaxIdx].mainText}</h3>
       <p>{resultTest[resultMaxIdx].subText}</p>
-    </div>
+      <img />
+    </ResultWrap>
   );
 }
 

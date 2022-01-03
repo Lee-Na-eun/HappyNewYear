@@ -108,6 +108,7 @@ export const QuestionWrap = styled.div`
     width: 80vw;
   }
   > h1 {
+    padding-bottom: 10px;
     @media (max-width: 600px) {
       font-size: 25px;
     }
@@ -115,6 +116,9 @@ export const QuestionWrap = styled.div`
   > h2 {
     @media (max-width: 600px) {
       font-size: 20px;
+    }
+    @media (max-width: 420px) {
+      font-size: 16px;
     }
   }
 `;
@@ -139,5 +143,31 @@ export const Button = styled.button`
   @media (max-width: 420px) {
     font-size: 10px;
     height: 40px;
+  }
+`;
+
+export const ResultWrap = styled.div`
+  > h3 {
+    font-size: 25px;
+    padding: 30px 20px;
+    @media (max-width: 420px) {
+      font-size: 15px;
+    }
+  }
+  > p {
+    padding: 20px 30px;
+    @media (max-width: 420px) {
+      font-size: 10px;
+      padding: 0 20px 20px 20px;
+    }
+  }
+  > img {
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    @media (max-width: 420px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 `;
