@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
-import { navOpen, navBooleanStatus, navClose } from '../redux/nav/nav';
-import { Link } from 'react-router-dom';
+import { navOpen, navClose } from '../redux/nav/nav';
+import { modalOpen, modalClose } from '../redux/nav/loginSignup';
+import { resultStatus } from '../redux/quiz/result';
 
 function Nav() {
-  const isNavOpen = useSelector(navBooleanStatus);
+  const statusResult = useSelector(resultStatus);
   const dispatch = useDispatch();
 
   const handleNavOpen = () => {
@@ -15,6 +16,16 @@ function Nav() {
     dispatch(navClose());
   };
 
+  const handleModalOpen = () => {
+    dispatch(modalOpen());
+  };
+
+  const handleModalClose = () => {
+    dispatch(modalClose());
+  };
+
+  console.log(statusResult);
+
   return (
     <div>
       <NavWrap>
@@ -23,7 +34,7 @@ function Nav() {
         </ul>
       </NavWrap>
 
-      {isNavOpen.isNavOpen.open ? (
+      {statusResult.isNavOpen.open ? (
         <HiddenMenuWrap
           style={{
             opacity: 1,
@@ -32,7 +43,7 @@ function Nav() {
           }}
         >
           <ul>
-            <li>로그인 / 회원가입</li>
+            <li onClick={handleModalOpen}>로그인 / 회원가입</li>
             {/* <li>내 방으로 가기</li> */}
             <li onClick={() => window.location.replace('/')}>
               테스트 다시 하기

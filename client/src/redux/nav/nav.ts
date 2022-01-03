@@ -22,5 +22,4 @@ export const navOpenSlice = createSlice({
 });
 
 export const { navOpen, navClose } = navOpenSlice.actions;
-export const navBooleanStatus = (state: any) => state;
 export default navOpenSlice.reducer;
