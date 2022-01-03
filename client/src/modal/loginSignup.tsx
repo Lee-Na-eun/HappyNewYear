@@ -7,8 +7,14 @@ import {
   InputWrap,
 } from '../style/styleLoginSignup';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { resultStatus } from '../redux/quiz/result';
+import { modalClose } from '../redux/nav/loginSignup';
 
 function LoginSignup() {
+  const statusResult = useSelector(resultStatus);
+  const dispatch = useDispatch();
+
   const [isLogin, setIsLogin] = useState(true);
 
   const handleChangeSignup = () => {
@@ -17,6 +23,10 @@ function LoginSignup() {
 
   const handleChangeLogin = () => {
     setIsLogin(true);
+  };
+
+  const handleCloseModal = () => {
+    dispatch(modalClose());
   };
 
   return (
@@ -50,7 +60,7 @@ function LoginSignup() {
                 </div>
               </InputWrap>
               <button>로그인</button>
-              <button>취소</button>
+              <button onClick={handleCloseModal}>취소</button>
             </LoginWrap>
           ) : (
             <SignupWrap>
@@ -69,7 +79,7 @@ function LoginSignup() {
                 </div>
               </InputWrap>
               <button>회원가입</button>
-              <button>취소</button>
+              <button onClick={handleCloseModal}>취소</button>
             </SignupWrap>
           )}
         </ModalBox>

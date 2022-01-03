@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
 import { navOpen, navClose } from '../redux/nav/nav';
-import { modalOpen, modalClose } from '../redux/nav/loginSignup';
+import { modalOpen } from '../redux/nav/loginSignup';
 import { resultStatus } from '../redux/quiz/result';
 import LoginSignup from '../modal/loginSignup';
 
@@ -20,8 +20,6 @@ function Nav() {
   const handleModalOpen = () => {
     dispatch(modalOpen());
   };
-
-  console.log(statusResult);
 
   return (
     <div>
