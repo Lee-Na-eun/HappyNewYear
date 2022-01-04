@@ -65,14 +65,14 @@ export const SelectLoginSignup = styled.ul`
 `;
 
 export const LoginWrap = styled.div`
-  margin-top: 30px;
+  margin-top: 80px;
 `;
 
 export const SignupWrap = styled.div`
-  margin-top: 30px;
+  margin-top: 50px;
 `;
 
-export const InputWrap = styled.div`
+export const SignupInputWrap = styled.div`
   height: 200px;
   display: flex;
   flex-direction: column;
@@ -110,7 +110,46 @@ export const InputWrap = styled.div`
   }
 `;
 
+export const LoginInputWrap = styled.div`
+  /* height: 220px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > .inputWrap {
+    width: 400px;
+    padding: 20px 0;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+    > input {
+      width: 250px;
+      outline: none;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #fff;
+      color: #fff;
+      padding: 0 0 5px 5px;
+      @media (max-width: 600px) {
+        width: 55%;
+      }
+    }
+    > span {
+      display: inline-block;
+      width: 100px;
+      text-align: left;
+      color: #fff;
+      font-size: 13px;
+      @media (max-width: 600px) {
+        width: 25%;
+        font-size: 10px;
+      }
+    }
+  }
+`;
+
 export const ButtonWrap = styled.div`
+  margin-top: 10px;
   > button {
     width: 100px;
     height: 40px;
@@ -129,8 +168,9 @@ export const ButtonWrap = styled.div`
 `;
 
 export const AlertError = styled.div`
-  height: 50px;
+  height: 30px;
   color: #ffca98;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 10px;
+  margin-top: 10px;
 `;

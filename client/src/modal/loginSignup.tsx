@@ -5,7 +5,8 @@ import {
   SelectLoginSignup,
   LoginWrap,
   SignupWrap,
-  InputWrap,
+  LoginInputWrap,
+  SignupInputWrap,
   ButtonWrap,
   AlertError,
 } from '../style/styleLoginSignup';
@@ -25,6 +26,13 @@ function LoginSignup() {
     signupRepassword: '',
   });
 
+  const [loginInfo, setLoginInfo] = useState({
+    loginId: '',
+    loginPassword: '',
+  });
+
+  const [errMsg, setErrMsg] = useState('');
+
   const handleChangeSignup = () => {
     setIsLogin(false);
   };
@@ -41,7 +49,12 @@ function LoginSignup() {
     setSignupInfo({ ...signupInfo, [key]: e.target.value });
   };
 
+  const handleLoginInputValue = (key: string) => (e: any) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+  };
+
   const handleSignup = async () => {
+    // axios 요청 해주기, error 메세지 띄워주기
     try {
       const validId = /^[a-zA-zㄱ-ㅎ가-힣0-9]{2,15}$/;
       const validPassword = /^[a-zA-z0-9]{8,}$/;
@@ -51,21 +64,33 @@ function LoginSignup() {
         !signupInfo.signupPassword ||
         !signupInfo.signupRepassword
       ) {
-        console.log('정보를 모두 입력해주세요.');
+        setErrMsg('정보를 모두 입력해주세요.');
       } else if (!validId.test(signupInfo.signupId)) {
-        console.log('아이디는 2글자 이상 15글자 이하여야 합니다.');
+        setErrMsg('아이디는 2글자 이상 15글자 이하여야 합니다.');
       } else if (!validPassword.test(signupInfo.signupPassword)) {
-        console.log('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
+        setErrMsg('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
       } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
-        console.log('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+        setErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
       }
     } catch (e) {
       console.log(e);
     }
   };
 
+  const handleLogin = async () => {
+    // axios 요청 해주기, error 메세지 띄워주기
+    try {
+      if (!loginInfo.loginId || !loginInfo.loginPassword) {
+        setErrMsg('정보를 모두 입력해주세요.');
+      }
+      console.log('axios 요청 해주세요');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   // console.log(statusResult);
-  // console.log(signupInfo);
+  // console.log(loginInfo);
 
   return (
     <LoginSignupModal>
@@ -89,25 +114,25 @@ function LoginSignup() {
           </SelectLoginSignup>
           {isLogin ? (
             <LoginWrap>
-              <InputWrap>
+              <LoginInputWrap>
                 <div className='inputWrap'>
                   <span>아이디</span>
-                  <input />
+                  <input onChange={handleLoginInputValue('loginId')} />
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호</span>
-                  <input />
+                  <input onChange={handleLoginInputValue('loginPassword')} />
                 </div>
-              </InputWrap>
-              <AlertError>uuu</AlertError>
+              </LoginInputWrap>
+              <AlertError>{errMsg}</AlertError>
               <ButtonWrap>
-                <button>로그인</button>
+                <button onClick={handleLogin}>로그인</button>
                 <button onClick={handleCloseModal}>취소</button>
               </ButtonWrap>
             </LoginWrap>
           ) : (
             <SignupWrap>
-              <InputWrap>
+              <SignupInputWrap>
                 <div className='inputWrap'>
                   <span>아이디</span>
                   <input onChange={handleSignupInputValue('signupId')} />
@@ -122,8 +147,8 @@ function LoginSignup() {
                     onChange={handleSignupInputValue('signupRepassword')}
                   />
                 </div>
-              </InputWrap>
-              <AlertError>hihi</AlertError>
+              </SignupInputWrap>
+              <AlertError>{errMsg}</AlertError>
               <ButtonWrap>
                 <button onClick={handleSignup}>회원가입</button>
                 <button onClick={handleCloseModal}>취소</button>
