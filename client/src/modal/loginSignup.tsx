@@ -7,6 +7,7 @@ import {
   SignupWrap,
   InputWrap,
   ButtonWrap,
+  AlertError,
 } from '../style/styleLoginSignup';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +19,11 @@ function LoginSignup() {
   const dispatch = useDispatch();
 
   const [isLogin, setIsLogin] = useState(true);
+  const [signupInfo, setSignupInfo] = useState({
+    signupId: '',
+    signupPassword: '',
+    signupRepassword: '',
+  });
 
   const handleChangeSignup = () => {
     setIsLogin(false);
@@ -31,7 +37,35 @@ function LoginSignup() {
     dispatch(modalClose());
   };
 
-  console.log(statusResult);
+  const handleSignupInputValue = (key: string) => (e: any) => {
+    setSignupInfo({ ...signupInfo, [key]: e.target.value });
+  };
+
+  const handleSignup = async () => {
+    try {
+      const validId = /^[a-zA-zㄱ-ㅎ가-힣0-9]{2,15}$/;
+      const validPassword = /^[a-zA-z0-9]{8,}$/;
+
+      if (
+        !signupInfo.signupId ||
+        !signupInfo.signupPassword ||
+        !signupInfo.signupRepassword
+      ) {
+        console.log('정보를 모두 입력해주세요.');
+      } else if (!validId.test(signupInfo.signupId)) {
+        console.log('아이디는 2글자 이상 15글자 이하여야 합니다.');
+      } else if (!validPassword.test(signupInfo.signupPassword)) {
+        console.log('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
+      } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
+        console.log('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // console.log(statusResult);
+  // console.log(signupInfo);
 
   return (
     <LoginSignupModal>
@@ -65,6 +99,7 @@ function LoginSignup() {
                   <input />
                 </div>
               </InputWrap>
+              <AlertError>uuu</AlertError>
               <ButtonWrap>
                 <button>로그인</button>
                 <button onClick={handleCloseModal}>취소</button>
@@ -75,19 +110,22 @@ function LoginSignup() {
               <InputWrap>
                 <div className='inputWrap'>
                   <span>아이디</span>
-                  <input />
+                  <input onChange={handleSignupInputValue('signupId')} />
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호</span>
-                  <input />
+                  <input onChange={handleSignupInputValue('signupPassword')} />
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호 재입력</span>
-                  <input />
+                  <input
+                    onChange={handleSignupInputValue('signupRepassword')}
+                  />
                 </div>
               </InputWrap>
+              <AlertError>hihi</AlertError>
               <ButtonWrap>
-                <button>회원가입</button>
+                <button onClick={handleSignup}>회원가입</button>
                 <button onClick={handleCloseModal}>취소</button>
               </ButtonWrap>
             </SignupWrap>

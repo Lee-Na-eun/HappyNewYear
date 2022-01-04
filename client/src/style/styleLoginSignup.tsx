@@ -9,15 +9,6 @@ const fadeIn = keyframes`
     }
 `;
 
-const fadeOut = keyframes`
-    0% {
-      opacity: 1;
-    }
-    100%{
-      opacity: 0;
-    }
-`;
-
 export const LoginSignupModal = styled.div`
   > .fadeIn {
     animation: ${fadeIn} 0.3s ease;
@@ -82,7 +73,7 @@ export const SignupWrap = styled.div`
 `;
 
 export const InputWrap = styled.div`
-  height: 250px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,7 +93,7 @@ export const InputWrap = styled.div`
       color: #fff;
       padding: 0 0 5px 5px;
       @media (max-width: 600px) {
-        width: 60%;
+        width: 55%;
       }
     }
     > span {
@@ -112,7 +103,8 @@ export const InputWrap = styled.div`
       color: #fff;
       font-size: 13px;
       @media (max-width: 600px) {
-        width: 20%;
+        width: 25%;
+        font-size: 10px;
       }
     }
   }
@@ -134,4 +126,11 @@ export const ButtonWrap = styled.div`
   > button:nth-child(1) {
     margin-left: 0;
   }
+`;
+
+export const AlertError = styled.div`
+  height: 50px;
+  color: #ffca98;
+  font-weight: bold;
+  font-size: 14px;
 `;
