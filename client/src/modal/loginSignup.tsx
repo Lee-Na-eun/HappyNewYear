@@ -31,7 +31,8 @@ function LoginSignup() {
     loginPassword: '',
   });
 
-  const [errMsg, setErrMsg] = useState('');
+  const [loginErrMsg, setLoginErrMsg] = useState('');
+  const [singUpErrMsg, setSingUpErrMsg] = useState('');
 
   const handleChangeSignup = () => {
     setIsLogin(false);
@@ -64,13 +65,13 @@ function LoginSignup() {
         !signupInfo.signupPassword ||
         !signupInfo.signupRepassword
       ) {
-        setErrMsg('정보를 모두 입력해주세요.');
+        setSingUpErrMsg('정보를 모두 입력해주세요.');
       } else if (!validId.test(signupInfo.signupId)) {
-        setErrMsg('아이디는 2글자 이상 15글자 이하여야 합니다.');
+        setSingUpErrMsg('아이디는 2글자 이상 15글자 이하여야 합니다.');
       } else if (!validPassword.test(signupInfo.signupPassword)) {
-        setErrMsg('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
+        setSingUpErrMsg('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
       } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
-        setErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+        setSingUpErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
       }
     } catch (e) {
       console.log(e);
@@ -81,7 +82,7 @@ function LoginSignup() {
     // axios 요청 해주기, error 메세지 띄워주기
     try {
       if (!loginInfo.loginId || !loginInfo.loginPassword) {
-        setErrMsg('정보를 모두 입력해주세요.');
+        setLoginErrMsg('정보를 모두 입력해주세요.');
       }
       console.log('axios 요청 해주세요');
     } catch (e) {
@@ -124,7 +125,7 @@ function LoginSignup() {
                   <input onChange={handleLoginInputValue('loginPassword')} />
                 </div>
               </LoginInputWrap>
-              <AlertError>{errMsg}</AlertError>
+              <AlertError>{loginErrMsg}</AlertError>
               <ButtonWrap>
                 <button onClick={handleLogin}>로그인</button>
                 <button onClick={handleCloseModal}>취소</button>
@@ -148,7 +149,7 @@ function LoginSignup() {
                   />
                 </div>
               </SignupInputWrap>
-              <AlertError>{errMsg}</AlertError>
+              <AlertError>{singUpErrMsg}</AlertError>
               <ButtonWrap>
                 <button onClick={handleSignup}>회원가입</button>
                 <button onClick={handleCloseModal}>취소</button>
