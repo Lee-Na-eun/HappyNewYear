@@ -169,7 +169,7 @@ export const ButtonWrap = styled.div`
 
 export const AlertError = styled.div`
   height: 30px;
-  color: #ffca98;
+  color: #850000;
   font-weight: bold;
   font-size: 10px;
   margin-top: 10px;
