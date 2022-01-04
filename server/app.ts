@@ -3,10 +3,12 @@ import 'dotenv/config';
 import * as cors from 'cors';
 import * as morgan from 'morgan';
 import * as cookieParser from 'cookie-parser';
-import { Sequelize } from 'sequelize';
+import { sequelize } from './models';
 
 const app: express.Application = express();
-const serverPort = process.env.SERVER_PORT || 4000;
+const serverPort: number =
+  parseInt(process.env.SERVER_PORT as string, 10) || 4000;
+const host: string = process.env.HOST || 'localhost';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +46,20 @@ app.use(
   }
 );
 
-app.listen(serverPort, () => {
-  console.log(`서버 연결 성공 🍎`);
+app.listen(serverPort, host, async () => {
+  console.log(`🍎 Server Listening on ${host}:${serverPort} 🍎`);
+
+  // //sequelize-db 연결 테스트
+  await sequelize
+    .authenticate()
+    .then(async () => {
+      console.log('👍 connection success 👍');
+    })
+    .catch((e) => {
+      console.log('TT : ', e);
+    });
 });
+
+// app.listen(serverPort, () => {
+//   console.log(`서버 연결 성공 🍎`);
+// });
