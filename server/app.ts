@@ -3,7 +3,7 @@ import 'dotenv/config';
 import * as cors from 'cors';
 import * as morgan from 'morgan';
 import * as cookieParser from 'cookie-parser';
-import sequelize from './models';
+import { sequelize } from './models';
 
 const app: express.Application = express();
 const serverPort: number =
@@ -46,18 +46,18 @@ app.use(
   }
 );
 
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log();
+    console.log(`👍데이터베이스 연결 성공👍 \n`);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 app.listen(serverPort, host, async () => {
   console.log(`🍎 Server Listening on ${host}:${serverPort} 🍎`);
-
-  // //sequelize-db 연결 테스트
-  await sequelize
-    .authenticate()
-    .then(async () => {
-      console.log('👍 connection success 👍');
-    })
-    .catch((e) => {
-      console.log('TT : ', e);
-    });
 });
 
 // app.listen(serverPort, () => {
