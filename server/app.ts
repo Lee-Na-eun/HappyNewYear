@@ -3,7 +3,7 @@ import 'dotenv/config';
 import * as cors from 'cors';
 import * as morgan from 'morgan';
 import * as cookieParser from 'cookie-parser';
-import { sequelize } from './models';
+import sequelize from './models';
 
 const app: express.Application = express();
 const serverPort: number =

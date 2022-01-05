@@ -11,3 +11,5 @@ export const config = {
     dialect: 'mysql',
   },
 };
+
+export default config;
