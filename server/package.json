@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.2",
+    "aws-sdk": "^2.1052.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
