@@ -36,15 +36,15 @@ app.use((err, req, res, next) => {
   });
 });
 
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log();
-    console.log(`👍데이터베이스 연결 성공👍 \n`);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// sequelize
+//   .sync({ force: false })
+//   .then(() => {
+//     console.log();
+//     console.log(`👍데이터베이스 연결 성공👍 \n`);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 app.listen(serverPort, () => {
   console.log(`서버 연결 성공 🍎`);
