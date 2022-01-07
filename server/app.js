@@ -6,7 +6,7 @@ const logger = require('morgan');
 const { sequelize } = require('./models');
 require('dotenv').config();
 
-const serverPort = process.env.SERVER_PORT;
+const serverPort = process.env.SERVER_PORT || 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,20 +36,17 @@ app.use((err, req, res, next) => {
   });
 });
 
-// sequelize
-//   .sync({ force: false })
-//   .then(() => {
-//     console.log();
-//     console.log(`👍데이터베이스 연결 성공👍 \n`);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
+// 데이터베이스 연결
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log();
+    console.log(`👍데이터베이스 연결 성공👍 \n`);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.listen(serverPort, () => {
   console.log(`서버 연결 성공 🍎`);
 });
-
-// app.listen(serverPort, () => {
-//   console.log(`서버 연결 성공 🍎`);
-// });
