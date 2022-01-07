@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/HappyNewYear/server
+cd /home/ubuntu/TripleTwo/server
 
 npm install
 npm install pm2@latest -g
