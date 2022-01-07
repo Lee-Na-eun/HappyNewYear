@@ -6,7 +6,7 @@ const logger = require('morgan');
 const { sequelize } = require('./models');
 require('dotenv').config();
 
-const serverPort = process.env.SERVER_PORT || 4000;
+const serverPort = process.env.SERVER_PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
