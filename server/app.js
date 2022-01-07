@@ -7,7 +7,6 @@ const { sequelize } = require('./models');
 require('dotenv').config();
 
 const serverPort = process.env.SERVER_PORT || 4000;
-const host = process.env.DATABASE_HOST || 'localhost';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,8 +46,8 @@ sequelize
     console.error(err);
   });
 
-app.listen(serverPort, host, async () => {
-  console.log(`🍎 Server Listening on ${host}:${serverPort} 🍎`);
+app.listen(serverPort, () => {
+  console.log(`서버 연결 성공 🍎`);
 });
 
 // app.listen(serverPort, () => {
