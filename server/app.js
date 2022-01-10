@@ -8,33 +8,33 @@ require('dotenv').config();
 
 const serverPort = process.env.SERVER_PORT || 4000;
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(logger('dev'));
 
-// app.use(
-//   cors({
-//     origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
+    credentials: true,
+  })
+);
 
 app.get('/', (req, res) => {
   res.send('Hello Server!');
 });
 
-// app.use((req, res, next) => {
-//   res.status(404).send('Not Found!');
-// });
+app.use((req, res, next) => {
+  res.status(404).send('Not Found!');
+});
 
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).send({
-//     message: 'Internal Server Error',
-//     stacktrace: err.toString(),
-//   });
-// });
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({
+    message: 'Internal Server Error',
+    stacktrace: err.toString(),
+  });
+});
 
 // // 데이터베이스 연결
 // sequelize
