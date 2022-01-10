@@ -21,7 +21,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.send('Hello Server!');
+  res.send('Helloooo Server!');
 });
 
 app.use((req, res, next) => {
