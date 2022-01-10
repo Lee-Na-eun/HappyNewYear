@@ -24,28 +24,28 @@ app.get('/', (req, res) => {
   res.send('Hello Server!');
 });
 
-app.use((req, res, next) => {
-  res.status(404).send('Not Found!');
-});
+// app.use((req, res, next) => {
+//   res.status(404).send('Not Found!');
+// });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send({
-    message: 'Internal Server Error',
-    stacktrace: err.toString(),
-  });
-});
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(500).send({
+//     message: 'Internal Server Error',
+//     stacktrace: err.toString(),
+//   });
+// });
 
-// 데이터베이스 연결
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log();
-    console.log(`👍데이터베이스 연결 성공👍 \n`);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// // 데이터베이스 연결
+// sequelize
+//   .sync({ force: false })
+//   .then(() => {
+//     console.log();
+//     console.log(`👍데이터베이스 연결 성공👍 \n`);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 app.listen(serverPort, () => {
   console.log(`서버 연결 성공 🍎`);
