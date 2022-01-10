@@ -8,17 +8,17 @@ require('dotenv').config();
 
 const serverPort = process.env.SERVER_PORT || 4000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(logger('dev'));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser());
+// app.use(logger('dev'));
 
-app.use(
-  cors({
-    origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
+//     credentials: true,
+//   })
+// );
 
 app.get('/', (req, res) => {
   res.send('Hello Server!');
