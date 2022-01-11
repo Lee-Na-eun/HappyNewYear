@@ -79,6 +79,7 @@ function LoginSignup() {
       } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
         setSingUpErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
       } else {
+        setSingUpErrMsg('');
         const secretKey = process.env.SECRET_KEY || 'secretKey';
 
         const encrypted = CryptoJS.AES.encrypt(
@@ -143,7 +144,10 @@ function LoginSignup() {
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호</span>
-                  <input onChange={handleLoginInputValue('loginPassword')} />
+                  <input
+                    type='password'
+                    onChange={handleLoginInputValue('loginPassword')}
+                  />
                 </div>
               </LoginInputWrap>
               <AlertError>{loginErrMsg}</AlertError>
@@ -161,11 +165,15 @@ function LoginSignup() {
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호</span>
-                  <input onChange={handleSignupInputValue('signupPassword')} />
+                  <input
+                    type='password'
+                    onChange={handleSignupInputValue('signupPassword')}
+                  />
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호 재입력</span>
                   <input
+                    type='password'
                     onChange={handleSignupInputValue('signupRepassword')}
                   />
                 </div>
