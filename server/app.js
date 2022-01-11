@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const { sequelize } = require('./models');
 const logger = require('morgan');
 require('dotenv').config();
 
-const serverPort = process.env.SERVER_PORT;
+const serverPort = process.env.SERVER_PORT || 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,6 +19,10 @@ app.use(
     credentials: true,
   })
 );
+
+const userRouter = require('./routes/user');
+
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello Server!');
@@ -35,16 +40,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-// // 데이터베이스 연결
-// sequelize
-//   .sync({ force: false })
-//   .then(() => {
-//     console.log();
-//     console.log(`👍데이터베이스 연결 성공👍 \n`);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
+// 데이터베이스 연결
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log();
+    console.log(`👍데이터베이스 연결 성공👍 \n`);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.listen(serverPort, () => {
   console.log(`서버 연결 성공 🍎`);
