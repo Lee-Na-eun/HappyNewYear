@@ -1,5 +1,5 @@
 const crypto = require('crypto-js');
-const { user } = require('../../models');
+const { User } = require('../../models');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -8,17 +8,25 @@ module.exports = {
     const newUserData = req.body;
     const { userId, password } = newUserData;
 
-    const findUserId = await user.findOne({ where: { userId } });
-
-    if (findUserId) {
-      res.status(400).json({ message: 'same UserId' });
-    } else {
+    if (!User) {
       res.status(200).json({ message: 'ok' });
 
-      await user.create({
+      await User.create({
         userId,
         password,
       });
+    } else {
+      const findUserId = await User.findOne({ where: { userId } });
+      if (findUserId) {
+        res.status(400).json({ message: 'same UserId' });
+      } else {
+        res.status(200).json({ message: 'ok' });
+
+        await User.create({
+          userId,
+          password,
+        });
+      }
     }
 
     // 비밀번호 복호화 시키기
