@@ -75,7 +75,9 @@ function LoginSignup() {
       } else if (!validId.test(signupInfo.signupId)) {
         setSingUpErrMsg('아이디는 2글자 이상 15글자 이하여야 합니다.');
       } else if (!validPassword.test(signupInfo.signupPassword)) {
-        setSingUpErrMsg('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
+        setSingUpErrMsg(
+          '비밀번호는 영문, 숫자 조합으로만 8글자 이상이어야 합니다.'
+        );
       } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
         setSingUpErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
       } else {
