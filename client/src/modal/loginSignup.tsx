@@ -14,10 +14,16 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
 import { modalClose } from '../redux/nav/loginSignup';
+import axios from 'axios';
+import * as CryptoJS from 'crypto-js';
+
+axios.defaults.withCredentials = true;
 
 function LoginSignup() {
   const statusResult = useSelector(resultStatus);
   const dispatch = useDispatch();
+
+  const url: string = process.env.REACT_APP_API_URL || `http://localhost:4000`;
 
   const [isLogin, setIsLogin] = useState(true);
   const [signupInfo, setSignupInfo] = useState({
@@ -69,9 +75,27 @@ function LoginSignup() {
       } else if (!validId.test(signupInfo.signupId)) {
         setSingUpErrMsg('아이디는 2글자 이상 15글자 이하여야 합니다.');
       } else if (!validPassword.test(signupInfo.signupPassword)) {
-        setSingUpErrMsg('비밀번호는 영문, 숫자 조합 8글자 이상이어야 합니다.');
+        setSingUpErrMsg(
+          '비밀번호는 영문, 숫자 조합으로만 8글자 이상이어야 합니다.'
+        );
       } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
         setSingUpErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+      } else {
+        setSingUpErrMsg('');
+        const secretKey = process.env.SECRET_KEY || 'secretKey';
+
+        const encrypted = CryptoJS.AES.encrypt(
+          JSON.stringify(signupInfo.signupPassword),
+          secretKey
+        ).toString();
+        // 비밀번호 암호화
+
+        const result = await axios.post(`${url}/user/signup`, {
+          userId: signupInfo.signupId,
+          password: encrypted,
+        });
+
+        console.log(result);
       }
     } catch (e) {
       console.log(e);
@@ -122,7 +146,10 @@ function LoginSignup() {
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호</span>
-                  <input onChange={handleLoginInputValue('loginPassword')} />
+                  <input
+                    type='password'
+                    onChange={handleLoginInputValue('loginPassword')}
+                  />
                 </div>
               </LoginInputWrap>
               <AlertError>{loginErrMsg}</AlertError>
@@ -140,11 +167,15 @@ function LoginSignup() {
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호</span>
-                  <input onChange={handleSignupInputValue('signupPassword')} />
+                  <input
+                    type='password'
+                    onChange={handleSignupInputValue('signupPassword')}
+                  />
                 </div>
                 <div className='inputWrap'>
                   <span>비밀번호 재입력</span>
                   <input
+                    type='password'
                     onChange={handleSignupInputValue('signupRepassword')}
                   />
                 </div>

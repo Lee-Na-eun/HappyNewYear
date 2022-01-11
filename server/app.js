@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const { sequelize } = require('./models');
 const logger = require('morgan');
 require('dotenv').config();
 
@@ -18,6 +19,10 @@ app.use(
     credentials: true,
   })
 );
+
+const userRouter = require('./routes/user');
+
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello Server!');

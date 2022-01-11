@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/HappyNewYear/server
+cd /home/ubuntu/TripleTwo/server
 
 pm2 stop app.js 2> /dev/null || true
 pm2 delete app.js 2> /dev/null || true
