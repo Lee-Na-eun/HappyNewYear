@@ -64,7 +64,7 @@ function LoginSignup() {
     // axios 요청 해주기, error 메세지 띄워주기
     try {
       const validId = /^[a-zA-zㄱ-ㅎ가-힣0-9]{2,15}$/;
-      const validPassword = /^[a-zA-z0-9]{8,}$/;
+      const validPassword = /^[a-zA-z0-9]{5,}$/;
 
       if (
         !signupInfo.signupId ||
@@ -76,7 +76,7 @@ function LoginSignup() {
         setSingUpErrMsg('아이디는 2글자 이상 15글자 이하여야 합니다.');
       } else if (!validPassword.test(signupInfo.signupPassword)) {
         setSingUpErrMsg(
-          '비밀번호는 영문, 숫자 조합으로만 8글자 이상이어야 합니다.'
+          '비밀번호는 영문, 숫자 조합으로만 5글자 이상이어야 합니다.'
         );
       } else if (signupInfo.signupPassword !== signupInfo.signupRepassword) {
         setSingUpErrMsg('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
@@ -107,8 +107,23 @@ function LoginSignup() {
     try {
       if (!loginInfo.loginId || !loginInfo.loginPassword) {
         setLoginErrMsg('정보를 모두 입력해주세요.');
+      } else {
+        setSingUpErrMsg('');
+        const secretKey = process.env.SECRET_KEY || 'secretKey';
+
+        const encrypted = CryptoJS.AES.encrypt(
+          JSON.stringify(loginInfo.loginPassword),
+          secretKey
+        ).toString();
+        // 비밀번호 암호화
+
+        const result = await axios.post(`${url}/user/login`, {
+          userId: loginInfo.loginId,
+          password: encrypted,
+        });
+
+        console.log(result);
       }
-      console.log('axios 요청 해주세요');
     } catch (e) {
       console.log(e);
     }
