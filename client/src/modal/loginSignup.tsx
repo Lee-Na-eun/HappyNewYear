@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
 import { modalClose, loginDone, logout } from '../redux/nav/loginSignup';
+import { login } from '../redux/user/user';
 import axios from 'axios';
 import * as CryptoJS from 'crypto-js';
 import swal from 'sweetalert';
@@ -91,7 +92,7 @@ function LoginSignup() {
         ).toString();
         // 비밀번호 암호화
 
-        const result = await axios.post(`${url}/user/signup`, {
+        await axios.post(`${url}/user/signup`, {
           userId: signupInfo.signupId,
           password: encrypted,
         });
@@ -127,10 +128,11 @@ function LoginSignup() {
             text: '즐거운 시간 되세요! 😆',
             icon: 'success',
           }).then(() => {
+            dispatch(login({ ...result.data.userInfo }));
             dispatch(loginDone());
             dispatch(modalClose());
           });
-          console.log('로그인에 성공하셨습니다.');
+          console.log(result);
         }
       }
     } catch (err) {

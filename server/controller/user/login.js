@@ -39,7 +39,14 @@ module.exports = {
         res.status(400).json({ message: 'Invalid User' });
       } else {
         sendRefreshToken(res, refreshToken);
-        res.status(200).json({ accessToken, message: 'ok' });
+        res.status(200).json({
+          userInfo: {
+            accessToken,
+            id: findUser.dataValues.id,
+            userId: findUser.dataValues.userId,
+          },
+          message: 'ok',
+        });
       }
     }
   },

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type UserType = {
   id: number;
@@ -16,11 +16,12 @@ export const userInfoSlice = createSlice({
   name: 'userInfo',
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: (state: UserType, action: PayloadAction<UserType>) => {
       state.id = action.payload.id;
       state.userId = action.payload.userId;
+      state.accessToken = action.payload.accessToken;
     },
-    updateAccessToken: (state, action) => {
+    updateAccessToken: (state: UserType, action) => {
       state.accessToken = action.payload.accessToken;
       console.log(
         'updateAccessToken dispatch안에서 찍은 업뎃 한 후 accessToken: ',
@@ -34,3 +35,6 @@ export const userInfoSlice = createSlice({
     },
   },
 });
+
+export const { login, updateAccessToken, logout } = userInfoSlice.actions;
+export default userInfoSlice.reducer;
