@@ -32,7 +32,7 @@ function Nav() {
     window.location.replace('/');
     dispatch(resetIndex());
   };
-  console.log(statusResult);
+  // console.log(statusResult);
 
   return (
     <div>
