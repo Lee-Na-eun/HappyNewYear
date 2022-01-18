@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
-import { modalClose, loginDone, loginNot } from '../redux/nav/loginSignup';
+import { modalClose, loginDone, logout } from '../redux/nav/loginSignup';
 import axios from 'axios';
 import * as CryptoJS from 'crypto-js';
 import swal from 'sweetalert';
@@ -139,7 +139,7 @@ function LoginSignup() {
         text: '다시 시도해주세요.',
         icon: 'error',
       }).then(() => {
-        dispatch(loginNot());
+        dispatch(logout());
         console.log(err);
         console.log('다시 로그인해주세요');
       });

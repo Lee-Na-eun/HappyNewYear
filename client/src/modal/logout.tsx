@@ -9,6 +9,7 @@ import {
 } from '../style/styleModal';
 import { logoutModalClose } from '../redux/nav/logout';
 import { resultStatus } from '../redux/quiz/result';
+import { logout } from '../redux/nav/loginSignup';
 
 function Logout() {
   const statusResult = useSelector(resultStatus);
@@ -18,6 +19,10 @@ function Logout() {
     dispatch(logoutModalClose());
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <LogoutModal>
       <ModalWrap>
@@ -25,7 +30,7 @@ function Logout() {
           <ContentWrap>
             <div>정말 로그아웃 하실 건가요?</div>
             <ButtonWrap>
-              <button>로그아웃</button>
+              <button onClick={handleLogout}>로그아웃</button>
               <button onClick={handleCloseLogoutModal}>취소</button>
             </ButtonWrap>
           </ContentWrap>
