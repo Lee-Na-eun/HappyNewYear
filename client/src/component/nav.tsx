@@ -21,6 +21,8 @@ function Nav() {
     dispatch(modalOpen());
   };
 
+  // console.log(statusResult);
+
   return (
     <div>
       {statusResult.isModalOpen.open ? <LoginSignup /> : <LoginSignup />}
@@ -38,14 +40,25 @@ function Nav() {
             transition: '0.3s',
           }}
         >
-          <ul>
-            <li onClick={handleModalOpen}>로그인 / 회원가입</li>
-            {/* <li>내 방으로 가기</li> */}
-            <li onClick={() => window.location.replace('/')}>
-              테스트 다시 하기
-            </li>
-            <li onClick={handleNavClose}>닫기</li>
-          </ul>
+          {statusResult.isModalOpen.login ? (
+            <ul>
+              <li>내 방으로 가기</li>
+              <li onClick={() => window.location.replace('/')}>
+                테스트 다시 하기
+              </li>
+              <li onClick={handleModalOpen}>로그아웃</li>
+              <li onClick={handleNavClose}>닫기</li>
+            </ul>
+          ) : (
+            <ul>
+              <li onClick={handleModalOpen}>로그인 / 회원가입</li>
+              {/* <li>내 방으로 가기</li> */}
+              <li onClick={() => window.location.replace('/')}>
+                테스트 다시 하기
+              </li>
+              <li onClick={handleNavClose}>닫기</li>
+            </ul>
+          )}
         </HiddenMenuWrap>
       ) : (
         <HiddenMenuWrap
