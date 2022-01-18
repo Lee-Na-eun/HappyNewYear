@@ -13,9 +13,10 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
-import { modalClose } from '../redux/nav/loginSignup';
+import { modalClose, loginDone, loginNot } from '../redux/nav/loginSignup';
 import axios from 'axios';
 import * as CryptoJS from 'crypto-js';
+import swal from 'sweetalert';
 
 axios.defaults.withCredentials = true;
 
@@ -94,8 +95,6 @@ function LoginSignup() {
           userId: signupInfo.signupId,
           password: encrypted,
         });
-
-        console.log(result);
       }
     } catch (e) {
       console.log(e);
@@ -122,10 +121,28 @@ function LoginSignup() {
           password: encrypted,
         });
 
-        console.log(result);
+        if (result.data.message === 'ok') {
+          swal({
+            title: '로그인이 완료되었습니다.',
+            text: '즐거운 시간 되세요! 😆',
+            icon: 'success',
+          }).then(() => {
+            dispatch(loginDone());
+            dispatch(modalClose());
+          });
+          console.log('로그인에 성공하셨습니다.');
+        }
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      swal({
+        title: '로그인에 실패하였습니다.',
+        text: '다시 시도해주세요.',
+        icon: 'error',
+      }).then(() => {
+        dispatch(loginNot());
+        console.log(err);
+        console.log('다시 로그인해주세요');
+      });
     }
   };
 
