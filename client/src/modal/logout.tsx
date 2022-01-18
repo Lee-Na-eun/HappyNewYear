@@ -10,6 +10,7 @@ import {
 import { logoutModalClose } from '../redux/nav/logout';
 import { userInfoStatus } from '../redux/user/user';
 import { logout } from '../redux/nav/loginSignup';
+import swal from 'sweetalert';
 
 function Logout() {
   const url: string = process.env.REACT_APP_API_URL || `http://localhost:4000`;
@@ -22,14 +23,28 @@ function Logout() {
   };
 
   const handleLogout = async () => {
-    const result = await axios.get(`${url}/user/logout`, {
-      headers: { authorization: `Bearer ${statusUserInfo.accessToken}}` },
-    });
-    console.log(result);
-    if (result.data.message === 'ok') {
-      dispatch(logout());
-      dispatch(logoutModalClose());
-      window.location.replace('/');
+    try {
+      const result = await axios.get(`${url}/user/logout`, {
+        headers: { authorization: `Bearer ${statusUserInfo.accessToken}}` },
+      });
+      if (result.data.message === 'ok') {
+        swal({
+          title: '로그아웃 되었습니다.',
+          text: '다음에 또 만나요!',
+          icon: 'success',
+        }).then(() => {
+          dispatch(logout());
+          dispatch(logoutModalClose());
+          window.location.replace('/');
+        });
+        console.log(result);
+      }
+    } catch (err) {
+      swal({
+        title: '로그아웃을 실패하였습니다.',
+        text: '잠시 후 다시 시도해주세요.',
+        icon: 'error',
+      });
     }
   };
 
