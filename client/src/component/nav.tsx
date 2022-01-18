@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
 import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen } from '../redux/nav/loginSignup';
+import { logoutModalOpen } from '../redux/nav/logout';
 import { resultStatus } from '../redux/quiz/result';
-import LoginSignup from '../modal/loginSignup';
 import { resetIndex } from '../redux/quiz/quiz';
+import LoginSignup from '../modal/loginSignup';
+import Logout from '../modal/logout';
 
 function Nav() {
   const statusResult = useSelector(resultStatus);
@@ -18,7 +20,11 @@ function Nav() {
     dispatch(navClose());
   };
 
-  const handleModalOpen = () => {
+  const handleLogoutModalOpen = () => {
+    dispatch(logoutModalOpen());
+  };
+
+  const handleLoginSignupModal = () => {
     dispatch(modalOpen());
   };
 
@@ -30,7 +36,8 @@ function Nav() {
 
   return (
     <div>
-      {statusResult.isModalOpen.open ? <LoginSignup /> : <LoginSignup />}
+      {statusResult.isModalOpen.open ? <LoginSignup /> : null}
+      {statusResult.isLogoutModalOpen.open ? <Logout /> : null}
       <NavWrap>
         <ul>
           <li onClick={handleNavOpen}>이거슨 로고</li>
@@ -49,12 +56,12 @@ function Nav() {
             <ul>
               <li>내 방으로 가기</li>
               <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
-              <li onClick={handleModalOpen}>로그아웃</li>
+              <li onClick={handleLogoutModalOpen}>로그아웃</li>
               <li onClick={handleNavClose}>닫기</li>
             </ul>
           ) : (
             <ul>
-              <li onClick={handleModalOpen}>로그인 / 회원가입</li>
+              <li onClick={handleLoginSignupModal}>로그인 / 회원가입</li>
               {/* <li>내 방으로 가기</li> */}
               <li onClick={() => handleRetryQuiz}>테스트 다시 하기</li>
               <li onClick={handleNavClose}>닫기</li>
