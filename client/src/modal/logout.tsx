@@ -8,19 +8,29 @@ import {
   ContentWrap,
 } from '../style/styleModal';
 import { logoutModalClose } from '../redux/nav/logout';
-import { resultStatus } from '../redux/quiz/result';
+import { userInfoStatus } from '../redux/user/user';
 import { logout } from '../redux/nav/loginSignup';
 
 function Logout() {
-  const statusResult = useSelector(resultStatus);
+  const url: string = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const statusUserInfo = useSelector(userInfoStatus);
+  console.log(statusUserInfo);
   const dispatch = useDispatch();
 
   const handleCloseLogoutModal = () => {
     dispatch(logoutModalClose());
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    const result = await axios.get(`${url}/user/logout`, {
+      headers: { authorization: `Bearer ${statusUserInfo.accessToken}}` },
+    });
+    console.log(result);
+    if (result.data.message === 'ok') {
+      dispatch(logout());
+      dispatch(logoutModalClose());
+      window.location.replace('/');
+    }
   };
 
   return (

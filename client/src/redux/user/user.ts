@@ -37,4 +37,5 @@ export const userInfoSlice = createSlice({
 });
 
 export const { login, updateAccessToken, logout } = userInfoSlice.actions;
+export const userInfoStatus = (state: any) => state.userInfo;
 export default userInfoSlice.reducer;
