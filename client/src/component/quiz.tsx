@@ -10,7 +10,7 @@ import { Button, QuestionWrap } from '../style/StyleQuiz';
 function Quiz() {
   const dispatch = useDispatch();
   const quizState = useSelector(QuizIndexStatus);
-  // const resultArrState = useSelector(resultStatus);
+  const resultArrState = useSelector(resultStatus);
 
   const [isEnd, setIsEnd] = useState(false);
 
@@ -28,6 +28,8 @@ function Quiz() {
     dispatch(resultArr({ idx }));
     dispatch(nextIndex());
   };
+
+  console.log(quizState);
 
   return (
     <div>
