@@ -29,7 +29,7 @@ function Quiz() {
     dispatch(nextIndex());
   };
 
-  console.log(nextIndex);
+  console.log(quizState);
 
   return (
     <div>

@@ -4,6 +4,7 @@ import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen } from '../redux/nav/loginSignup';
 import { resultStatus } from '../redux/quiz/result';
 import LoginSignup from '../modal/loginSignup';
+import { resetIndex } from '../redux/quiz/quiz';
 
 function Nav() {
   const statusResult = useSelector(resultStatus);
@@ -21,7 +22,11 @@ function Nav() {
     dispatch(modalOpen());
   };
 
-  // console.log(statusResult);
+  const handleRetryQuiz = () => {
+    window.location.replace('/');
+    dispatch(resetIndex());
+  };
+  console.log(statusResult);
 
   return (
     <div>
@@ -43,9 +48,7 @@ function Nav() {
           {statusResult.isModalOpen.login ? (
             <ul>
               <li>내 방으로 가기</li>
-              <li onClick={() => window.location.replace('/')}>
-                테스트 다시 하기
-              </li>
+              <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
               <li onClick={handleModalOpen}>로그아웃</li>
               <li onClick={handleNavClose}>닫기</li>
             </ul>
@@ -53,9 +56,7 @@ function Nav() {
             <ul>
               <li onClick={handleModalOpen}>로그인 / 회원가입</li>
               {/* <li>내 방으로 가기</li> */}
-              <li onClick={() => window.location.replace('/')}>
-                테스트 다시 하기
-              </li>
+              <li onClick={() => handleRetryQuiz}>테스트 다시 하기</li>
               <li onClick={handleNavClose}>닫기</li>
             </ul>
           )}
