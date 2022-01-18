@@ -19,34 +19,39 @@ module.exports = {
       res.status(400).json({ message: 'Invalid User' });
     } else {
       const findUser = await User.findOne({ where: { userId } });
-
-      // 비밀번호 복호화 시키기
-      const secretKey = process.env.SECRET_KEY || 'secretKey';
-      const dataBytes = crypto.AES.decrypt(
-        findUser.dataValues.password,
-        secretKey
-      );
-      const clientBytes = crypto.AES.decrypt(password, secretKey);
-
-      const dataDecrypted = JSON.parse(dataBytes.toString(crypto.enc.Utf8));
-      const clientDecrypted = JSON.parse(clientBytes.toString(crypto.enc.Utf8));
-      // 비밀번호 복호화 시키기
-
-      const accessToken = basicAccessToken(findUser.dataValues);
-      const refreshToken = basicRefreshToken(findUser.dataValues);
-
-      if (dataDecrypted !== clientDecrypted) {
+      if (!findUser) {
         res.status(400).json({ message: 'Invalid User' });
       } else {
-        sendRefreshToken(res, refreshToken);
-        res.status(200).json({
-          userInfo: {
-            accessToken,
-            id: findUser.dataValues.id,
-            userId: findUser.dataValues.userId,
-          },
-          message: 'ok',
-        });
+        // 비밀번호 복호화 시키기
+        const secretKey = process.env.SECRET_KEY || 'secretKey';
+        const dataBytes = crypto.AES.decrypt(
+          findUser.dataValues.password,
+          secretKey
+        );
+        const clientBytes = crypto.AES.decrypt(password, secretKey);
+
+        const dataDecrypted = JSON.parse(dataBytes.toString(crypto.enc.Utf8));
+        const clientDecrypted = JSON.parse(
+          clientBytes.toString(crypto.enc.Utf8)
+        );
+        // 비밀번호 복호화 시키기
+
+        const accessToken = basicAccessToken(findUser.dataValues);
+        const refreshToken = basicRefreshToken(findUser.dataValues);
+
+        if (dataDecrypted !== clientDecrypted) {
+          res.status(400).json({ message: 'Wrong Password' });
+        } else {
+          sendRefreshToken(res, refreshToken);
+          res.status(200).json({
+            userInfo: {
+              accessToken,
+              id: findUser.dataValues.id,
+              userId: findUser.dataValues.userId,
+            },
+            message: 'ok',
+          });
+        }
       }
     }
   },

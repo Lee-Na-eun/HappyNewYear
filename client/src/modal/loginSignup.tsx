@@ -92,13 +92,33 @@ function LoginSignup() {
         ).toString();
         // 비밀번호 암호화
 
-        await axios.post(`${url}/user/signup`, {
+        const result = await axios.post(`${url}/user/signup`, {
           userId: signupInfo.signupId,
           password: encrypted,
         });
+
+        if (result.data.message === 'ok') {
+          swal({
+            title: '회원가입이 완료되었습니다.',
+            text: '환영합니다🌈 활동을 원할시 로그인해주세요.',
+            icon: 'success',
+          });
+        }
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err: any) {
+      if (err.message === 'Network Error') {
+        swal({
+          title: '네트워크가 불안정 합니다.',
+          text: '잠시 후에 이용 부탁드립니다.',
+          icon: 'error',
+        });
+      } else if (err.response.data.message === 'same userId') {
+        swal({
+          title: '이미 존재하는 아이디 입니다.',
+          text: '다른 아이디로 시도해주세요.',
+          icon: 'warning',
+        });
+      }
     }
   };
 
@@ -135,16 +155,26 @@ function LoginSignup() {
           console.log(result);
         }
       }
-    } catch (err) {
-      swal({
-        title: '로그인에 실패하였습니다.',
-        text: '다시 시도해주세요.',
-        icon: 'error',
-      }).then(() => {
-        dispatch(logout());
-        console.log(err);
-        console.log('다시 로그인해주세요');
-      });
+    } catch (err: any) {
+      if (err.message === 'Network Error') {
+        swal({
+          title: '네트워크가 불안정 합니다.',
+          text: '잠시 후에 이용 부탁드립니다.',
+          icon: 'error',
+        });
+      } else if (err.response.data.message === 'Invalid User') {
+        swal({
+          title: '존재하지 않는 아이디 입니다.',
+          text: '회원가입 후 이용 부탁드립니다.',
+          icon: 'warning',
+        });
+      } else if (err.response.data.message === 'Wrong Password') {
+        swal({
+          title: '비밀번호가 틀렸습니다.',
+          text: '다시한번 시도해주세요.',
+          icon: 'warning',
+        });
+      }
     }
   };
 

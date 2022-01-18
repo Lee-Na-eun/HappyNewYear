@@ -18,7 +18,7 @@ module.exports = {
     } else {
       const findUserId = await User.findOne({ where: { userId } });
       if (findUserId) {
-        res.status(400).json({ message: 'same UserId' });
+        res.status(400).json({ message: 'same userId' });
       } else {
         res.status(200).json({ message: 'ok' });
 
