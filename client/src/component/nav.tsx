@@ -35,8 +35,8 @@ function Nav() {
   const handleRetryQuiz = () => {
     dispatch(resetIndex());
     dispatch(resetResultArr());
+    dispatch(navClose());
     window.location.replace('/');
-    console.log('aaa');
   };
   console.log(statusResult);
 
@@ -48,9 +48,9 @@ function Nav() {
     }
   };
 
-  console.log(userInfo);
-  console.log(userUrl());
-  console.log(statusResult);
+  // console.log(userInfo);
+  // console.log(userUrl());
+  // console.log(statusResult);
 
   return (
     <div>

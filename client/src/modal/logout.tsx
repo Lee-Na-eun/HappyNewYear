@@ -11,6 +11,7 @@ import { logoutModalClose } from '../redux/nav/logoutModal';
 import { userInfoStatus } from '../redux/user/user';
 import { loginNot } from '../redux/nav/loginSignup';
 import { logout } from '../redux/user/user';
+import { navClose } from '../redux/nav/nav';
 import swal from 'sweetalert';
 
 function Logout() {
@@ -37,6 +38,7 @@ function Logout() {
           dispatch(logout());
           dispatch(loginNot());
           dispatch(logoutModalClose());
+          dispatch(navClose());
           window.location.replace('/');
         });
         console.log(result);
