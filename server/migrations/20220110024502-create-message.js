@@ -11,6 +11,9 @@ module.exports = {
       message: {
         type: Sequelize.STRING,
       },
+      readLetter: {
+        type: Sequelize.BOOLEAN,
+      },
       decoration: {
         type: Sequelize.STRING,
       },

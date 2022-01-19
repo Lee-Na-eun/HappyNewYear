@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Message.init(
     {
       message: DataTypes.STRING,
+      readLetter: DataTypes.BOOLEAN,
       decoration: DataTypes.STRING,
       shape: DataTypes.STRING,
       color: DataTypes.STRING,
