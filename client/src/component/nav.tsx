@@ -41,11 +41,8 @@ function Nav() {
   console.log(statusResult);
 
   const userUrl = (): string => {
-    if (userInfo.userId === '') {
-      return '/myRoom';
-    } else {
-      return `/myRoom/${userInfo.userId}`;
-    }
+    // dispatch(navClose());
+    return `/myRoom/${userInfo.userId}`;
   };
 
   // console.log(userInfo);
@@ -72,7 +69,7 @@ function Nav() {
         >
           {statusResult.isModalOpen.login ? (
             <ul>
-              <li>
+              <li onClick={() => dispatch(navClose())}>
                 <Link to={userUrl()}>내 우체통 보기</Link>
               </li>
               <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
