@@ -38,14 +38,14 @@ function Nav() {
     dispatch(navClose());
     window.location.replace('/');
   };
-  console.log(statusResult);
+  // console.log(statusResult);
 
   const userUrl = (): string => {
     // dispatch(navClose());
     return `/myRoom/${userInfo.userId}`;
   };
 
-  console.log(userInfo);
+  // console.log(userInfo);
   // console.log(userUrl());
   // console.log(statusResult);
 
