@@ -4,12 +4,15 @@ import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen } from '../redux/nav/loginSignup';
 import { logoutModalOpen } from '../redux/nav/logout';
 import { resultStatus } from '../redux/quiz/result';
+import { userInfoStatus } from '../redux/user/user';
 import { resetIndex } from '../redux/quiz/quiz';
 import LoginSignup from '../modal/loginSignup';
 import Logout from '../modal/logout';
+import { Link } from 'react-router-dom';
 
 function Nav() {
   const statusResult = useSelector(resultStatus);
+  const userInfo = useSelector(userInfoStatus);
   const dispatch = useDispatch();
 
   const handleNavOpen = () => {
@@ -34,6 +37,18 @@ function Nav() {
   };
   // console.log(statusResult);
 
+  const userUrl = (): string => {
+    if (userInfo.userId === '') {
+      return '/myRoom';
+    } else {
+      return `/myRoom/${userInfo.userId}`;
+    }
+  };
+
+  console.log(userInfo);
+  console.log(userUrl());
+  console.log(statusResult);
+
   return (
     <div>
       {statusResult.isModalOpen.open ? <LoginSignup /> : null}
@@ -54,7 +69,9 @@ function Nav() {
         >
           {statusResult.isModalOpen.login ? (
             <ul>
-              <li>내 방으로 가기</li>
+              <li>
+                <Link to={userUrl()}>내 우체통 보기</Link>
+              </li>
               <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
               <li onClick={handleLogoutModalOpen}>로그아웃</li>
               <li onClick={handleNavClose}>닫기</li>
