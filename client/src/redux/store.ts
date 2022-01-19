@@ -15,13 +15,7 @@ import {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [
-    'quizIndex',
-    'resultOption',
-    'isNavOpen',
-    'isModalOpen',
-    'userInfo',
-  ],
+  whitelist: ['isNavOpen', 'isModalOpen', 'userInfo'],
   blacklist: [],
 };
 

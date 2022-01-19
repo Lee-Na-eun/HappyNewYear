@@ -20,9 +20,12 @@ export const optionArrSlice = createSlice({
       const idx: number = action.payload.idx;
       state.selectOptionArr[idx] += 1;
     },
+    resetResultArr: (state: OptionArr) => {
+      state.selectOptionArr = [0, 0, 0, 0, 0];
+    },
   },
 });
 
-export const { resultArr } = optionArrSlice.actions;
+export const { resultArr, resetResultArr } = optionArrSlice.actions;
 export const resultStatus = (state: any) => state;
 export default optionArrSlice.reducer;

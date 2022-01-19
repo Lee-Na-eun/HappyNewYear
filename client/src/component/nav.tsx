@@ -6,6 +6,7 @@ import { logoutModalOpen } from '../redux/nav/logout';
 import { resultStatus } from '../redux/quiz/result';
 import { userInfoStatus } from '../redux/user/user';
 import { resetIndex } from '../redux/quiz/quiz';
+import { resetResultArr } from '../redux/quiz/result';
 import LoginSignup from '../modal/loginSignup';
 import Logout from '../modal/logout';
 import { Link } from 'react-router-dom';
@@ -32,10 +33,12 @@ function Nav() {
   };
 
   const handleRetryQuiz = () => {
-    window.location.replace('/');
     dispatch(resetIndex());
+    dispatch(resetResultArr());
+    window.location.replace('/');
+    console.log('aaa');
   };
-  // console.log(statusResult);
+  console.log(statusResult);
 
   const userUrl = (): string => {
     if (userInfo.userId === '') {
@@ -80,7 +83,7 @@ function Nav() {
             <ul>
               <li onClick={handleLoginSignupModal}>로그인 / 회원가입</li>
               {/* <li>내 방으로 가기</li> */}
-              <li onClick={() => handleRetryQuiz}>테스트 다시 하기</li>
+              <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
               <li onClick={handleNavClose}>닫기</li>
             </ul>
           )}
