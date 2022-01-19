@@ -23,12 +23,12 @@ export const modalOpenSlice = createSlice({
     loginDone: (state: IsModalOpen) => {
       state.login = true;
     },
-    loginNot: (state: IsModalOpen) => {
+    logout: (state: IsModalOpen) => {
       state.login = false;
     },
   },
 });
 
-export const { modalOpen, modalClose, loginDone, loginNot } =
+export const { modalOpen, modalClose, loginDone, logout } =
   modalOpenSlice.actions;
 export default modalOpenSlice.reducer;

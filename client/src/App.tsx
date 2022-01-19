@@ -4,8 +4,20 @@ import './App.css';
 import Main from './page/main';
 import MyRoom from './page/myRoom';
 import Nav from './component/nav';
+import { useSelector } from 'react-redux';
+import { userInfoStatus } from './redux/user/user';
 
 function App() {
+  const userInfo = useSelector(userInfoStatus);
+
+  const userUrl = (): string => {
+    if (userInfo.userId === '') {
+      return '/myRoom';
+    } else {
+      return `/myRoom/${userInfo.userId}`;
+    }
+  };
+
   return (
     <BrowserRouter>
       <div className='App'>
@@ -16,7 +28,7 @@ function App() {
           <Route exact path='/'>
             <Main />
           </Route>
-          <Route path='/myRoom'>
+          <Route path={userUrl()}>
             <MyRoom />
           </Route>
         </Switch>
