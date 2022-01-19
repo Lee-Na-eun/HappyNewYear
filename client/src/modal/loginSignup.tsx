@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
-import { modalClose, loginDone, logout } from '../redux/nav/loginSignup';
+import { modalClose, loginDone } from '../redux/nav/loginSignup';
 import { login } from '../redux/user/user';
 import axios from 'axios';
 import * as CryptoJS from 'crypto-js';

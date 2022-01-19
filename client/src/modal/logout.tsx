@@ -7,9 +7,9 @@ import {
   ModalBox,
   ContentWrap,
 } from '../style/styleModal';
-import { logoutModalClose } from '../redux/nav/logout';
+import { logoutModalClose } from '../redux/nav/logoutModal';
 import { userInfoStatus } from '../redux/user/user';
-import { logout } from '../redux/nav/loginSignup';
+import { loginNot } from '../redux/nav/loginSignup';
 import swal from 'sweetalert';
 
 function Logout() {
@@ -33,7 +33,7 @@ function Logout() {
           text: '다음에 또 만나요!',
           icon: 'success',
         }).then(() => {
-          dispatch(logout());
+          dispatch(loginNot());
           dispatch(logoutModalClose());
           window.location.replace('/');
         });

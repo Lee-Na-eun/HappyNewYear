@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
 import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen } from '../redux/nav/loginSignup';
-import { logoutModalOpen } from '../redux/nav/logout';
+import { logoutModalOpen } from '../redux/nav/logoutModal';
 import { resultStatus } from '../redux/quiz/result';
 import { userInfoStatus } from '../redux/user/user';
 import { resetIndex } from '../redux/quiz/quiz';
