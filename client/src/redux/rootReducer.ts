@@ -3,7 +3,7 @@ import quizIndexReducer from './quiz/quiz';
 import resultOptionReducer from './quiz/result';
 import isNavOpenReducer from './nav/nav';
 import isModalOpenReducer from './nav/loginSignup';
-import isLogoutModalOpenReducer from './nav/logout';
+import isLogoutModalOpenReducer from './nav/logoutModal';
 import userReducer from './user/user';
 
 const reducer = combineReducers({

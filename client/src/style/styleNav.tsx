@@ -21,9 +21,25 @@ export const HiddenMenuWrap = styled.div`
   background-color: #ffdcdc;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+
+  @media (max-width: 420px) {
+    width: 100vw;
+  }
+`;
+
+export const MenuBox = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+  > span {
+    height: 50px;
+    color: #c56363;
+    font-weight: bold;
+  }
   > ul {
+    margin: 0 auto;
     > li {
       background-color: #c56363;
       width: 120px;
@@ -48,8 +64,5 @@ export const HiddenMenuWrap = styled.div`
         color: #fff;
       }
     }
-  }
-  @media (max-width: 420px) {
-    width: 100vw;
   }
 `;

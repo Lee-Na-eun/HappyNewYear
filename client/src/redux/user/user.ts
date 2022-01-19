@@ -6,6 +6,10 @@ export type UserType = {
   accessToken: null;
 };
 
+// export type AccessType = {
+//   accessToken: null;
+// };
+
 const initialState: UserType = {
   id: -1,
   userId: '',

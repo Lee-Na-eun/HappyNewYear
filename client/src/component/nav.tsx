@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { NavWrap, HiddenMenuWrap } from '../style/styleNav';
+import { NavWrap, HiddenMenuWrap, MenuBox } from '../style/styleNav';
 import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen } from '../redux/nav/loginSignup';
-import { logoutModalOpen } from '../redux/nav/logout';
+import { logoutModalOpen } from '../redux/nav/logoutModal';
 import { resultStatus } from '../redux/quiz/result';
 import { userInfoStatus } from '../redux/user/user';
 import { resetIndex } from '../redux/quiz/quiz';
+import { resetResultArr } from '../redux/quiz/result';
 import LoginSignup from '../modal/loginSignup';
 import Logout from '../modal/logout';
 import { Link } from 'react-router-dom';
@@ -32,22 +33,21 @@ function Nav() {
   };
 
   const handleRetryQuiz = () => {
-    window.location.replace('/');
     dispatch(resetIndex());
+    dispatch(resetResultArr());
+    dispatch(navClose());
+    window.location.replace('/');
   };
   // console.log(statusResult);
 
   const userUrl = (): string => {
-    if (userInfo.userId === '') {
-      return '/myRoom';
-    } else {
-      return `/myRoom/${userInfo.userId}`;
-    }
+    // dispatch(navClose());
+    return `/myRoom/${userInfo.userId}`;
   };
 
-  console.log(userInfo);
-  console.log(userUrl());
-  console.log(statusResult);
+  // console.log(userInfo);
+  // console.log(userUrl());
+  // console.log(statusResult);
 
   return (
     <div>
@@ -68,19 +68,22 @@ function Nav() {
           }}
         >
           {statusResult.isModalOpen.login ? (
-            <ul>
-              <li>
-                <Link to={userUrl()}>내 우체통 보기</Link>
-              </li>
-              <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
-              <li onClick={handleLogoutModalOpen}>로그아웃</li>
-              <li onClick={handleNavClose}>닫기</li>
-            </ul>
+            <MenuBox>
+              <span>{userInfo.userId}님의 메뉴</span>
+              <ul>
+                <li onClick={() => dispatch(navClose())}>
+                  <Link to={userUrl()}>내 우체통 보기</Link>
+                </li>
+                <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
+                <li onClick={handleLogoutModalOpen}>로그아웃</li>
+                <li onClick={handleNavClose}>닫기</li>
+              </ul>
+            </MenuBox>
           ) : (
             <ul>
               <li onClick={handleLoginSignupModal}>로그인 / 회원가입</li>
               {/* <li>내 방으로 가기</li> */}
-              <li onClick={() => handleRetryQuiz}>테스트 다시 하기</li>
+              <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
               <li onClick={handleNavClose}>닫기</li>
             </ul>
           )}
