@@ -13,7 +13,6 @@ export const MyLetterWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   > #post {
     width: 500px;
     height: 600px;
@@ -22,7 +21,7 @@ export const MyLetterWrap = styled.div`
   > .noneLetterBox {
     width: 0;
     height: 600px;
-    /* opacity: 0; */
+    opacity: 0;
     transition: 0.5s;
   }
   > .letterBox {
@@ -47,15 +46,6 @@ export const LetterHead = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  > .noneLetterBox {
-    opacity: 0;
-    transition: 0.5s;
-  }
-  > .letterBox {
-    opacity: 1;
-    transition: 0.5s;
-    background-color: #fff;
-  }
   > #buttonWrap {
     display: flex;
     flex-direction: row-reverse;
@@ -68,6 +58,7 @@ export const LetterHead = styled.div`
   }
   > #headerTextBox {
     font-size: 18px;
+    transition: 0.5s;
   }
 `;
 
@@ -78,18 +69,5 @@ export const LetterBox = styled.div`
     border-radius: 15px;
     margin: 0 auto;
     border: 5px solid #c56363;
-  }
-  > .noneLetterBox {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    transition: 0.5s;
-  }
-  > .letterBox {
-    opacity: 1;
-    transition: 0.5s;
-    width: 400px;
-    height: 450px;
-    background-color: #fff;
   }
 `;

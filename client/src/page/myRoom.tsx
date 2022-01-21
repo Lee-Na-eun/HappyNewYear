@@ -13,6 +13,10 @@ function MyRoom() {
     setIsLetter(true);
   };
 
+  const handleCloseLetter = () => {
+    setIsLetter(false);
+  };
+
   return (
     <MyRoomWrap>
       <MyLetterWrap>
@@ -21,21 +25,13 @@ function MyRoom() {
         </div>
         <div className={isLetter ? 'letterBox' : 'noneLetterBox'}>
           <LetterHead>
-            <div
-              id='buttonWrap'
-              className={isLetter ? 'letterBox' : 'noneLetterBox'}
-            >
-              <button>닫기</button>
+            <div id='buttonWrap'>
+              <button onClick={handleCloseLetter}>닫기</button>
             </div>
-            <div
-              id='headerTextBox'
-              className={isLetter ? 'letterBox' : 'noneLetterBox'}
-            >
-              ㅇㅇ님의 보관함
-            </div>
+            <div id='headerTextBox'>ㅇㅇ님의 보관함</div>
           </LetterHead>
           <LetterBox>
-            <ul className={isLetter ? 'letterBox' : 'noneLetterBox'}></ul>
+            <ul></ul>
           </LetterBox>
         </div>
       </MyLetterWrap>
