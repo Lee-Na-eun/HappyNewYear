@@ -13,9 +13,21 @@ export const MyLetterWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  > div {
+
+  > #post {
     width: 500px;
     height: 600px;
+    background-color: #fff;
+  }
+  > .noneLetterBox {
+    width: 0;
+    height: 0;
+    transition: 0.5s;
+  }
+  > .letterBox {
+    width: 500px;
+    height: 600px;
+    transition: 0.5s;
     background-color: #fff;
   }
   > div:nth-child(1) {
@@ -26,3 +38,5 @@ export const MyLetterWrap = styled.div`
     border-radius: 20px;
   }
 `;
+
+export const PostBox = styled.div``;
