@@ -1,4 +1,9 @@
-import { MyRoomWrap, MyLetterWrap } from '../style/styleMyRoom';
+import {
+  MyRoomWrap,
+  MyLetterWrap,
+  LetterBox,
+  LetterHead,
+} from '../style/styleMyRoom';
 import { useState } from 'react';
 
 function MyRoom() {
@@ -14,7 +19,15 @@ function MyRoom() {
         <div id='post' onClick={handleWatchLetter}>
           우체통
         </div>
-        <div className={isLetter ? 'letterBox' : 'noneLetterBox'}></div>
+        <div className={isLetter ? 'letterBox' : 'noneLetterBox'}>
+          <LetterHead>
+            <div id='buttonWrap'>
+              <button>닫기</button>
+            </div>
+            <div id='headerTextBox'>ㅇㅇ님의 보관함</div>
+          </LetterHead>
+          <LetterBox></LetterBox>
+        </div>
       </MyLetterWrap>
     </MyRoomWrap>
   );

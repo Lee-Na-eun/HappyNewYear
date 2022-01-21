@@ -39,4 +39,31 @@ export const MyLetterWrap = styled.div`
   }
 `;
 
-export const PostBox = styled.div``;
+export const LetterHead = styled.div`
+  width: 400px;
+  height: 110px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  > #buttonWrap {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 60px;
+    align-items: center;
+    > button {
+      width: 70px;
+      height: 30px;
+    }
+  }
+  > #headerTextBox {
+    font-size: 18px;
+  }
+`;
+
+export const LetterBox = styled.div`
+  width: 400px;
+  height: 450px;
+  border: 5px solid #c56363;
+  border-radius: 15px;
+  margin: 0 auto;
+`;
