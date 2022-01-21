@@ -46,19 +46,45 @@ export const LetterHead = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  > #buttonWrap {
+  > .noneLetterBox {
+    width: 0;
+    transition: 0.5s;
+  }
+  > .letterBox {
+    width: 400px;
+    transition: 0.5s;
+  }
+  > #closeLetter {
     display: flex;
-    flex-direction: row-reverse;
+    width: 400px;
     height: 60px;
+    justify-content: right;
     align-items: center;
-    > button {
-      width: 70px;
-      height: 30px;
+    font-size: 40px;
+    color: #c56363;
+    > span {
+      cursor: pointer;
     }
   }
   > #headerTextBox {
-    font-size: 18px;
     transition: 0.5s;
+    > ul {
+      display: flex;
+      width: 60%;
+      justify-content: space-between;
+      > li {
+        width: 70px;
+        height: 30px;
+        font-size: 11px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 5px;
+        border: 1px solid #c56363;
+        color: #c56363;
+        box-shadow: 0px 3px 0px #c56363;
+        cursor: pointer;
+      }
+    }
   }
 `;
 
@@ -67,7 +93,15 @@ export const LetterBox = styled.div`
     width: 400px;
     height: 450px;
     border-radius: 15px;
+    border: 1px solid #c56363;
     margin: 0 auto;
-    border: 5px solid #c56363;
+  }
+  > .noneLetterBox {
+    width: 0;
+    transition: 0.5s;
+  }
+  > .letterBox {
+    width: 400px;
+    transition: 0.5s;
   }
 `;

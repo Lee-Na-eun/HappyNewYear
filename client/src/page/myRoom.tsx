@@ -25,13 +25,19 @@ function MyRoom() {
         </div>
         <div className={isLetter ? 'letterBox' : 'noneLetterBox'}>
           <LetterHead>
-            <div id='buttonWrap'>
-              <button onClick={handleCloseLetter}>닫기</button>
+            <div id='closeLetter'>
+              <span onClick={handleCloseLetter}>&times;</span>
             </div>
-            <div id='headerTextBox'>ㅇㅇ님의 보관함</div>
+            <div id='headerTextBox'>
+              <ul>
+                <li>전체</li>
+                <li>안 읽은 편지</li>
+                <li>읽은 편지</li>
+              </ul>
+            </div>
           </LetterHead>
           <LetterBox>
-            <ul></ul>
+            <ul className={isLetter ? 'letterBox' : 'noneLetterBox'}></ul>
           </LetterBox>
         </div>
       </MyLetterWrap>
