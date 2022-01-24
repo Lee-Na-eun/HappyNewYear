@@ -1,4 +1,4 @@
-const { User } = require('../../models');
+const { Message } = require('../../models');
 const dotenv = require('dotenv');
 dotenv.config();
 
