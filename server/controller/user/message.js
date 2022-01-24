@@ -11,6 +11,7 @@ const {
 module.exports = {
   get: async (req, res) => {
     console.log(req.query);
+    console.log(req.path);
 
     const findMessage = await Message.findAll({
       where: { toUserId: req.query.user },

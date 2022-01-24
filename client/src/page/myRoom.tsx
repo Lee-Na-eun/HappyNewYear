@@ -31,10 +31,10 @@ function MyRoom() {
     setIsLetter(false);
   };
 
-  const handleMyRoom = async () => {
+  const handleAllMessage = async () => {
     try {
       const result = await axios.get(
-        `${url}/user/myRoom?user=${statusResult.userInfo.id}`,
+        `${url}/user/myRoom/message/all?user=${statusResult.userInfo.id}`,
         {
           headers: {
             authorization: `bearer ${statusResult.userInfo.accessToken}`,
@@ -42,11 +42,9 @@ function MyRoom() {
         }
       );
 
-      if (result.data.message === 'ok') {
-        console.log(result);
-        dispatch(navClose());
-      }
+      console.log('vvvvvvv', result);
     } catch (err: any) {
+      console.log(err);
       if (err.response.data.message === 'Send new Login Request') {
         swal({
           title: '재로그인이 필요합니다.',
@@ -74,7 +72,7 @@ function MyRoom() {
             </div>
             <div id='headerTextBox'>
               <ul>
-                <li>전체</li>
+                <li onClick={handleAllMessage}>전체</li>
                 <li>안 읽은 편지</li>
                 <li>읽은 편지</li>
               </ul>
