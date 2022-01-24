@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
-import { useEffect } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 
@@ -17,11 +16,10 @@ axios.defaults.withCredentials = true;
 
 function MyRoom() {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const clientUrl = process.env.REACT_APP_REDIRECT_URI;
   const statusResult = useSelector(resultStatus);
   const dispatch = useDispatch();
   const [isLetter, setIsLetter] = useState(false);
-
-  useEffect(() => {}, []);
 
   const handleWatchLetter = () => {
     setIsLetter(true);
