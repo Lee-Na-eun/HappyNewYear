@@ -143,6 +143,8 @@ function LoginSignup() {
           password: encrypted,
         });
 
+        console.log(result);
+
         if (result.data.message === 'ok') {
           swal({
             title: '로그인이 완료되었습니다.',

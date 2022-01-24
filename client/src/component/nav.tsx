@@ -98,12 +98,14 @@ function Nav() {
               </ul>
             </MenuBox>
           ) : (
-            <ul>
-              <li onClick={handleLoginSignupModal}>로그인 / 회원가입</li>
-              {/* <li>내 방으로 가기</li> */}
-              <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
-              <li onClick={handleNavClose}>닫기</li>
-            </ul>
+            <MenuBox>
+              <ul>
+                <li onClick={handleLoginSignupModal}>로그인 / 회원가입</li>
+                {/* <li>내 방으로 가기</li> */}
+                <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
+                <li onClick={handleNavClose}>닫기</li>
+              </ul>
+            </MenuBox>
           )}
         </HiddenMenuWrap>
       ) : (
