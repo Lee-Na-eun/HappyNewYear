@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Message.init(
     {
-      toUserId: DataTypes.STRING,
+      fromUserId: DataTypes.STRING,
       message: DataTypes.STRING,
       readLetter: DataTypes.BOOLEAN,
       decoration: DataTypes.STRING,
