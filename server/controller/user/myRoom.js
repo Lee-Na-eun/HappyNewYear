@@ -10,9 +10,9 @@ const {
 
 module.exports = {
   get: async (req, res) => {
-    const newUserData = req.body;
-    const { userId, password } = newUserData;
+    console.log(req.query);
+    const userData = req.body;
 
-    res.status(200).json({ message: 'MyRoom Ok' });
+    res.status(200).json({ message: 'ok' });
   },
 };

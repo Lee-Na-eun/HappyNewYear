@@ -10,8 +10,13 @@ import { resetResultArr } from '../redux/quiz/result';
 import LoginSignup from '../modal/loginSignup';
 import Logout from '../modal/logout';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+// require('dotenv').config();
+axios.defaults.withCredentials = true;
 
 function Nav() {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const statusResult = useSelector(resultStatus);
   const userInfo = useSelector(userInfoStatus);
   const dispatch = useDispatch();
@@ -38,11 +43,22 @@ function Nav() {
     dispatch(navClose());
     window.location.replace('/');
   };
-  // console.log(statusResult);
 
   const userUrl = (): string => {
-    // dispatch(navClose());
     return `/myRoom/${userInfo.userId}`;
+  };
+
+  const test = () => {
+    const result = axios.get(
+      `${url}/user/myRoom?user=${statusResult.userInfo.id}`,
+      {
+        headers: {
+          authorization: `bearer ${statusResult.userInfo.accessToken}`,
+        },
+      }
+    );
+
+    console.log(result);
   };
 
   // console.log(userInfo);
@@ -72,7 +88,9 @@ function Nav() {
               <span>{userInfo.userId}님의 메뉴</span>
               <ul>
                 <li onClick={() => dispatch(navClose())}>
-                  <Link to={userUrl()}>내 우체통 보기</Link>
+                  <Link to={userUrl} onClick={test}>
+                    내 우체통 보기
+                  </Link>
                 </li>
                 <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
                 <li onClick={handleLogoutModalOpen}>로그아웃</li>
