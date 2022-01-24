@@ -48,8 +48,8 @@ function Nav() {
     return `/myRoom/${userInfo.userId}`;
   };
 
-  const test = () => {
-    const result = axios.get(
+  const test = async () => {
+    const result = await axios.get(
       `${url}/user/myRoom?user=${statusResult.userInfo.id}`,
       {
         headers: {
@@ -59,6 +59,7 @@ function Nav() {
     );
 
     console.log(result);
+    dispatch(navClose());
   };
 
   // console.log(userInfo);
@@ -87,10 +88,8 @@ function Nav() {
             <MenuBox>
               <span>{userInfo.userId}님의 메뉴</span>
               <ul>
-                <li onClick={() => dispatch(navClose())}>
-                  <Link to={userUrl} onClick={test}>
-                    내 우체통 보기
-                  </Link>
+                <li onClick={test}>
+                  <Link to={userUrl}>내 우체통 보기</Link>
                 </li>
                 <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
                 <li onClick={handleLogoutModalOpen}>로그아웃</li>
