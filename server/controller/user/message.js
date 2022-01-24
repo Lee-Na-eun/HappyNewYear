@@ -11,6 +11,7 @@ const {
 module.exports = {
   get: async (req, res) => {
     console.log(req.query);
+    console.log(req.path);
 
     const findMessage = await Message.findAll({
       where: { toUserId: req.query.user },
@@ -27,9 +28,9 @@ module.exports = {
         res.status(401).json({ message: 'Send new Login Request' });
       }
 
-      res.status(201).json({ message: 'ok' });
+      res.status(201).json({ message: 'ok', userMessage: { findMessage } });
     } else {
-      res.status(200).json({ message: 'ok' });
+      res.status(200).json({ message: 'ok', userMessage: { findMessage } });
     }
   },
 };

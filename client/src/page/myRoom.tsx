@@ -5,9 +5,23 @@ import {
   LetterHead,
 } from '../style/styleMyRoom';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { resultStatus } from '../redux/quiz/result';
+import { logout } from '../redux/user/user';
+import { navClose } from '../redux/nav/nav';
+import { useEffect } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+
+axios.defaults.withCredentials = true;
 
 function MyRoom() {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const statusResult = useSelector(resultStatus);
+  const dispatch = useDispatch();
   const [isLetter, setIsLetter] = useState(false);
+
+  useEffect(() => {}, []);
 
   const handleWatchLetter = () => {
     setIsLetter(true);
@@ -15,6 +29,34 @@ function MyRoom() {
 
   const handleCloseLetter = () => {
     setIsLetter(false);
+  };
+
+  const handleAllMessage = async () => {
+    try {
+      const result = await axios.get(
+        `${url}/user/myRoom/message/all?user=${statusResult.userInfo.id}`,
+        {
+          headers: {
+            authorization: `bearer ${statusResult.userInfo.accessToken}`,
+          },
+        }
+      );
+
+      console.log('vvvvvvv', result);
+    } catch (err: any) {
+      console.log(err);
+      if (err.response.data.message === 'Send new Login Request') {
+        swal({
+          title: '재로그인이 필요합니다.',
+          text: '다시 로그인 후 이용 부탁드립니다.',
+          icon: 'warning',
+        }).then(() => {
+          dispatch(logout());
+          dispatch(navClose());
+          window.location.replace('/');
+        });
+      }
+    }
   };
 
   return (
@@ -30,7 +72,7 @@ function MyRoom() {
             </div>
             <div id='headerTextBox'>
               <ul>
-                <li>전체</li>
+                <li onClick={handleAllMessage}>전체</li>
                 <li>안 읽은 편지</li>
                 <li>읽은 편지</li>
               </ul>

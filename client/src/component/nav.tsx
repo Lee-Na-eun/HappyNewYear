@@ -4,13 +4,14 @@ import { navOpen, navClose } from '../redux/nav/nav';
 import { modalOpen } from '../redux/nav/loginSignup';
 import { logoutModalOpen } from '../redux/nav/logoutModal';
 import { resultStatus } from '../redux/quiz/result';
-import { userInfoStatus } from '../redux/user/user';
+import { userInfoStatus, logout } from '../redux/user/user';
 import { resetIndex } from '../redux/quiz/quiz';
 import { resetResultArr } from '../redux/quiz/result';
 import LoginSignup from '../modal/loginSignup';
 import Logout from '../modal/logout';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 // require('dotenv').config();
 axios.defaults.withCredentials = true;
@@ -48,23 +49,39 @@ function Nav() {
     return `/myRoom/${userInfo.userId}`;
   };
 
-  const test = async () => {
-    const result = await axios.get(
-      `${url}/user/myRoom?user=${statusResult.userInfo.id}`,
-      {
-        headers: {
-          authorization: `bearer ${statusResult.userInfo.accessToken}`,
-        },
-      }
-    );
+  const handleMyRoom = async () => {
+    try {
+      const result = await axios.get(
+        `${url}/user/myRoom?user=${statusResult.userInfo.id}`,
+        {
+          headers: {
+            authorization: `bearer ${statusResult.userInfo.accessToken}`,
+          },
+        }
+      );
 
-    console.log(result);
-    dispatch(navClose());
+      if (result.data.message === 'ok') {
+        console.log(result);
+        dispatch(navClose());
+      }
+    } catch (err: any) {
+      if (err.response.data.message === 'Send new Login Request') {
+        swal({
+          title: '재로그인이 필요합니다.',
+          text: '다시 로그인 후 이용 부탁드립니다.',
+          icon: 'warning',
+        }).then(() => {
+          dispatch(logout());
+          dispatch(navClose());
+          window.location.replace('/');
+        });
+      }
+    }
   };
 
   // console.log(userInfo);
   // console.log(userUrl());
-  // console.log(statusResult);
+  console.log(statusResult);
 
   return (
     <div>
@@ -84,11 +101,11 @@ function Nav() {
             transition: '0.3s',
           }}
         >
-          {statusResult.isModalOpen.login ? (
+          {statusResult.userInfo.id !== -1 ? (
             <MenuBox>
               <span>{userInfo.userId}님의 메뉴</span>
               <ul>
-                <li onClick={test}>
+                <li onClick={handleMyRoom}>
                   <Link to={userUrl}>내 우체통 보기</Link>
                 </li>
                 <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
