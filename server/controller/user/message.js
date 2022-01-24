@@ -27,9 +27,9 @@ module.exports = {
         res.status(401).json({ message: 'Send new Login Request' });
       }
 
-      res.status(201).json({ message: 'ok' });
+      res.status(201).json({ message: 'ok', userMessage: { findMessage } });
     } else {
-      res.status(200).json({ message: 'ok' });
+      res.status(200).json({ message: 'ok', userMessage: { findMessage } });
     }
   },
 };
