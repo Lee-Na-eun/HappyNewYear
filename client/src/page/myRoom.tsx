@@ -37,7 +37,32 @@ function MyRoom() {
             </div>
           </LetterHead>
           <LetterBox>
-            <ul className={isLetter ? 'letterBox' : 'noneLetterBox'}></ul>
+            <ul className={isLetter ? 'letterBox' : 'noneLetterBox'}>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+              <li>편지에오</li>
+            </ul>
           </LetterBox>
         </div>
       </MyLetterWrap>
