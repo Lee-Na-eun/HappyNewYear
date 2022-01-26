@@ -29,6 +29,8 @@ function MyRoom() {
     setIsLetter(false);
   };
 
+  window.onload = function () {};
+
   const handleAllMessage = async () => {
     try {
       const result = await axios.get(

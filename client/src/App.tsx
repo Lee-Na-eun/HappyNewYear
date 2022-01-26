@@ -10,14 +10,6 @@ import { userInfoStatus } from './redux/user/user';
 function App() {
   const userInfo = useSelector(userInfoStatus);
 
-  const userUrl = (): string => {
-    if (userInfo.userId === '') {
-      return '/myRoom';
-    } else {
-      return `/myRoom/${userInfo.userId}`;
-    }
-  };
-
   return (
     <BrowserRouter>
       <div className='App'>
@@ -28,7 +20,7 @@ function App() {
           <Route exact path='/'>
             <Main />
           </Route>
-          <Route path={userUrl()}>
+          <Route path='/myRoom'>
             <MyRoom />
           </Route>
         </Switch>
