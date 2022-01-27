@@ -47,9 +47,15 @@ function MyRoom() {
           <li>
             <Link to='/makePlan'>나의 플랜짜기</Link>
           </li>
-          <li>전체 플랜보기</li>
-          <li>주중 플랜보기</li>
-          <li>하루 플랜보기</li>
+          <li>
+            <Link to='/allPlan'>전체 플랜보기</Link>
+          </li>
+          <li>
+            <Link to='/weekPlan'>주중 플랜보기</Link>
+          </li>
+          <li>
+            <Link to='/dayPlan'>하루 플랜보기</Link>
+          </li>
         </ul>
       </MyPlanWrap>
     </MyRoomWrap>

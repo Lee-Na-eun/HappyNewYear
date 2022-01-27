@@ -1,11 +1,11 @@
 import { PlanWrap } from '../style/stylePlan';
 
-function MakePlan() {
+function WeekPlan() {
   return (
     <PlanWrap>
-      <div>his</div>
+      <div>주중 플랜</div>
     </PlanWrap>
   );
 }
 
-export default MakePlan;
+export default WeekPlan;

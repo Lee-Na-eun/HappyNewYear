@@ -5,8 +5,9 @@ import Main from './page/main';
 import MyRoom from './page/myRoom';
 import Nav from './component/nav';
 import MakePlan from './page/makePlan';
-import { useSelector } from 'react-redux';
-import { userInfoStatus } from './redux/user/user';
+import AllPlan from './page/allPlan';
+import DayPlan from './page/dayPlan';
+import WeekPlan from './page/weekPlan';
 
 function App() {
   // const userInfo = useSelector(userInfoStatus);
@@ -26,6 +27,15 @@ function App() {
           </Route>
           <Route path='/makePlan'>
             <MakePlan />
+          </Route>
+          <Route path='/allPlan'>
+            <AllPlan />
+          </Route>
+          <Route path='/weekPlan'>
+            <WeekPlan />
+          </Route>
+          <Route path='/dayPlan'>
+            <DayPlan />
           </Route>
         </Switch>
       </div>

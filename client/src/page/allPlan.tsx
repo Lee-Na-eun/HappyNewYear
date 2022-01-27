@@ -1,11 +1,11 @@
 import { PlanWrap } from '../style/stylePlan';
 
-function MakePlan() {
+function AllPlan() {
   return (
     <PlanWrap>
-      <div>his</div>
+      <div>전체플랜</div>
     </PlanWrap>
   );
 }
 
-export default MakePlan;
+export default AllPlan;
