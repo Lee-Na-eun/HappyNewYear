@@ -145,27 +145,40 @@ export const Button = styled.button`
 `;
 
 export const ResultWrap = styled.div`
-  > h3 {
-    font-size: 25px;
-    padding: 20px 20px;
-    @media (max-width: 420px) {
-      font-size: 15px;
+  display: flex;
+  width: 650px;
+  height: 550px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #878bbe;
+  border-radius: 20px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    > h3 {
+      font-size: 25px;
+      padding: 20px 20px;
+      @media (max-width: 420px) {
+        font-size: 15px;
+      }
     }
-  }
-  > p {
-    padding: 20px 30px;
-    @media (max-width: 420px) {
-      font-size: 10px;
-      padding: 0 20px 20px 20px;
+    > p {
+      padding: 20px 30px;
+      @media (max-width: 420px) {
+        font-size: 10px;
+        padding: 0 20px 20px 20px;
+      }
     }
-  }
-  > img {
-    width: 150px;
-    height: 150px;
-    background-color: red;
-    @media (max-width: 420px) {
-      width: 100px;
-      height: 100px;
+    > img {
+      width: 150px;
+      height: 150px;
+      background-color: pink;
+      margin: 0 auto;
+      @media (max-width: 420px) {
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 `;
