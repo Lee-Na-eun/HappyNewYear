@@ -36,7 +36,7 @@ export const ModalWrap = styled.div`
 export const ModalBox = styled.div`
   width: 500px;
   height: 450px;
-  background-color: #c56363;
+  background-color: #878bbe;
   border-radius: 20px;
   @media (max-width: 600px) {
     width: 90%;
@@ -53,14 +53,14 @@ export const SelectLoginSignup = styled.ul`
     font-size: 14px;
   }
   > .changeColor {
-    background-color: #c56363;
+    background-color: #878bbe;
     color: #fff;
   }
   > li {
     cursor: pointer;
     flex: 1 1 auto;
     line-height: 60px;
-    color: #c56363;
+    color: #878bbe;
   }
 `;
 
@@ -156,7 +156,7 @@ export const ButtonWrap = styled.div`
     margin-left: 20px;
     border-radius: 10px;
     border: none;
-    color: #c56363;
+    color: #878bbe;
     cursor: pointer;
     @media (max-width: 600px) {
       font-size: 12px;
