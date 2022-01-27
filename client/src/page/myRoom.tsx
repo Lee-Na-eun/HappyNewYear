@@ -4,6 +4,7 @@ import { resultStatus } from '../redux/quiz/result';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 axios.defaults.withCredentials = true;
@@ -43,7 +44,9 @@ function MyRoom() {
     <MyRoomWrap>
       <MyPlanWrap>
         <ul>
-          <li>나의 플랜짜기</li>
+          <li>
+            <Link to='/makePlan'>나의 플랜짜기</Link>
+          </li>
           <li>전체 플랜보기</li>
           <li>주중 플랜보기</li>
           <li>하루 플랜보기</li>

@@ -47,10 +47,6 @@ function Nav() {
     window.location.replace('/');
   };
 
-  const userUrl = (): string => {
-    return `/myRoom/${userInfo.userId}`;
-  };
-
   const handleMyRoom = async () => {
     try {
       const result = await axios.get(
@@ -108,7 +104,7 @@ function Nav() {
               <span>{userInfo.userId}님의 메뉴</span>
               <ul>
                 <li onClick={handleMyRoom}>
-                  <Link to={userUrl}>나의 플랜 보기</Link>
+                  <Link to='/myRoom'>나의 플랜 보기</Link>
                 </li>
                 <li onClick={handleRetryQuiz}>테스트 다시 하기</li>
                 <li onClick={handleLogoutModalOpen}>로그아웃</li>

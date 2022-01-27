@@ -4,11 +4,12 @@ import './App.css';
 import Main from './page/main';
 import MyRoom from './page/myRoom';
 import Nav from './component/nav';
+import MakePlan from './page/makePlan';
 import { useSelector } from 'react-redux';
 import { userInfoStatus } from './redux/user/user';
 
 function App() {
-  const userInfo = useSelector(userInfoStatus);
+  // const userInfo = useSelector(userInfoStatus);
 
   return (
     <BrowserRouter>
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path='/myRoom'>
             <MyRoom />
+          </Route>
+          <Route path='/makePlan'>
+            <MakePlan />
           </Route>
         </Switch>
       </div>

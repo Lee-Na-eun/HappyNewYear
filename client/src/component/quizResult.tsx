@@ -39,7 +39,7 @@ function QuizResult() {
             </GoRoomButton>
           ) : (
             <GoRoomButton>
-              <Link to={userUrl()}>나의 플랜 보기</Link>
+              <Link to='/myRoom'>나의 플랜 보기</Link>
             </GoRoomButton>
           )}
         </div>
