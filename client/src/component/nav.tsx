@@ -12,6 +12,8 @@ import Logout from '../modal/logout';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 // require('dotenv').config();
 axios.defaults.withCredentials = true;
@@ -88,9 +90,9 @@ function Nav() {
       {statusResult.isModalOpen.open ? <LoginSignup /> : null}
       {statusResult.isLogoutModalOpen.open ? <Logout /> : null}
       <NavWrap>
-        <ul>
-          <li onClick={handleNavOpen}>이거슨 로고</li>
-        </ul>
+        <div>
+          <FontAwesomeIcon icon={faBars} onClick={handleNavOpen} id='navBtn' />
+        </div>
       </NavWrap>
 
       {statusResult.isNavOpen.open ? (

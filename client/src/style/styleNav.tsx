@@ -4,12 +4,19 @@ export const NavWrap = styled.div`
   position: fixed;
   width: 100vw;
   height: 70px;
-  > ul {
+  > div {
     display: flex;
     height: 70px;
     line-height: 70px;
-    > li {
-      padding: 0 50px;
+    > #navBtn {
+      font-size: 35px;
+      color: #fff;
+      margin-left: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      @media (max-width: 420px) {
+        font-size: 25px;
+      }
     }
   }
 `;
