@@ -14,11 +14,11 @@ export const MainWrap = styled.div`
   margin: 0 auto; */
   width: 700px;
   height: 600px;
-  color: #c56363;
+  color: #878bbe;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
   @media (max-width: 800px) {
     width: 90%;
@@ -66,7 +66,6 @@ export const StartWrap = styled.div`
   > img {
     width: 150px;
     height: 150px;
-    /* background-color: orange; */
     margin: 0 auto;
     @media (max-width: 420px) {
       width: 100px;
@@ -76,19 +75,18 @@ export const StartWrap = styled.div`
 `;
 
 export const StartButton = styled.button`
-  background-color: #fff;
   width: 70%;
   height: 50px;
   border: none;
   border-radius: 50px;
-  background-color: #c56363;
+  background-color: #878bbe;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
   margin: 0 auto;
   :hover {
-    background-color: #ffb4b4;
+    background-color: #b7baea;
   }
   @media (max-width: 420px) {
     width: 60%;
@@ -132,13 +130,13 @@ export const Button = styled.button`
   height: 50px;
   margin-top: 20px;
   font-size: 12px;
-  background-color: #c56363;
+  background-color: #878bbe;
   color: #fff;
   cursor: pointer;
   transition: 0.2s;
   padding: 0 20px;
   :hover {
-    background-color: #ffb4b4;
+    background-color: #b7baea;
   }
   @media (max-width: 420px) {
     font-size: 10px;
@@ -174,13 +172,13 @@ export const ResultWrap = styled.div`
 
 const blinkEffect = keyframes`
    0% {
-      background-color: #ffb4b4;
+      background-color: #878bbe;
     }
     50% {
-      background-color: #FFDCDC;
+      background-color: #b7baea;
     }
     100%{
-      background-color: #ffb4b4;
+      background-color: #878bbe;
     }
 `;
 
@@ -190,7 +188,7 @@ export const GoRoomButton = styled.div`
   height: 50px;
   border: none;
   border-radius: 50px;
-  background-color: #ffb4b4;
+  background-color: #878bbe;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
