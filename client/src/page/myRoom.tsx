@@ -1,10 +1,4 @@
-import {
-  MyRoomWrap,
-  MyLetterWrap,
-  LetterBox,
-  LetterHead,
-} from '../style/styleMyRoom';
-import { useState } from 'react';
+import { MyRoomWrap, MyPlanWrap } from '../style/styleMyRoom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
 import { logout } from '../redux/user/user';
@@ -16,20 +10,8 @@ axios.defaults.withCredentials = true;
 
 function MyRoom() {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
-  const clientUrl = process.env.REACT_APP_REDIRECT_URI;
   const statusResult = useSelector(resultStatus);
   const dispatch = useDispatch();
-  const [isLetter, setIsLetter] = useState(false);
-
-  const handleWatchLetter = () => {
-    setIsLetter(true);
-  };
-
-  const handleCloseLetter = () => {
-    setIsLetter(false);
-  };
-
-  window.onload = function () {};
 
   const handleAllMessage = async () => {
     try {
@@ -41,8 +23,6 @@ function MyRoom() {
           },
         }
       );
-
-      console.log('vvvvvvv', result);
     } catch (err: any) {
       console.log(err);
       if (err.response.data.message === 'Send new Login Request') {
@@ -61,53 +41,14 @@ function MyRoom() {
 
   return (
     <MyRoomWrap>
-      <MyLetterWrap>
-        <div id='post' onClick={handleWatchLetter}>
-          우체통
-        </div>
-        <div className={isLetter ? 'letterBox' : 'noneLetterBox'}>
-          <LetterHead>
-            <div id='closeLetter'>
-              <span onClick={handleCloseLetter}>&times;</span>
-            </div>
-            <div id='headerTextBox'>
-              <ul>
-                <li onClick={handleAllMessage}>전체</li>
-                <li>안 읽은 편지</li>
-                <li>읽은 편지</li>
-              </ul>
-            </div>
-          </LetterHead>
-          <LetterBox>
-            <ul className={isLetter ? 'letterBox' : 'noneLetterBox'}>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-            </ul>
-          </LetterBox>
-        </div>
-      </MyLetterWrap>
+      <MyPlanWrap>
+        <ul>
+          <li>나의 플랜짜기</li>
+          <li>전체 플랜보기</li>
+          <li>주중 플랜보기</li>
+          <li>하루 플랜보기</li>
+        </ul>
+      </MyPlanWrap>
     </MyRoomWrap>
   );
 }
