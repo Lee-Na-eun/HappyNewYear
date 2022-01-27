@@ -17,6 +17,28 @@ export const MyPlanWrap = styled.div`
     > li {
       border-radius: 20px;
       background-color: #fff;
+      :hover {
+        margin-top: -10px;
+        margin-bottom: 10px;
+        transition: 0.2s;
+      }
+      > a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #878bbe;
+        > .planIcon {
+          font-size: 45px;
+          display: block;
+          color: #878bbe;
+          margin-bottom: 15px;
+        }
+      }
     }
     @media (max-width: 420px) {
       grid-template-columns: 100px 100px;

@@ -6,6 +6,11 @@ import { navClose } from '../redux/nav/nav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudMoon } from '@fortawesome/free-solid-svg-icons';
+import { faCloudSun } from '@fortawesome/free-solid-svg-icons';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 axios.defaults.withCredentials = true;
 
@@ -45,16 +50,28 @@ function MyRoom() {
       <MyPlanWrap>
         <ul>
           <li>
-            <Link to='/makePlan'>나의 플랜짜기</Link>
+            <Link to='/makePlan'>
+              <FontAwesomeIcon icon={faEdit} className='planIcon' />
+              나의 플랜짜기
+            </Link>
           </li>
           <li>
-            <Link to='/allPlan'>전체 플랜보기</Link>
+            <Link to='/allPlan'>
+              <FontAwesomeIcon icon={faSun} className='planIcon' />
+              전체 플랜보기
+            </Link>
           </li>
           <li>
-            <Link to='/weekPlan'>주중 플랜보기</Link>
+            <Link to='/weekPlan'>
+              <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />
+              주중 플랜보기
+            </Link>
           </li>
           <li>
-            <Link to='/dayPlan'>하루 플랜보기</Link>
+            <Link to='/dayPlan'>
+              <FontAwesomeIcon icon={faCloudSun} className='planIcon' />
+              하루 플랜보기
+            </Link>
           </li>
         </ul>
       </MyPlanWrap>
