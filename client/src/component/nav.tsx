@@ -50,7 +50,7 @@ function Nav() {
   const handleMyRoom = async () => {
     try {
       const result = await axios.get(
-        `${url}/myRoom/userId=${statusResult.userInfo.id}`,
+        `${url}/myRoom?userId=${statusResult.userInfo.id}`,
         {
           headers: {
             authorization: `bearer ${statusResult.userInfo.accessToken}`,
