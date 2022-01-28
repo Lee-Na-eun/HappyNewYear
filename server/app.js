@@ -21,8 +21,10 @@ app.use(
 );
 
 const userRouter = require('./routes/user');
+const planRouter = require('./routes/plan');
 
 app.use('/user', userRouter);
+app.use('/plan', planRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello Server!');
