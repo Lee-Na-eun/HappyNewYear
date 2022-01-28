@@ -13,9 +13,13 @@ export const MakePlanWrap = styled.div`
   border: 4px solid #fff;
   border-radius: 30px;
   background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
 `;
 
 export const PlanHead = styled.div`
+  background-color: red;
+  flex: 1 1 auto;
   > h2 {
     font-size: 50px;
     color: #fff;
@@ -29,4 +33,21 @@ export const PlanHead = styled.div`
     margin: 0 auto;
     border-bottom: 2px solid #fff;
   }
+`;
+
+export const PlanMainWrap = styled.div`
+  background-color: orange;
+  flex: 10 1 auto;
+`;
+
+export const MonthDaySelectWrap = styled.div`
+  background-color: pink;
+`;
+
+export const PlanTextWrap = styled.div`
+  background-color: green;
+`;
+
+export const WorkingWrap = styled.div`
+  background-color: blueviolet;
 `;
