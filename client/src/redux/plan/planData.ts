@@ -7,8 +7,13 @@ export type PlanType = {
   working: string;
 };
 
-interface QuizProperty {
-  [key: string]: { index: number };
+interface PlanProperty {
+  [key: string]: {
+    month: number;
+    date: number;
+    planText: string;
+    working: string;
+  };
 }
 
 const initialState: PlanType = {
@@ -41,5 +46,5 @@ export const PlanTypeSlice = createSlice({
 
 export const { planTextChange, monthChange, dateChange, workingChange } =
   PlanTypeSlice.actions;
-export const planTypeStatus = (state: QuizProperty) => state;
+export const planTypeStatus = (state: PlanProperty) => state;
 export default PlanTypeSlice.reducer;

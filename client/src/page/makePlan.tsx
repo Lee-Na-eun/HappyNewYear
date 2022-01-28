@@ -1,7 +1,6 @@
 import { PlanWrap, MakePlanWrap, PlanHead } from '../style/stylePlan';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarAndCrescent } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   planTextChange,
@@ -14,7 +13,6 @@ import { planTypeStatus } from '../redux/plan/planData';
 function MakePlan() {
   const dispatch = useDispatch();
   const statusResult = useSelector(planTypeStatus);
-  const [test, setTest] = useState({ month: 0 });
 
   const optionMonth = (): number[] => {
     const monthArr = [];
@@ -25,6 +23,11 @@ function MakePlan() {
     return monthArr;
   };
   // 한달 선택을 위한 배열
+
+  const handleMonthChange = (e: any) => {
+    dispatch(monthChange(Number(e.currentTarget.value)));
+  };
+  // 달 저장하기
 
   const optionDay = (month: number): number[] => {
     const dayArr = [];
@@ -49,16 +52,11 @@ function MakePlan() {
     return dayArr;
   };
 
-  const handleTest = (e: any) => {
-    setTest({ month: e.currentTarget.value });
-  };
-  // 월 선택 후 그 달 저장
-
-  const handleMonthChange = (e: any) => {
-    dispatch(monthChange(Number(e.currentTarget.value)));
+  const handleDateChange = (e: any) => {
+    dispatch(dateChange(Number(e.currentTarget.value)));
   };
 
-  console.log(statusResult.planData);
+  console.log(statusResult.planData.month);
 
   return (
     <PlanWrap>
@@ -75,6 +73,11 @@ function MakePlan() {
               <option key={index} value={el}>
                 {el}월
               </option>
+            ))}
+          </select>
+          <select onChange={handleDateChange}>
+            {optionDay(statusResult.planData.month).map((el, index) => (
+              <option key={index}>{el}일</option>
             ))}
           </select>
         </>
