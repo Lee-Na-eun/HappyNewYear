@@ -21,7 +21,6 @@ module.exports = {
       res.status(400).json({ message: 'wrong access' });
     } else {
       const accessVerify = isAuthorized(req);
-      console.log(accessVerify);
 
       if (!accessVerify) {
         // accessToken 유효기간이 만료됐을 때
