@@ -36,7 +36,7 @@ export const ModalWrap = styled.div`
 export const ModalBox = styled.div`
   width: 500px;
   height: 250px;
-  background-color: #c56363;
+  background-color: #878bbe;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -66,7 +66,7 @@ export const ButtonWrap = styled.div`
     margin-left: 20px;
     border-radius: 10px;
     border: none;
-    color: #c56363;
+    color: #878bbe;
     cursor: pointer;
     @media (max-width: 600px) {
       font-size: 12px;

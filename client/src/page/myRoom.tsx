@@ -1,17 +1,16 @@
-import {
-  MyRoomWrap,
-  MyLetterWrap,
-  LetterBox,
-  LetterHead,
-} from '../style/styleMyRoom';
-import { useState } from 'react';
+import { MyRoomWrap, MyPlanWrap } from '../style/styleMyRoom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
-import { useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudMoon } from '@fortawesome/free-solid-svg-icons';
+import { faCloudSun } from '@fortawesome/free-solid-svg-icons';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 axios.defaults.withCredentials = true;
 
@@ -19,17 +18,6 @@ function MyRoom() {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const statusResult = useSelector(resultStatus);
   const dispatch = useDispatch();
-  const [isLetter, setIsLetter] = useState(false);
-
-  useEffect(() => {}, []);
-
-  const handleWatchLetter = () => {
-    setIsLetter(true);
-  };
-
-  const handleCloseLetter = () => {
-    setIsLetter(false);
-  };
 
   const handleAllMessage = async () => {
     try {
@@ -41,8 +29,6 @@ function MyRoom() {
           },
         }
       );
-
-      console.log('vvvvvvv', result);
     } catch (err: any) {
       console.log(err);
       if (err.response.data.message === 'Send new Login Request') {
@@ -61,53 +47,34 @@ function MyRoom() {
 
   return (
     <MyRoomWrap>
-      <MyLetterWrap>
-        <div id='post' onClick={handleWatchLetter}>
-          우체통
-        </div>
-        <div className={isLetter ? 'letterBox' : 'noneLetterBox'}>
-          <LetterHead>
-            <div id='closeLetter'>
-              <span onClick={handleCloseLetter}>&times;</span>
-            </div>
-            <div id='headerTextBox'>
-              <ul>
-                <li onClick={handleAllMessage}>전체</li>
-                <li>안 읽은 편지</li>
-                <li>읽은 편지</li>
-              </ul>
-            </div>
-          </LetterHead>
-          <LetterBox>
-            <ul className={isLetter ? 'letterBox' : 'noneLetterBox'}>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-              <li>편지에오</li>
-            </ul>
-          </LetterBox>
-        </div>
-      </MyLetterWrap>
+      <MyPlanWrap>
+        <ul>
+          <li>
+            <Link to='/makePlan'>
+              <FontAwesomeIcon icon={faEdit} className='planIcon' />
+              나의 플랜짜기
+            </Link>
+          </li>
+          <li>
+            <Link to='/allPlan'>
+              <FontAwesomeIcon icon={faSun} className='planIcon' />
+              전체 플랜보기
+            </Link>
+          </li>
+          <li>
+            <Link to='/weekPlan'>
+              <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />
+              주중 플랜보기
+            </Link>
+          </li>
+          <li>
+            <Link to='/dayPlan'>
+              <FontAwesomeIcon icon={faCloudSun} className='planIcon' />
+              하루 플랜보기
+            </Link>
+          </li>
+        </ul>
+      </MyPlanWrap>
     </MyRoomWrap>
   );
 }

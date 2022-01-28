@@ -4,19 +4,13 @@ import './App.css';
 import Main from './page/main';
 import MyRoom from './page/myRoom';
 import Nav from './component/nav';
-import { useSelector } from 'react-redux';
-import { userInfoStatus } from './redux/user/user';
+import MakePlan from './page/makePlan';
+import AllPlan from './page/allPlan';
+import DayPlan from './page/dayPlan';
+import WeekPlan from './page/weekPlan';
 
 function App() {
-  const userInfo = useSelector(userInfoStatus);
-
-  const userUrl = (): string => {
-    if (userInfo.userId === '') {
-      return '/myRoom';
-    } else {
-      return `/myRoom/${userInfo.userId}`;
-    }
-  };
+  // const userInfo = useSelector(userInfoStatus);
 
   return (
     <BrowserRouter>
@@ -28,8 +22,20 @@ function App() {
           <Route exact path='/'>
             <Main />
           </Route>
-          <Route path={userUrl()}>
+          <Route path='/myRoom'>
             <MyRoom />
+          </Route>
+          <Route path='/makePlan'>
+            <MakePlan />
+          </Route>
+          <Route path='/allPlan'>
+            <AllPlan />
+          </Route>
+          <Route path='/weekPlan'>
+            <WeekPlan />
+          </Route>
+          <Route path='/dayPlan'>
+            <DayPlan />
           </Route>
         </Switch>
       </div>

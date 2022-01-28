@@ -4,12 +4,19 @@ export const NavWrap = styled.div`
   position: fixed;
   width: 100vw;
   height: 70px;
-  > ul {
+  > div {
     display: flex;
     height: 70px;
     line-height: 70px;
-    > li {
-      padding: 0 50px;
+    > #navBtn {
+      font-size: 35px;
+      color: #fff;
+      margin-left: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      @media (max-width: 420px) {
+        font-size: 25px;
+      }
     }
   }
 `;
@@ -18,7 +25,7 @@ export const HiddenMenuWrap = styled.div`
   width: 200px;
   height: 100vh;
   position: fixed;
-  background-color: #ffdcdc;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -35,13 +42,13 @@ export const MenuBox = styled.div`
   flex-direction: column;
   > span {
     height: 50px;
-    color: #c56363;
+    color: #878bbe;
     font-weight: bold;
   }
   > ul {
     margin: 0 auto;
     > li {
-      background-color: #c56363;
+      background-color: #878bbe;
       width: 120px;
       height: 50px;
       line-height: 50px;

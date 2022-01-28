@@ -7,101 +7,44 @@ export const MyRoomWrap = styled.div`
   height: 100vh;
 `;
 
-export const MyLetterWrap = styled.div`
-  width: 1020px;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  > #post {
-    width: 500px;
-    height: 600px;
-    background-color: #fff;
-  }
-  > .noneLetterBox {
-    width: 0;
-    height: 600px;
-    opacity: 0;
-    transition: 0.5s;
-  }
-  > .letterBox {
-    opacity: 1;
-    width: 500px;
-    height: 600px;
-    transition: 0.5s;
-    background-color: #fff;
-  }
-  > div:nth-child(1) {
-    border-radius: 200px 200px 0 0;
-  }
-  > div:nth-child(2) {
-    margin-left: 20px;
-    border-radius: 20px;
-  }
-`;
-
-export const LetterHead = styled.div`
-  width: 400px;
-  height: 110px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  > .noneLetterBox {
-    width: 0;
-    transition: 0.5s;
-  }
-  > .letterBox {
-    width: 400px;
-    transition: 0.5s;
-  }
-  > #closeLetter {
-    display: flex;
-    width: 400px;
-    height: 60px;
-    justify-content: right;
-    align-items: center;
-    font-size: 40px;
-    color: #c56363;
-    > span {
-      cursor: pointer;
-    }
-  }
-  > #headerTextBox {
-    transition: 0.5s;
-    > ul {
-      display: flex;
-      width: 60%;
-      justify-content: space-between;
-      > li {
-        width: 70px;
-        height: 30px;
-        font-size: 11px;
-        text-align: center;
-        line-height: 30px;
-        border-radius: 5px;
-        border: 1px solid #c56363;
-        color: #c56363;
-        box-shadow: 0px 3px 0px #c56363;
-        cursor: pointer;
+export const MyPlanWrap = styled.div`
+  > ul {
+    display: grid;
+    grid-template-columns: 180px 180px;
+    grid-template-rows: 180px 180px;
+    row-gap: 20px;
+    column-gap: 20px;
+    > li {
+      border-radius: 20px;
+      background-color: #fff;
+      :hover {
+        margin-top: -10px;
+        margin-bottom: 10px;
+        transition: 0.2s;
+      }
+      > a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #878bbe;
+        > .planIcon {
+          font-size: 45px;
+          display: block;
+          color: #878bbe;
+          margin-bottom: 15px;
+        }
       }
     }
-  }
-`;
-
-export const LetterBox = styled.div`
-  > ul {
-    width: 400px;
-    height: 450px;
-    border-radius: 15px;
-    border: 1px solid #c56363;
-    margin: 0 auto;
-  }
-  > .noneLetterBox {
-    width: 0;
-    transition: 0.5s;
-  }
-  > .letterBox {
-    width: 400px;
-    transition: 0.5s;
+    @media (max-width: 420px) {
+      grid-template-columns: 100px 100px;
+      grid-template-rows: 100px 100px;
+      row-gap: 10px;
+      column-gap: 10px;
+    }
   }
 `;
