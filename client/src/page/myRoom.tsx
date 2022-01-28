@@ -19,32 +19,6 @@ function MyRoom() {
   const statusResult = useSelector(resultStatus);
   const dispatch = useDispatch();
 
-  const handleAllMessage = async () => {
-    try {
-      const result = await axios.get(
-        `${url}/user/myRoom/message/all?user=${statusResult.userInfo.id}`,
-        {
-          headers: {
-            authorization: `bearer ${statusResult.userInfo.accessToken}`,
-          },
-        }
-      );
-    } catch (err: any) {
-      console.log(err);
-      if (err.response.data.message === 'Send new Login Request') {
-        swal({
-          title: '재로그인이 필요합니다.',
-          text: '다시 로그인 후 이용 부탁드립니다.',
-          icon: 'warning',
-        }).then(() => {
-          dispatch(logout());
-          dispatch(navClose());
-          window.location.replace('/');
-        });
-      }
-    }
-  };
-
   return (
     <MyRoomWrap>
       <MyPlanWrap>
