@@ -1,4 +1,3 @@
-const { Message } = require('../../models');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -11,10 +10,6 @@ const {
 module.exports = {
   get: async (req, res) => {
     console.log(req.query);
-
-    const findMessage = await Message.findAll({
-      where: { toUserId: req.query.user },
-    });
 
     const accessVerify = isAuthorized(req);
     console.log(accessVerify);

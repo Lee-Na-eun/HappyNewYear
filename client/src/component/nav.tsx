@@ -63,17 +63,15 @@ function Nav() {
         dispatch(navClose());
       }
     } catch (err: any) {
-      if (err.response.data.message === 'Send new Login Request') {
-        swal({
-          title: '재로그인이 필요합니다.',
-          text: '다시 로그인 후 이용 부탁드립니다.',
-          icon: 'warning',
-        }).then(() => {
-          dispatch(logout());
-          dispatch(navClose());
-          window.location.replace('/');
-        });
-      }
+      swal({
+        title: '재로그인이 필요합니다.',
+        text: '다시 로그인 후 이용 부탁드립니다.',
+        icon: 'warning',
+      }).then(() => {
+        dispatch(logout());
+        dispatch(navClose());
+        window.location.replace('/');
+      });
     }
   };
 

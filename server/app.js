@@ -21,7 +21,7 @@ app.use(
 );
 
 const userRouter = require('./routes/user');
-const planRouter = require('./routes/plan');
+const planRouter = require('./routes/myRoom');
 
 app.use('/user', userRouter);
 app.use('/plan', planRouter);
