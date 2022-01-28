@@ -6,6 +6,7 @@ import {
   MonthDaySelectWrap,
   PlanTextWrap,
   WorkingWrap,
+  CompleteButton,
 } from '../style/stylePlan';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarAndCrescent } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +19,19 @@ function MakePlan() {
   const dispatch = useDispatch();
   const statusResult = useSelector(planTypeStatus);
   const [planTextChange, setPlanTextChange] = useState('');
-  const [workingStatus, setWorkingStatus] = useState('시작 안 함');
+  const [workingStatus, setWorkingStatus] = useState('');
+
+  type ColorType = {
+    firstBtn: boolean;
+    secontBtn: boolean;
+    thirdBtn: boolean;
+  };
+
+  const [changeColor, setChangeColor] = useState<ColorType>({
+    firstBtn: false,
+    secontBtn: false,
+    thirdBtn: false,
+  });
 
   const optionMonth = (): number[] => {
     const monthArr = [];
@@ -71,11 +84,18 @@ function MakePlan() {
 
   const handleWorkingStatus = (e: any) => {
     setWorkingStatus(e.currentTarget.value);
+    if (e.currentTarget.value === '시작 안 함') {
+      setChangeColor({ firstBtn: true, secontBtn: false, thirdBtn: false });
+    } else if (e.currentTarget.value === '진행 중') {
+      setChangeColor({ firstBtn: false, secontBtn: true, thirdBtn: false });
+    } else if (e.currentTarget.value === '완료') {
+      setChangeColor({ firstBtn: false, secontBtn: false, thirdBtn: true });
+    }
   };
 
-  console.log(statusResult.planData);
-  console.log(planTextChange);
-  console.log(workingStatus);
+  // console.log(statusResult.planData);
+  // console.log(planTextChange);
+  // console.log(workingStatus);
 
   return (
     <PlanWrap>
@@ -89,20 +109,22 @@ function MakePlan() {
         <PlanMainWrap>
           <MonthDaySelectWrap>
             <p>날짜 선택하기</p>
-            <select onChange={handleMonthChange}>
-              {optionMonth().map((el: number, index) => (
-                <option key={index} value={el}>
-                  {el}월
-                </option>
-              ))}
-            </select>
-            <select onChange={handleDateChange}>
-              {optionDay(statusResult.planData.month).map((el, index) => (
-                <option key={index} value={el}>
-                  {el}일
-                </option>
-              ))}
-            </select>
+            <div>
+              <select onChange={handleMonthChange}>
+                {optionMonth().map((el: number, index) => (
+                  <option key={index} value={el}>
+                    {el}월
+                  </option>
+                ))}
+              </select>
+              <select onChange={handleDateChange}>
+                {optionDay(statusResult.planData.month).map((el, index) => (
+                  <option key={index} value={el}>
+                    {el}일
+                  </option>
+                ))}
+              </select>
+            </div>
           </MonthDaySelectWrap>
           <PlanTextWrap>
             <p>계획 쓰기</p>
@@ -111,19 +133,33 @@ function MakePlan() {
           <WorkingWrap>
             <p>계획 상태</p>
             <div>
-              <button onClick={handleWorkingStatus} value='시작 안 함'>
+              <button
+                className={changeColor.firstBtn ? 'colorChange' : ''}
+                onClick={handleWorkingStatus}
+                value='시작 안 함'
+              >
                 시작 안 함
               </button>
-              <button onClick={handleWorkingStatus} value='진행 중'>
+              <button
+                className={changeColor.secontBtn ? 'colorChange' : ''}
+                onClick={handleWorkingStatus}
+                value='진행 중'
+              >
                 진행 중
               </button>
-              <button onClick={handleWorkingStatus} value='완료'>
+              <button
+                className={changeColor.thirdBtn ? 'colorChange' : ''}
+                onClick={handleWorkingStatus}
+                value='완료'
+              >
                 완료
               </button>
             </div>
           </WorkingWrap>
-          {/* axiso 요청해주기 */}
-          <button>작성 완료</button>
+          <CompleteButton>
+            {/* axiso 요청해주기 */}
+            <button>작성 완료</button>
+          </CompleteButton>
         </PlanMainWrap>
       </MakePlanWrap>
     </PlanWrap>
