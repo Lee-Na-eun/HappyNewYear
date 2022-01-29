@@ -14,6 +14,6 @@ module.exports = {
       workingStatus,
       userId: accessVerify.id,
     });
-    res.json({ message: 'plan is ready' });
+    res.status(200).json({ message: 'ok' });
   },
 };

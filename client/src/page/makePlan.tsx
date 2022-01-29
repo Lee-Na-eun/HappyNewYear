@@ -14,12 +14,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { monthChange, dateChange } from '../redux/plan/planData';
 import { planTypeStatus } from '../redux/plan/planData';
 import { useState } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+
+axios.defaults.withCredentials = true;
 
 function MakePlan() {
   const dispatch = useDispatch();
-  const statusResult = useSelector(planTypeStatus);
+  const planStatusResult = useSelector(planTypeStatus);
   const [planTextChange, setPlanTextChange] = useState('');
   const [workingStatus, setWorkingStatus] = useState('');
+  const url: string = process.env.REACT_APP_API_URL || `http://localhost:4000`;
 
   type ColorType = {
     firstBtn: boolean;
@@ -93,9 +98,50 @@ function MakePlan() {
     }
   };
 
-  // console.log(statusResult.planData);
-  // console.log(planTextChange);
-  // console.log(workingStatus);
+  const handleSendPlan = async () => {
+    try {
+      if (planTextChange === '' || workingStatus === '') {
+        swal({
+          title: '아직 작성하지 않은 부분이 있습니다.',
+          text: '모두 작성 후 다시 시도 해주세요.',
+          icon: 'warning',
+        });
+      } else {
+        const result = await axios.post(
+          `${url}/myRoom/makePlan`,
+          {
+            month: planStatusResult.planData.month,
+            date: planStatusResult.planData.date,
+            planText: planTextChange,
+            workingStatus: workingStatus,
+          },
+          {
+            headers: {
+              authorization: `bearer ${planStatusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+
+        if (result.data.message === 'ok') {
+          swal({
+            title: '제출이 완료 되었습니다.',
+            text: '작성한 계획은 언제든지 수정 가능합니다.',
+            icon: 'success',
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      }
+    } catch (err: any) {
+      swal({
+        title: '네트워크가 불안정 합니다.',
+        text: '잠시 후에 이용 부탁드립니다.',
+        icon: 'error',
+      });
+    }
+  };
+
+  console.log(planStatusResult);
 
   return (
     <PlanWrap>
@@ -118,7 +164,7 @@ function MakePlan() {
                 ))}
               </select>
               <select onChange={handleDateChange}>
-                {optionDay(statusResult.planData.month).map((el, index) => (
+                {optionDay(planStatusResult.planData.month).map((el, index) => (
                   <option key={index} value={el}>
                     {el}일
                   </option>
@@ -131,7 +177,7 @@ function MakePlan() {
             <input onChange={handlePlanTextChange} value={planTextChange} />
           </PlanTextWrap>
           <WorkingWrap>
-            <p>계획 상태</p>
+            <p>계획 상태 선택</p>
             <div>
               <button
                 className={changeColor.firstBtn ? 'colorChange' : ''}
@@ -158,7 +204,7 @@ function MakePlan() {
           </WorkingWrap>
           <CompleteButton>
             {/* axiso 요청해주기 */}
-            <button>작성 완료</button>
+            <button onClick={handleSendPlan}>작성 완료</button>
           </CompleteButton>
         </PlanMainWrap>
       </MakePlanWrap>
