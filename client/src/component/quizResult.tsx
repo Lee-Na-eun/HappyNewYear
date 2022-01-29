@@ -1,4 +1,4 @@
-import { resultStatus } from '../redux/quiz/result';
+import result, { resultStatus } from '../redux/quiz/result';
 import { useSelector, useDispatch } from 'react-redux';
 import { resultTest } from '../quizData/quizData';
 import { ResultWrap, GoRoomButton } from '../style/StyleQuiz';
@@ -8,6 +8,12 @@ import axios from 'axios';
 import { modalOpen } from '../redux/nav/loginSignup';
 import swal from 'sweetalert';
 import { navClose } from '../redux/nav/nav';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faGrinHearts } from '@fortawesome/free-solid-svg-icons';
+import { faHatWizard } from '@fortawesome/free-solid-svg-icons';
+import { faPlane } from '@fortawesome/free-solid-svg-icons';
 
 function QuizResult() {
   const dispatch = useDispatch();
@@ -50,11 +56,25 @@ function QuizResult() {
     dispatch(modalOpen());
   };
 
+  const whichFontIcon = () => {
+    if (resultTest[resultMaxIdx].fontIcon === 'UserTie') {
+      return <FontAwesomeIcon icon={faUserTie} className='fontIcon' />;
+    } else if (resultTest[resultMaxIdx].fontIcon === 'Dumbbell') {
+      return <FontAwesomeIcon icon={faDumbbell} className='fontIcon' />;
+    } else if (resultTest[resultMaxIdx].fontIcon === 'GrinHearts') {
+      return <FontAwesomeIcon icon={faGrinHearts} className='fontIcon' />;
+    } else if (resultTest[resultMaxIdx].fontIcon === 'HatWizard') {
+      return <FontAwesomeIcon icon={faHatWizard} className='fontIcon' />;
+    } else if (resultTest[resultMaxIdx].fontIcon === 'Plane') {
+      return <FontAwesomeIcon icon={faPlane} className='fontIcon' />;
+    }
+  };
+
   return (
     <div>
       <ResultWrap>
         <div>
-          <img />
+          {whichFontIcon()}
           <h3>{resultTest[resultMaxIdx].mainText}</h3>
           <p>{resultTest[resultMaxIdx].subText}</p>
           {userInfo.userId === '' ? (
