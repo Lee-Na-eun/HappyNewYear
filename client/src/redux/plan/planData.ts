@@ -9,6 +9,7 @@ interface PlanProperty {
   [key: string]: {
     month: number;
     date: number;
+    accessToken: string;
   };
 }
 
