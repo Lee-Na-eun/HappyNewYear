@@ -8,10 +8,6 @@ export const MainWrapBox = styled.div`
 `;
 
 export const MainWrap = styled.div`
-  /* min-width: 50%; */
-  /* width: 550px;
-  height: 500px;
-  margin: 0 auto; */
   width: 700px;
   height: 600px;
   color: #878bbe;
@@ -170,16 +166,23 @@ export const ResultWrap = styled.div`
         padding: 0 20px 20px 20px;
       }
     }
-    > img {
-      width: 150px;
-      height: 150px;
-      background-color: pink;
+    > .fontIcon {
+      color: #878bbe;
+      width: 100px;
+      height: 100px;
       margin: 0 auto;
       @media (max-width: 420px) {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
       }
     }
+  }
+  @media (max-width: 800px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+  @media (max-width: 420px) {
+    height: 410px;
   }
 `;
 

@@ -71,24 +71,22 @@ function QuizResult() {
   };
 
   return (
-    <div>
-      <ResultWrap>
-        <div>
-          {whichFontIcon()}
-          <h3>{resultTest[resultMaxIdx].mainText}</h3>
-          <p>{resultTest[resultMaxIdx].subText}</p>
-          {userInfo.userId === '' ? (
-            <GoRoomButton>
-              <a onClick={handleOpenSignupLoginModal}>로그인 / 회원가입 하기</a>
-            </GoRoomButton>
-          ) : (
-            <GoRoomButton onClick={handleMyRoom}>
-              <Link to='/myRoom'>나의 플랜 보기</Link>
-            </GoRoomButton>
-          )}
-        </div>
-      </ResultWrap>
-    </div>
+    <ResultWrap>
+      <div>
+        {whichFontIcon()}
+        <h3>{resultTest[resultMaxIdx].mainText}</h3>
+        <p>{resultTest[resultMaxIdx].subText}</p>
+        {userInfo.userId === '' ? (
+          <GoRoomButton>
+            <a onClick={handleOpenSignupLoginModal}>로그인 / 회원가입 하기</a>
+          </GoRoomButton>
+        ) : (
+          <GoRoomButton onClick={handleMyRoom}>
+            <Link to='/myRoom'>나의 플랜 보기</Link>
+          </GoRoomButton>
+        )}
+      </div>
+    </ResultWrap>
   );
 }
 
