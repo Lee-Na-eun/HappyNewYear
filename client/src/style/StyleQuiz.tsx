@@ -158,8 +158,8 @@ export const ResultWrap = styled.div`
       @media (max-width: 420px) {
         font-size: 15px;
       }
-    }
-    > p {
+      > p {
+      }
       padding: 20px 30px;
       @media (max-width: 420px) {
         font-size: 10px;
