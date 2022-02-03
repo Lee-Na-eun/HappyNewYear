@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type FindPlanType = {
-  findPlan: Array<object>;
+  findPlan: object;
 };
-
-// interface FindPlanArray {
-//   aaa: Array<object>;
-// }
 
 const initialState: FindPlanType = {
   findPlan: [],
@@ -22,7 +18,7 @@ export const findPlanReducer = createSlice({
       state: FindPlanType,
       action: PayloadAction<FindPlanType>
     ) => {
-      state.findPlan = action.payload.findPlan;
+      state.findPlan = action.payload;
     },
   },
 });

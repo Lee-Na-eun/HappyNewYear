@@ -14,7 +14,7 @@ import {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['isNavOpen', 'isModalOpen', 'userInfo'],
+  whitelist: ['isNavOpen', 'isModalOpen', 'userInfo', 'findPlan'],
   blacklist: [],
 };
 

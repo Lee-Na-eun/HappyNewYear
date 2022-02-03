@@ -1,6 +1,7 @@
 import { MyRoomWrap, MyPlanWrap } from '../style/styleMyRoom';
 import { useDispatch, useSelector } from 'react-redux';
-import result, { resultStatus } from '../redux/quiz/result';
+import { resultStatus } from '../redux/quiz/result';
+import { savePlanData } from '../redux/plan/findPlan';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
 import axios from 'axios';
@@ -61,7 +62,8 @@ function MyRoom() {
             },
           }
         );
-        console.log(result);
+        console.log(result.data.data);
+        dispatch(savePlanData(result.data.data));
       } else if (day === 'month') {
         const result = await axios.get(
           `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}&month=${findMonth}`,
@@ -105,6 +107,8 @@ function MyRoom() {
       }
     }
   };
+
+  console.log(statusResult);
 
   return (
     <MyRoomWrap>
