@@ -1,0 +1,32 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+export type FindPlanType = {
+  findPlan: Array<object>;
+};
+
+// interface FindPlanArray {
+//   aaa: Array<object>;
+// }
+
+const initialState: FindPlanType = {
+  findPlan: [],
+};
+
+// slice 안에 들어갈 내용들은 매우 심플하고 직관적이다.
+// name, initialState, reducers.
+export const findPlanReducer = createSlice({
+  name: 'FindPlanType',
+  initialState,
+  reducers: {
+    savePlanData: (
+      state: FindPlanType,
+      action: PayloadAction<FindPlanType>
+    ) => {
+      state.findPlan = action.payload.findPlan;
+    },
+  },
+});
+
+export const { savePlanData } = findPlanReducer.actions;
+// export const planTypeStatus = (state: PlanProperty) => state;
+export default findPlanReducer.reducer;

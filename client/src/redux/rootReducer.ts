@@ -7,6 +7,7 @@ import isLogoutModalOpenReducer from './nav/logoutModal';
 import userReducer from './user/user';
 import myRoomReducer from './user/mail';
 import planDataReducer from './plan/planData';
+import findPlanReducer from './plan/findPlan';
 
 const reducer = combineReducers({
   quizIndex: quizIndexReducer,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   userInfo: userReducer,
   isMailBoxOpen: myRoomReducer,
   planData: planDataReducer,
+  findPlan: findPlanReducer,
 });
 
 // React에서 사용할 수 있도록 타입을 만들어 export 해준다.
