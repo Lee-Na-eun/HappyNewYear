@@ -47,7 +47,7 @@ function MyRoom() {
     }
   };
 
-  const findMyPlanAll = async (day: string) => {
+  const findMyPlan = async (day: string) => {
     try {
       const findMonth = new Date().getMonth() + 1;
       const findDate = new Date().getDate();
@@ -109,19 +109,19 @@ function MyRoom() {
               나의 플랜짜기
             </Link>
           </li>
-          <li onClick={() => findMyPlanAll('all')}>
+          <li onClick={() => findMyPlan('all')}>
             <Link to='/allPlan'>
               <FontAwesomeIcon icon={faSun} className='planIcon' />
               전체 플랜보기
             </Link>
           </li>
-          <li onClick={() => findMyPlanAll('month')}>
+          <li onClick={() => findMyPlan('month')}>
             <Link to='/weekPlan'>
               <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />한 달
               플랜보기
             </Link>
           </li>
-          <li onClick={() => findMyPlanAll('date')}>
+          <li onClick={() => findMyPlan('date')}>
             <Link to='/dayPlan'>
               <FontAwesomeIcon icon={faCloudSun} className='planIcon' />
               하루 플랜보기
