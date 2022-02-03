@@ -9,18 +9,11 @@ const {
 module.exports = {
   get: async (req, res) => {
     const accessVerify = isAuthorized(req);
-    const { day, userId, month, date } = req.query;
+    const { day, userId } = req.query;
 
     const findAllPlan = await Plan.findAll({ where: { userId } });
     const allPlanClear = findAllPlan.map((el) => el.dataValues);
     // plan 전체 보기
-    const findMonthPlan = await Plan.findAll({ where: { userId, month } });
-    const monthPlanClear = findMonthPlan.map((el) => el.dataValues);
-    // plna 한 달 보기
-
-    const findDayPlan = await Plan.findAll({ where: { userId, month, date } });
-    const datePlanClear = findDayPlan.map((el) => el.dataValues);
-    // plan 하루 보기
 
     if (!accessVerify) {
       const refreshVerify = refreshAuthorized(req);
@@ -30,16 +23,38 @@ module.exports = {
       if (day === 'all') {
         res.status(201).json({ message: 'ok', data: allPlanClear });
       } else if (day === 'month') {
+        const { month } = req.query;
+        const findMonthPlan = await Plan.findAll({ where: { userId, month } });
+        const monthPlanClear = findMonthPlan.map((el) => el.dataValues);
+        // plna 한 달 보기
         res.status(201).json({ message: 'ok', data: monthPlanClear });
       } else if (day === 'date') {
+        const { date } = req.query;
+
+        const findDayPlan = await Plan.findAll({
+          where: { userId, month, date },
+        });
+        const datePlanClear = findDayPlan.map((el) => el.dataValues);
+        // plan 하루 보기
         res.status(201).json({ message: 'ok', data: datePlanClear });
       }
     } else {
       if (day === 'all') {
         res.status(200).json({ message: 'ok', data: allPlanClear });
       } else if (day === 'month') {
+        const { month } = req.query;
+        const findMonthPlan = await Plan.findAll({ where: { userId, month } });
+        const monthPlanClear = findMonthPlan.map((el) => el.dataValues);
+        // plna 한 달 보기
         res.status(200).json({ message: 'ok', data: monthPlanClear });
       } else if (day === 'date') {
+        const { date } = req.query;
+
+        const findDayPlan = await Plan.findAll({
+          where: { userId, month, date },
+        });
+        const datePlanClear = findDayPlan.map((el) => el.dataValues);
+        // plan 하루 보기
         res.status(200).json({ message: 'ok', data: datePlanClear });
       }
     }
