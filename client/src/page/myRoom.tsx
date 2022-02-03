@@ -65,8 +65,8 @@ function MyRoom() {
           </li>
           <li onClick={handleMyRoom}>
             <Link to='/weekPlan'>
-              <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />
-              주중 플랜보기
+              <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />한 달
+              플랜보기
             </Link>
           </li>
           <li onClick={handleMyRoom}>

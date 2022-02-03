@@ -9,7 +9,6 @@ const {
 module.exports = {
   get: async (req, res) => {
     const accessVerify = isAuthorized(req);
-    // res.status(200).json({ message: 'findPlan is ready' });
     const { day, userId, month, date } = req.query;
 
     const findAllPlan = await Plan.findAll({ where: { userId } });
