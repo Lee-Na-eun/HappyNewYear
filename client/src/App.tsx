@@ -7,7 +7,7 @@ import Nav from './component/nav';
 import MakePlan from './page/makePlan';
 import AllPlan from './page/allPlan';
 import DayPlan from './page/dayPlan';
-import WeekPlan from './page/weekPlan';
+import MonthPlan from './page/monthPlan';
 
 function App() {
   // const userInfo = useSelector(userInfoStatus);
@@ -32,7 +32,7 @@ function App() {
             <AllPlan />
           </Route>
           <Route path='/weekPlan'>
-            <WeekPlan />
+            <MonthPlan />
           </Route>
           <Route path='/dayPlan'>
             <DayPlan />

@@ -62,7 +62,6 @@ function MyRoom() {
             },
           }
         );
-        console.log(result.data.data);
         dispatch(savePlanData(result.data.data));
       } else if (day === 'month') {
         const result = await axios.get(
@@ -73,8 +72,7 @@ function MyRoom() {
             },
           }
         );
-
-        console.log(result);
+        dispatch(savePlanData(result.data.data));
       } else if ((day = 'date')) {
         const result = await axios.get(
           `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}&month=${findMonth}&date=${findDate}`,
@@ -84,8 +82,7 @@ function MyRoom() {
             },
           }
         );
-
-        console.log(result);
+        dispatch(savePlanData(result.data.data));
       }
     } catch (err: any) {
       if (err.message === 'Network Error') {
