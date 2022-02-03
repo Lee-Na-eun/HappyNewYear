@@ -1,6 +1,6 @@
 import { MyRoomWrap, MyPlanWrap } from '../style/styleMyRoom';
 import { useDispatch, useSelector } from 'react-redux';
-import { resultStatus } from '../redux/quiz/result';
+import result, { resultStatus } from '../redux/quiz/result';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
 import axios from 'axios';
@@ -47,6 +47,58 @@ function MyRoom() {
     }
   };
 
+  const findMyPlanAll = async (day: string) => {
+    try {
+      const findMonth = new Date().getMonth() + 1;
+      const findDate = new Date().getDate();
+
+      if (day === 'all') {
+        const result = await axios.get(
+          `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}`,
+          {
+            headers: {
+              authorization: `bearer ${statusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+        console.log(result);
+      } else if (day === 'month') {
+        const result = await axios.get(
+          `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}&month=${findMonth}`,
+          {
+            headers: {
+              authorization: `bearer ${statusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+
+        console.log(result);
+      } else if ((day = 'date')) {
+        const result = await axios.get(
+          `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}&month=${findMonth}&date=${findDate}`,
+          {
+            headers: {
+              authorization: `bearer ${statusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+
+        console.log(result);
+      }
+    } catch (err) {
+      // swal({
+      //   title: '재로그인이 필요합니다.',
+      //   text: '다시 로그인 후 이용 부탁드립니다.',
+      //   icon: 'warning',
+      // }).then(() => {
+      //   dispatch(logout());
+      //   dispatch(navClose());
+      //   window.location.replace('/');
+      // });
+      console.log(err);
+    }
+  };
+
   return (
     <MyRoomWrap>
       <MyPlanWrap>
@@ -57,19 +109,19 @@ function MyRoom() {
               나의 플랜짜기
             </Link>
           </li>
-          <li onClick={handleMyRoom}>
+          <li onClick={() => findMyPlanAll('all')}>
             <Link to='/allPlan'>
               <FontAwesomeIcon icon={faSun} className='planIcon' />
               전체 플랜보기
             </Link>
           </li>
-          <li onClick={handleMyRoom}>
+          <li onClick={() => findMyPlanAll('month')}>
             <Link to='/weekPlan'>
               <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />한 달
               플랜보기
             </Link>
           </li>
-          <li onClick={handleMyRoom}>
+          <li onClick={() => findMyPlanAll('date')}>
             <Link to='/dayPlan'>
               <FontAwesomeIcon icon={faCloudSun} className='planIcon' />
               하루 플랜보기

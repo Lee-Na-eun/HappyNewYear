@@ -29,7 +29,7 @@ module.exports = {
         // plna 한 달 보기
         res.status(201).json({ message: 'ok', data: monthPlanClear });
       } else if (day === 'date') {
-        const { date } = req.query;
+        const { date, month } = req.query;
 
         const findDayPlan = await Plan.findAll({
           where: { userId, month, date },
@@ -48,7 +48,7 @@ module.exports = {
         // plna 한 달 보기
         res.status(200).json({ message: 'ok', data: monthPlanClear });
       } else if (day === 'date') {
-        const { date } = req.query;
+        const { date, month } = req.query;
 
         const findDayPlan = await Plan.findAll({
           where: { userId, month, date },
