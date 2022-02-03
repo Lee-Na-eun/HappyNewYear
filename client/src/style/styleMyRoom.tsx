@@ -32,11 +32,17 @@ export const MyPlanWrap = styled.div`
         font-size: 12px;
         font-weight: bold;
         color: #878bbe;
+        @media (max-width: 420px) {
+          font-size: 10px;
+        }
         > .planIcon {
           font-size: 45px;
           display: block;
           color: #878bbe;
           margin-bottom: 15px;
+          @media (max-width: 420px) {
+            font-size: 30px;
+          }
         }
       }
     }
