@@ -8,6 +8,18 @@ const initialState: FindPlanType = {
   findPlan: [],
 };
 
+export type FindPlanProperty = {
+  id: number;
+  month: number;
+  date: number;
+  textPlan: string;
+  workingStatus: string;
+};
+
+type FindPlanArray = {
+  findPlan: { findPlan: FindPlanProperty[] };
+};
+
 // slice 안에 들어갈 내용들은 매우 심플하고 직관적이다.
 // name, initialState, reducers.
 export const findPlanReducer = createSlice({
@@ -24,5 +36,6 @@ export const findPlanReducer = createSlice({
 });
 
 export const { savePlanData } = findPlanReducer.actions;
-// export const planTypeStatus = (state: PlanProperty) => state;
+export const findPlanTypeStatus = (state: FindPlanArray) =>
+  state.findPlan.findPlan;
 export default findPlanReducer.reducer;

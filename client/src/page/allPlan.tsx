@@ -1,15 +1,19 @@
 import { PlanWrap } from '../style/stylePlan';
 import { useSelector } from 'react-redux';
-import { planTypeStatus } from '../redux/plan/planData';
+import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 
 function AllPlan() {
-  const statusResult = useSelector(planTypeStatus);
-
-  console.log(statusResult.findPlan);
+  const statusResult = useSelector(findPlanTypeStatus);
 
   return (
     <PlanWrap>
-      <div>전체플랜</div>
+      <div>
+        <ul>
+          {statusResult.map((el: FindPlanProperty, idx: number) => (
+            <li key={idx}>{el.id}</li>
+          ))}
+        </ul>
+      </div>
     </PlanWrap>
   );
 }
