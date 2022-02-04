@@ -48,33 +48,6 @@ function MyRoom() {
     }
   };
 
-  const findMyPlan = async (day: string) => {
-    try {
-      const findMonth = new Date().getMonth() + 1;
-      const findDate = new Date().getDate();
-    } catch (err: any) {
-      if (err.message === 'Network Error') {
-        swal({
-          title: '네트워크가 불안정 합니다.',
-          text: '잠시 후에 이용 부탁드립니다.',
-          icon: 'error',
-        });
-      } else if (err.response.data.message === 'same userId') {
-        swal({
-          title: '재로그인이 필요합니다.',
-          text: '다시 로그인 후 이용 부탁드립니다.',
-          icon: 'warning',
-        }).then(() => {
-          dispatch(logout());
-          dispatch(navClose());
-          window.location.replace('/');
-        });
-      }
-    }
-  };
-
-  console.log(statusResult);
-
   return (
     <MyRoomWrap>
       <MyPlanWrap>
@@ -85,19 +58,19 @@ function MyRoom() {
               나의 플랜짜기
             </Link>
           </li>
-          <li onClick={() => findMyPlan('all')}>
+          <li>
             <Link to='/allPlan'>
               <FontAwesomeIcon icon={faSun} className='planIcon' />
               전체 플랜보기
             </Link>
           </li>
-          <li onClick={() => findMyPlan('month')}>
+          <li>
             <Link to='/weekPlan'>
               <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />한 달
               플랜보기
             </Link>
           </li>
-          <li onClick={() => findMyPlan('date')}>
+          <li>
             <Link to='/dayPlan'>
               <FontAwesomeIcon icon={faCloudSun} className='planIcon' />
               하루 플랜보기
