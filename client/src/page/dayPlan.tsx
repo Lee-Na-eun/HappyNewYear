@@ -1,15 +1,23 @@
 import { PlanWrap } from '../style/stylePlan';
 import { useSelector } from 'react-redux';
-import { planTypeStatus } from '../redux/plan/planData';
+import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 
 function DayPlan() {
-  const statusResult = useSelector(planTypeStatus);
+  const statusResult = useSelector(findPlanTypeStatus);
 
-  console.log(statusResult.findPlan);
+  console.log(statusResult.length);
 
   return (
     <PlanWrap>
-      <div>하루 플랜</div>
+      <ul>
+        {statusResult.length !== 0 ? (
+          statusResult.map((el: FindPlanProperty, idx: number) => (
+            <li key={idx}>{el.id}</li>
+          ))
+        ) : (
+          <li>오늘 일정은 없습니다.</li>
+        )}
+      </ul>
     </PlanWrap>
   );
 }

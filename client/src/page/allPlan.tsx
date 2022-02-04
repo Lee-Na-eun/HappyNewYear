@@ -9,9 +9,13 @@ function AllPlan() {
     <PlanWrap>
       <div>
         <ul>
-          {statusResult.map((el: FindPlanProperty, idx: number) => (
-            <li key={idx}>{el.id}</li>
-          ))}
+          {statusResult.length !== 0 ? (
+            statusResult.map((el: FindPlanProperty, idx: number) => (
+              <li key={idx}>{el.id}</li>
+            ))
+          ) : (
+            <li>전체 일정이 없습니다.</li>
+          )}
         </ul>
       </div>
     </PlanWrap>
