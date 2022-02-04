@@ -1,7 +1,7 @@
 import { MyRoomWrap, MyPlanWrap } from '../style/styleMyRoom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
-import { savePlanData } from '../redux/plan/findPlan';
+import { FindPlanProperty, savePlanData } from '../redux/plan/findPlan';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
 import axios from 'axios';
@@ -62,6 +62,9 @@ function MyRoom() {
             },
           }
         );
+
+        result.data.data.map((el: FindPlanProperty) => (el.id = String(el.id)));
+
         dispatch(savePlanData(result.data.data));
       } else if (day === 'month') {
         const result = await axios.get(
@@ -72,6 +75,7 @@ function MyRoom() {
             },
           }
         );
+        result.data.data.map((el: FindPlanProperty) => (el.id = String(el.id)));
         dispatch(savePlanData(result.data.data));
       } else if ((day = 'date')) {
         const result = await axios.get(
@@ -82,6 +86,7 @@ function MyRoom() {
             },
           }
         );
+        result.data.data.map((el: FindPlanProperty) => (el.id = String(el.id)));
         dispatch(savePlanData(result.data.data));
       }
     } catch (err: any) {

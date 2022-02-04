@@ -9,7 +9,7 @@ const initialState: FindPlanType = {
 };
 
 export type FindPlanProperty = {
-  id: number;
+  id: string;
   month: number;
   date: number;
   textPlan: string;
