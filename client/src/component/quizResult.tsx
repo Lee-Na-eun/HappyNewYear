@@ -14,6 +14,7 @@ import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { faGrinHearts } from '@fortawesome/free-solid-svg-icons';
 import { faHatWizard } from '@fortawesome/free-solid-svg-icons';
 import { faPlane } from '@fortawesome/free-solid-svg-icons';
+import { FindPlanProperty, savePlanData } from '../redux/plan/findPlan';
 
 function QuizResult() {
   const dispatch = useDispatch();
@@ -35,20 +36,43 @@ function QuizResult() {
         }
       );
 
+      const findPlanData = await axios.get(
+        `${url}/myRoom/findPlan?userId=${statusResult.userInfo.id}`,
+        {
+          headers: {
+            authorization: `bearer ${statusResult.userInfo.accessToken}`,
+          },
+        }
+      );
+
+      findPlanData.data.data.map(
+        (el: FindPlanProperty) => (el.id = String(el.id))
+      );
+
+      dispatch(savePlanData(findPlanData.data.data));
+
       if (result.data.message === 'ok') {
         console.log(result);
         dispatch(navClose());
       }
     } catch (err: any) {
-      swal({
-        title: '재로그인이 필요합니다.',
-        text: '다시 로그인 후 이용 부탁드립니다.',
-        icon: 'warning',
-      }).then(() => {
-        dispatch(logout());
-        dispatch(navClose());
-        window.location.replace('/');
-      });
+      if (err.message === 'Network Error') {
+        swal({
+          title: '네트워크가 불안정 합니다.',
+          text: '잠시 후에 이용 부탁드립니다.',
+          icon: 'error',
+        });
+      } else if (err.response.data.message === 'same userId') {
+        swal({
+          title: '재로그인이 필요합니다.',
+          text: '다시 로그인 후 이용 부탁드립니다.',
+          icon: 'warning',
+        }).then(() => {
+          dispatch(logout());
+          dispatch(navClose());
+          window.location.replace('/');
+        });
+      }
     }
   };
 

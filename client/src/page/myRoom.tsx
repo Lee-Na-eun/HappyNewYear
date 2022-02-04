@@ -52,43 +52,6 @@ function MyRoom() {
     try {
       const findMonth = new Date().getMonth() + 1;
       const findDate = new Date().getDate();
-
-      if (day === 'all') {
-        const result = await axios.get(
-          `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}`,
-          {
-            headers: {
-              authorization: `bearer ${statusResult.userInfo.accessToken}`,
-            },
-          }
-        );
-
-        result.data.data.map((el: FindPlanProperty) => (el.id = String(el.id)));
-
-        dispatch(savePlanData(result.data.data));
-      } else if (day === 'month') {
-        const result = await axios.get(
-          `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}&month=${findMonth}`,
-          {
-            headers: {
-              authorization: `bearer ${statusResult.userInfo.accessToken}`,
-            },
-          }
-        );
-        result.data.data.map((el: FindPlanProperty) => (el.id = String(el.id)));
-        dispatch(savePlanData(result.data.data));
-      } else if ((day = 'date')) {
-        const result = await axios.get(
-          `${url}/myRoom/findPlan?day=${day}&userId=${statusResult.userInfo.id}&month=${findMonth}&date=${findDate}`,
-          {
-            headers: {
-              authorization: `bearer ${statusResult.userInfo.accessToken}`,
-            },
-          }
-        );
-        result.data.data.map((el: FindPlanProperty) => (el.id = String(el.id)));
-        dispatch(savePlanData(result.data.data));
-      }
     } catch (err: any) {
       if (err.message === 'Network Error') {
         swal({
