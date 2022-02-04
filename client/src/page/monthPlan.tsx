@@ -1,4 +1,8 @@
-import { PlanWrap } from '../style/stylePlan';
+import {
+  PlanWrap,
+  PlanDataDiv,
+  WorkingStatusFilterButtonWrap,
+} from '../style/stylePlan';
 import { useSelector } from 'react-redux';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 import {
@@ -62,26 +66,39 @@ function MonthPlan() {
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId='dropTags'>
           {(droppableProvided: DroppableProvided) => (
-            <ul
-              className='tags'
-              {...droppableProvided.droppableProps}
-              ref={droppableProvided.innerRef}
-            >
-              {planDatas.map((el: FindPlanProperty, index: number) => (
-                <Draggable key={el.id} draggableId={el.id} index={index}>
-                  {(draggableProvided: DraggableProvided) => (
-                    <li
-                      ref={draggableProvided.innerRef}
-                      {...draggableProvided.dragHandleProps}
-                      {...draggableProvided.draggableProps}
-                    >
-                      {el.planText}
-                    </li>
-                  )}
-                </Draggable>
-              ))}
+            <PlanDataDiv>
+              <WorkingStatusFilterButtonWrap>
+                <button>전체</button>
+                <button>시작 안 함</button>
+                <button>진행 중</button>
+                <button>완료</button>
+              </WorkingStatusFilterButtonWrap>
+              <ul
+                className='tags'
+                {...droppableProvided.droppableProps}
+                ref={droppableProvided.innerRef}
+              >
+                {planDatas.length !== 0 ? (
+                  planDatas.map((el: FindPlanProperty, index: number) => (
+                    <Draggable key={el.id} draggableId={el.id} index={index}>
+                      {(draggableProvided: DraggableProvided) => (
+                        <li
+                          ref={draggableProvided.innerRef}
+                          {...draggableProvided.dragHandleProps}
+                          {...draggableProvided.draggableProps}
+                        >
+                          {el.planText}
+                        </li>
+                      )}
+                    </Draggable>
+                  ))
+                ) : (
+                  <div>이 달의 계획이 아직 없습니다.</div>
+                )}
+              </ul>
+
               {droppableProvided.placeholder}
-            </ul>
+            </PlanDataDiv>
           )}
         </Droppable>
       </DragDropContext>
