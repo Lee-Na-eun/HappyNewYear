@@ -12,7 +12,7 @@ export type FindPlanProperty = {
   id: string;
   month: number;
   date: number;
-  textPlan: string;
+  planText: string;
   workingStatus: string;
 };
 

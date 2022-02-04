@@ -56,14 +56,14 @@ function AllPlan() {
               ref={droppableProvided.innerRef}
             >
               {localItems.map((el: FindPlanProperty, index: number) => (
-                <Draggable key={el.id} draggableId={el.textPlan} index={index}>
+                <Draggable key={el.id} draggableId={el.id} index={index}>
                   {(draggableProvided: DraggableProvided) => (
                     <li
                       ref={draggableProvided.innerRef}
                       {...draggableProvided.dragHandleProps}
                       {...draggableProvided.draggableProps}
                     >
-                      {el.id}
+                      {el.planText}
                     </li>
                   )}
                 </Draggable>
