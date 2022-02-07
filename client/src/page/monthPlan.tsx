@@ -75,6 +75,23 @@ function MonthPlan() {
     }
   };
 
+  const sortFindPlanData = () => {
+    planDatas.sort(function (a: FindPlanProperty, b: FindPlanProperty) {
+      if (a.date > b.date) {
+        return 1;
+      }
+      if (a.date < b.date) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+
+    console.log(planDatas);
+  };
+
+  sortFindPlanData();
+
   return (
     <PlanWrap>
       <DragDropContext onDragEnd={handleDragEnd}>
