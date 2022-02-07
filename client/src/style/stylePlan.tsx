@@ -236,6 +236,9 @@ export const PlanDataDiv = styled.div`
   @media (max-width: 400px) {
     width: 300px;
   }
+  @media (max-width: 300px) {
+    width: 280px;
+  }
   > ul {
     width: 500px;
     height: 400px;
@@ -271,14 +274,24 @@ export const PlanDataDiv = styled.div`
 
 export const FindPlanTextWrap = styled.div`
   display: flex;
-  background-color: orange;
   > p {
     width: 60%;
     padding-left: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width: 400px) {
+      font-size: 12px;
+      width: 55%;
+      padding-left: 10px;
+    }
   }
   > div {
     width: 40%;
     /* background-color: pink; */
+    @media (max-width: 400px) {
+      width: 45%;
+    }
     > .ready {
       background-color: #d22779;
     }
@@ -304,7 +317,7 @@ export const FindPlanTextWrap = styled.div`
     }
     > .findPlanIcon {
       display: inline-block;
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
       margin-left: 20px;
       @media (max-width: 600px) {
