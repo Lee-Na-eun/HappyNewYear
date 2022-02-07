@@ -2,6 +2,7 @@ import {
   PlanWrap,
   PlanDataDiv,
   WorkingStatusFilterButtonWrap,
+  FindPlanTextWrap,
 } from '../style/stylePlan';
 import { useSelector } from 'react-redux';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
@@ -15,6 +16,9 @@ import {
   DroppableProvided,
 } from 'react-beautiful-dnd';
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 
 function MonthPlan() {
   const statusResult = useSelector(findPlanTypeStatus);
@@ -61,6 +65,16 @@ function MonthPlan() {
     console.log(result);
   };
 
+  const workingStatusName = (el: FindPlanProperty) => {
+    if (el.workingStatus === '시작 안 함') {
+      return 'ready';
+    } else if (el.workingStatus === '진행 중') {
+      return 'working';
+    } else if (el.workingStatus === '완료') {
+      return 'complete';
+    }
+  };
+
   return (
     <PlanWrap>
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -87,7 +101,22 @@ function MonthPlan() {
                           {...draggableProvided.dragHandleProps}
                           {...draggableProvided.draggableProps}
                         >
-                          {el.planText}
+                          <FindPlanTextWrap>
+                            <p>{el.planText}</p>
+                            <div>
+                              <span className={workingStatusName(el)}>
+                                {el.workingStatus}
+                              </span>
+                              <FontAwesomeIcon
+                                className='findPlanIcon'
+                                icon={faPenSquare}
+                              />
+                              <FontAwesomeIcon
+                                className='findPlanIcon'
+                                icon={faTrashAlt}
+                              />
+                            </div>
+                          </FindPlanTextWrap>
                         </li>
                       )}
                     </Draggable>
