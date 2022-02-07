@@ -230,8 +230,11 @@ export const CompleteButton = styled.div`
 
 export const PlanDataDiv = styled.div`
   width: 500px;
-  height: 700px;
-  background-color: pink;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   @media (max-width: 600px) {
     width: 80%;
   }
@@ -242,6 +245,7 @@ export const PlanDataDiv = styled.div`
     width: 500px;
     height: 700px;
     overflow-y: scroll;
+    margin-top: 20px;
     ::-webkit-scrollbar {
       width: 5px;
       /* background-color: red; */
@@ -265,4 +269,33 @@ export const PlanDataDiv = styled.div`
   }
 `;
 
-export const WorkingStatusFilterButtonWrap = styled.div``;
+export const WorkingStatusFilterButtonWrap = styled.div`
+  width: 400px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-bottom: 3px solid #fff; */
+  @media (max-width: 420px) {
+    width: 200px;
+    height: 50px;
+  }
+  > button {
+    height: 40px;
+    width: 92.5px;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #878bbe;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    @media (max-width: 420px) {
+      height: 30px;
+      font-size: 10px;
+    }
+  }
+  > button:nth-child(1) {
+    margin-left: 0;
+  }
+`;
