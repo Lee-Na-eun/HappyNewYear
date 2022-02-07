@@ -34,6 +34,7 @@ function MonthPlan() {
     );
 
     setPlanDatas(filterMonthPlan);
+    sortFindPlanData();
   }, []);
 
   // setPlanDatas(filterMonthPlan);
@@ -89,8 +90,6 @@ function MonthPlan() {
 
     console.log(planDatas);
   };
-
-  sortFindPlanData();
 
   return (
     <PlanWrap>

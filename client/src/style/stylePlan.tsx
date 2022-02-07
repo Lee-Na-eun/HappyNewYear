@@ -230,6 +230,7 @@ export const CompleteButton = styled.div`
 
 export const PlanDataDiv = styled.div`
   width: 500px;
+  height: 500px;
   @media (max-width: 600px) {
     width: 400px;
   }
