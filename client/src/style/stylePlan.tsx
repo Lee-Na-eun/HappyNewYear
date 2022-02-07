@@ -4,7 +4,7 @@ export const PlanWrap = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; ;
 `;
 
 export const MakePlanWrap = styled.div`
@@ -227,3 +227,42 @@ export const CompleteButton = styled.div`
     background-color: #878bbe;
   }
 `;
+
+export const PlanDataDiv = styled.div`
+  width: 500px;
+  height: 700px;
+  background-color: pink;
+  @media (max-width: 600px) {
+    width: 80%;
+  }
+  @media (max-width: 420px) {
+    height: 500px;
+  }
+  > ul {
+    width: 500px;
+    height: 700px;
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+      width: 5px;
+      /* background-color: red; */
+    }
+    ::-webkit-scrollbar-thumb {
+      /*  스크롤  */
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    > li {
+      width: 400px;
+      height: 120px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.2);
+      margin-top: 20px;
+      border: 4px solid #fff;
+      border-radius: 30px;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+`;
+
+export const WorkingStatusFilterButtonWrap = styled.div``;

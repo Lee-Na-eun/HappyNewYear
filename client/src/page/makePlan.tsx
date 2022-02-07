@@ -141,7 +141,7 @@ function MakePlan() {
     }
   };
 
-  console.log(planStatusResult);
+  // console.log(planStatusResult);
 
   return (
     <PlanWrap>

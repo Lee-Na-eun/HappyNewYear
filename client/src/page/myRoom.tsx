@@ -1,6 +1,7 @@
 import { MyRoomWrap, MyPlanWrap } from '../style/styleMyRoom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resultStatus } from '../redux/quiz/result';
+import { FindPlanProperty, savePlanData } from '../redux/plan/findPlan';
 import { logout } from '../redux/user/user';
 import { navClose } from '../redux/nav/nav';
 import axios from 'axios';
@@ -57,19 +58,19 @@ function MyRoom() {
               나의 플랜짜기
             </Link>
           </li>
-          <li onClick={handleMyRoom}>
+          <li>
             <Link to='/allPlan'>
               <FontAwesomeIcon icon={faSun} className='planIcon' />
               전체 플랜보기
             </Link>
           </li>
-          <li onClick={handleMyRoom}>
+          <li>
             <Link to='/weekPlan'>
-              <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />
-              주중 플랜보기
+              <FontAwesomeIcon icon={faCloudMoon} className='planIcon' />한 달
+              플랜보기
             </Link>
           </li>
-          <li onClick={handleMyRoom}>
+          <li>
             <Link to='/dayPlan'>
               <FontAwesomeIcon icon={faCloudSun} className='planIcon' />
               하루 플랜보기
