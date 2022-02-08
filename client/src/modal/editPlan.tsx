@@ -1,5 +1,11 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { editModalClose } from '../redux/plan/editOrDeleteModal';
+import { ModalWrap } from '../style/styleModal';
+
 function EditPlanModal() {
-  return <div>hihi</div>;
+  const dispatch = useDispatch();
+
+  return <ModalWrap></ModalWrap>;
 }
 
 export default EditPlanModal;

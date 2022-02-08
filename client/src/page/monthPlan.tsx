@@ -158,11 +158,11 @@ function MonthPlan() {
     }
   };
 
-  const modalOpen = (el: string) => {
+  const modalOpen = (el: string, planId: string) => {
     if (el === 'edit') {
-      dispatch(editModalOpen());
+      dispatch(editModalOpen(planId));
     } else if (el === 'delete') {
-      dispatch(deleteModalOpen());
+      dispatch(deleteModalOpen(planId));
     }
   };
 
@@ -232,12 +232,12 @@ function MonthPlan() {
                               <FontAwesomeIcon
                                 className='findPlanIcon'
                                 icon={faPenSquare}
-                                onClick={() => modalOpen('edit')}
+                                onClick={() => modalOpen('edit', el.id)}
                               />
                               <FontAwesomeIcon
                                 className='findPlanIcon'
                                 icon={faTrashAlt}
-                                onClick={() => modalOpen('delete')}
+                                onClick={() => modalOpen('delete', el.id)}
                               />
                             </div>
                           </FindPlanTextWrap>
