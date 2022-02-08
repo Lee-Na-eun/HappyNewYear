@@ -23,11 +23,17 @@ import {
   editModalOpen,
   deleteModalOpen,
 } from '../redux/plan/editOrDeleteModal';
+import { resultStatus } from '../redux/quiz/result';
+import EditPlanModal from '../modal/editPlan';
+import DeletePlanModal from '../modal/deletePlan';
 
 function MonthPlan() {
   const dispatch = useDispatch();
+  const statusResult = useSelector(resultStatus);
   const findPlanStatus = useSelector(findPlanTypeStatus);
   const [planDatas, setPlanDatas] = useState(findPlanStatus);
+
+  console.log(statusResult);
 
   type ColorType = {
     firstBtn: boolean;
@@ -162,6 +168,10 @@ function MonthPlan() {
 
   return (
     <PlanWrap>
+      {statusResult.isEditOrDeleteModal.isEditOpen ? <EditPlanModal /> : null}
+      {statusResult.isEditOrDeleteModal.isDeleteOpen ? (
+        <DeletePlanModal />
+      ) : null}
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId='dropTags'>
           {(droppableProvided: DroppableProvided) => (

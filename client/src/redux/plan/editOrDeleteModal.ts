@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export type IsEditOrDeleteModal = {
-  open: boolean;
+  isEditOpen: boolean;
+  isDeleteOpen: boolean;
 };
 
 const initialState: IsEditOrDeleteModal = {
-  open: false,
+  isEditOpen: false,
+  isDeleteOpen: false,
 };
 
 export const modalOpenSlice = createSlice({
@@ -13,16 +15,16 @@ export const modalOpenSlice = createSlice({
   initialState,
   reducers: {
     editModalOpen: (state: IsEditOrDeleteModal) => {
-      state.open = true;
+      state.isEditOpen = true;
     },
     editModalClose: (state: IsEditOrDeleteModal) => {
-      state.open = false;
+      state.isEditOpen = false;
     },
     deleteModalOpen: (state: IsEditOrDeleteModal) => {
-      state.open = true;
+      state.isDeleteOpen = true;
     },
     deleteModalClose: (state: IsEditOrDeleteModal) => {
-      state.open = false;
+      state.isDeleteOpen = false;
     },
   },
 });
