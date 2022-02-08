@@ -4,7 +4,7 @@ import {
   WorkingStatusFilterButtonWrap,
   FindPlanTextWrap,
 } from '../style/stylePlan';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 import {
   DragDropContext,
@@ -19,10 +19,15 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  editModalOpen,
+  deleteModalOpen,
+} from '../redux/plan/editOrDeleteModal';
 
 function MonthPlan() {
-  const statusResult = useSelector(findPlanTypeStatus);
-  const [planDatas, setPlanDatas] = useState(statusResult);
+  const dispatch = useDispatch();
+  const findPlanStatus = useSelector(findPlanTypeStatus);
+  const [planDatas, setPlanDatas] = useState(findPlanStatus);
 
   type ColorType = {
     firstBtn: boolean;
@@ -40,7 +45,7 @@ function MonthPlan() {
 
   const findMonth = new Date().getMonth() + 1;
 
-  const filterMonthPlan = statusResult.filter(
+  const filterMonthPlan = findPlanStatus.filter(
     (el: FindPlanProperty) => el.month === findMonth
   );
 
@@ -147,6 +152,14 @@ function MonthPlan() {
     }
   };
 
+  const modalOpen = (el: string) => {
+    if (el === 'edit') {
+      dispatch(editModalOpen());
+    } else if (el === 'delete') {
+      dispatch(deleteModalOpen());
+    }
+  };
+
   return (
     <PlanWrap>
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -209,10 +222,12 @@ function MonthPlan() {
                               <FontAwesomeIcon
                                 className='findPlanIcon'
                                 icon={faPenSquare}
+                                onClick={() => modalOpen('edit')}
                               />
                               <FontAwesomeIcon
                                 className='findPlanIcon'
                                 icon={faTrashAlt}
+                                onClick={() => modalOpen('delete')}
                               />
                             </div>
                           </FindPlanTextWrap>

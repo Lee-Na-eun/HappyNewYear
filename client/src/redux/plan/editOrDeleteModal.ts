@@ -12,15 +12,25 @@ export const modalOpenSlice = createSlice({
   name: 'EditOrDeleteModal',
   initialState,
   reducers: {
-    EditOrDeleteModalOpen: (state: IsEditOrDeleteModal) => {
+    editModalOpen: (state: IsEditOrDeleteModal) => {
       state.open = true;
     },
-    EditOrDeleteModalClose: (state: IsEditOrDeleteModal) => {
+    editModalClose: (state: IsEditOrDeleteModal) => {
+      state.open = false;
+    },
+    deleteModalOpen: (state: IsEditOrDeleteModal) => {
+      state.open = true;
+    },
+    deleteModalClose: (state: IsEditOrDeleteModal) => {
       state.open = false;
     },
   },
 });
 
-export const { EditOrDeleteModalOpen, EditOrDeleteModalClose } =
-  modalOpenSlice.actions;
+export const {
+  editModalOpen,
+  editModalClose,
+  deleteModalOpen,
+  deleteModalClose,
+} = modalOpenSlice.actions;
 export default modalOpenSlice.reducer;
