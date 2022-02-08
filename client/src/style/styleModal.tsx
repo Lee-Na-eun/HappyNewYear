@@ -76,3 +76,10 @@ export const ButtonWrap = styled.div`
     margin-left: 0;
   }
 `;
+
+export const EditPlanBox = styled.div`
+  width: 500px;
+  height: 600px;
+  background-color: #878bbe;
+  border-radius: 20px;
+`;
