@@ -6,6 +6,10 @@ export type IsEditOrDeleteModal = {
   planId: string;
 };
 
+type FindPlanIdType = {
+  isEditOrDeleteModal: IsEditOrDeleteModal;
+};
+
 const initialState: IsEditOrDeleteModal = {
   isEditOpen: false,
   isDeleteOpen: false,
@@ -46,3 +50,5 @@ export const {
   deleteModalClose,
 } = modalOpenSlice.actions;
 export default modalOpenSlice.reducer;
+export const editPlanIdStatus = (state: FindPlanIdType) =>
+  state.isEditOrDeleteModal.planId;
