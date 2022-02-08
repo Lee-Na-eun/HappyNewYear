@@ -29,4 +29,19 @@ module.exports = {
       }
     }
   },
+
+  patch: async (req, res) => {
+    const accessVerify = isAuthorized(req);
+    const data = req.body;
+    const { month, date, planText, workingStatus } = data;
+
+    if (!accessVerify) {
+      const refreshVerify = refreshAuthorized(req);
+      if (!refreshVerify) {
+        res.status(401).json({ message: 'Send new Login Request' });
+      }
+      res.status(201).json({ message: 'ok' });
+    }
+    res.status(200).json({ message: 'ok' });
+  },
 };
