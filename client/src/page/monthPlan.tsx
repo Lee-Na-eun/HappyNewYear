@@ -33,11 +33,19 @@ function MonthPlan() {
       (el: FindPlanProperty) => el.month === findMonth
     );
 
-    setPlanDatas(filterMonthPlan);
-    sortFindPlanData();
-  }, []);
+    filterMonthPlan.sort(function (a: FindPlanProperty, b: FindPlanProperty) {
+      if (a.date > b.date) {
+        return 1;
+      }
+      if (a.date < b.date) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
 
-  // setPlanDatas(filterMonthPlan);
+    setPlanDatas(filterMonthPlan);
+  }, []);
 
   const handleDragEnd = (result: DropResult, provided?: ResponderProvided) => {
     if (!result.destination) {
@@ -76,22 +84,6 @@ function MonthPlan() {
     }
   };
 
-  const sortFindPlanData = () => {
-    const planDatasSlice = planDatas.slice(0);
-    planDatasSlice.sort(function (a: FindPlanProperty, b: FindPlanProperty) {
-      if (a.date > b.date) {
-        return 1;
-      }
-      if (a.date < b.date) {
-        return -1;
-      }
-      // a must be equal to b
-      return 0;
-    });
-
-    return planDatasSlice;
-  };
-
   return (
     <PlanWrap>
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -110,36 +102,37 @@ function MonthPlan() {
                 ref={droppableProvided.innerRef}
               >
                 {planDatas.length !== 0 ? (
-                  sortFindPlanData().map(
-                    (el: FindPlanProperty, index: number) => (
-                      <Draggable key={el.id} draggableId={el.id} index={index}>
-                        {(draggableProvided: DraggableProvided) => (
-                          <li
-                            ref={draggableProvided.innerRef}
-                            {...draggableProvided.dragHandleProps}
-                            {...draggableProvided.draggableProps}
-                          >
-                            <FindPlanTextWrap>
-                              <p>{el.planText}</p>
-                              <div>
-                                <span className={workingStatusName(el)}>
-                                  {el.workingStatus}
-                                </span>
-                                <FontAwesomeIcon
-                                  className='findPlanIcon'
-                                  icon={faPenSquare}
-                                />
-                                <FontAwesomeIcon
-                                  className='findPlanIcon'
-                                  icon={faTrashAlt}
-                                />
-                              </div>
-                            </FindPlanTextWrap>
-                          </li>
-                        )}
-                      </Draggable>
-                    )
-                  )
+                  planDatas.map((el: FindPlanProperty, index: number) => (
+                    <Draggable key={el.id} draggableId={el.id} index={index}>
+                      {(draggableProvided: DraggableProvided) => (
+                        <li
+                          ref={draggableProvided.innerRef}
+                          {...draggableProvided.dragHandleProps}
+                          {...draggableProvided.draggableProps}
+                        >
+                          <FindPlanTextWrap>
+                            <span>
+                              {el.month}월 {el.date}일
+                            </span>
+                            <p>{el.planText}</p>
+                            <div>
+                              <span className={workingStatusName(el)}>
+                                {el.workingStatus}
+                              </span>
+                              <FontAwesomeIcon
+                                className='findPlanIcon'
+                                icon={faPenSquare}
+                              />
+                              <FontAwesomeIcon
+                                className='findPlanIcon'
+                                icon={faTrashAlt}
+                              />
+                            </div>
+                          </FindPlanTextWrap>
+                        </li>
+                      )}
+                    </Draggable>
+                  ))
                 ) : (
                   <div>이 달의 계획이 아직 없습니다.</div>
                 )}

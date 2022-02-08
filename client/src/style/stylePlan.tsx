@@ -229,7 +229,6 @@ export const CompleteButton = styled.div`
 `;
 
 export const PlanDataDiv = styled.div`
-  width: 500px;
   height: 500px;
   @media (max-width: 600px) {
     width: 400px;
@@ -241,7 +240,6 @@ export const PlanDataDiv = styled.div`
     width: 280px;
   }
   > ul {
-    width: 500px;
     height: 400px;
     overflow-y: scroll;
     margin-top: 20px;
@@ -258,7 +256,6 @@ export const PlanDataDiv = styled.div`
       width: 100%;
     }
     > li {
-      /* width: 400px; */
       height: 60px;
       margin: 0 auto;
       background-color: rgba(255, 255, 255, 0.1);
@@ -275,23 +272,36 @@ export const PlanDataDiv = styled.div`
 
 export const FindPlanTextWrap = styled.div`
   display: flex;
+  align-items: center;
+  > span {
+    width: 10%;
+    border-right: 2px solid #fff;
+    font-size: 12px;
+    text-align: center;
+    height: 15px;
+    line-height: 15px;
+    @media (max-width: 400px) {
+      width: 60px;
+      font-size: 10px;
+    }
+  }
   > p {
-    width: 60%;
-    padding-left: 40px;
+    width: 50%;
+    padding-left: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     @media (max-width: 400px) {
-      font-size: 12px;
-      width: 55%;
+      width: 100px;
       padding-left: 10px;
+      font-size: 12px;
     }
   }
   > div {
     width: 40%;
     /* background-color: pink; */
     @media (max-width: 400px) {
-      width: 45%;
+      width: 130px;
     }
     > .ready {
       background-color: #d22779;
@@ -311,11 +321,12 @@ export const FindPlanTextWrap = styled.div`
       font-size: 12px;
       font-weight: bold;
       text-align: center;
+      margin-left: 8px;
       @media (max-width: 600px) {
         width: 60px;
         font-size: 10px;
       }
-      @media (max-width: 300px) {
+      @media (max-width: 400px) {
         width: 50px;
         height: 20px;
         line-height: 20px;
