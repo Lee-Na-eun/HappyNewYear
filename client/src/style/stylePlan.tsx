@@ -229,19 +229,21 @@ export const CompleteButton = styled.div`
 `;
 
 export const PlanDataDiv = styled.div`
-  width: 500px;
-  height: 700px;
-  background-color: pink;
+  height: 500px;
   @media (max-width: 600px) {
-    width: 80%;
+    width: 500px;
   }
-  @media (max-width: 420px) {
-    height: 500px;
+  @media (max-width: 400px) {
+    width: 300px;
+  }
+  @media (max-width: 300px) {
+    width: 280px;
   }
   > ul {
-    width: 500px;
-    height: 700px;
+    width: 600px;
+    height: 400px;
     overflow-y: scroll;
+    margin-top: 20px;
     ::-webkit-scrollbar {
       width: 5px;
       /* background-color: red; */
@@ -251,18 +253,134 @@ export const PlanDataDiv = styled.div`
       background-color: #fff;
       border-radius: 5px;
     }
+    @media (max-width: 600px) {
+      width: 100%;
+    }
     > li {
-      width: 400px;
-      height: 120px;
+      height: 60px;
       margin: 0 auto;
-      background-color: rgba(255, 255, 255, 0.2);
-      margin-top: 20px;
-      border: 4px solid #fff;
-      border-radius: 30px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin-top: 10px;
+      border-bottom: 1px solid #fff;
+      border-radius: 10px;
       color: #fff;
-      font-weight: bold;
+      line-height: 60px;
+      font-size: 15px;
+      text-align: left;
     }
   }
 `;
 
-export const WorkingStatusFilterButtonWrap = styled.div``;
+export const FindPlanTextWrap = styled.div`
+  display: flex;
+  align-items: center;
+  > span {
+    width: 15%;
+    border-right: 2px solid #fff;
+    font-size: 12px;
+    text-align: center;
+    height: 15px;
+    line-height: 15px;
+    @media (max-width: 400px) {
+      width: 60px;
+      font-size: 10px;
+    }
+  }
+  > p {
+    width: 45%;
+    padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width: 400px) {
+      width: 100px;
+      padding-left: 10px;
+      font-size: 12px;
+    }
+  }
+  > div {
+    width: 40%;
+    /* background-color: pink; */
+    @media (max-width: 400px) {
+      width: 130px;
+    }
+    > .ready {
+      background-color: #d22779;
+    }
+    > .working {
+      background-color: #b762c1;
+    }
+    > .complete {
+      background-color: #3fa796;
+    }
+    > span {
+      display: inline-block;
+      width: 80px;
+      height: 25px;
+      line-height: 25px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      margin-left: 8px;
+      @media (max-width: 600px) {
+        width: 60px;
+        font-size: 10px;
+      }
+      @media (max-width: 400px) {
+        width: 50px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 8px;
+      }
+    }
+    > .findPlanIcon {
+      display: inline-block;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 20px;
+      @media (max-width: 600px) {
+        font-size: 15px;
+      }
+      @media (max-width: 400px) {
+        font-size: 12px;
+        margin-left: 15px;
+      }
+      @media (max-width: 300px) {
+        font-size: 10px;
+      }
+    }
+  }
+`;
+
+export const WorkingStatusFilterButtonWrap = styled.div`
+  margin: 0 auto;
+  /* border-bottom: 3px solid #fff; */
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+  > .colorChange {
+    background-color: #878bbe;
+    color: #fff;
+    border: none;
+  }
+  > button {
+    height: 40px;
+    width: 92.5px;
+    margin-left: 8px;
+    font-size: 12px;
+    color: #878bbe;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    @media (max-width: 500px) {
+      height: 30px;
+      width: 22%;
+      font-size: 10px;
+    }
+  }
+  > button:nth-child(1) {
+    margin-left: 0;
+  }
+`;
