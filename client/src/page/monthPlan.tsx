@@ -24,27 +24,42 @@ function MonthPlan() {
   const statusResult = useSelector(findPlanTypeStatus);
   const [planDatas, setPlanDatas] = useState(statusResult);
 
+  type ColorType = {
+    firstBtn: boolean;
+    secontBtn: boolean;
+    thirdBtn: boolean;
+    fourthBtn: boolean;
+  };
+
+  const [changeColor, setChangeColor] = useState<ColorType>({
+    firstBtn: true,
+    secontBtn: false,
+    thirdBtn: false,
+    fourthBtn: false,
+  });
+
+  const findMonth = new Date().getMonth() + 1;
+
+  const filterMonthPlan = statusResult.filter(
+    (el: FindPlanProperty) => el.month === findMonth
+  );
+
+  const sortFliterMonthPlan = filterMonthPlan.sort(function (
+    a: FindPlanProperty,
+    b: FindPlanProperty
+  ) {
+    if (a.date > b.date) {
+      return 1;
+    }
+    if (a.date < b.date) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+
   useEffect(() => {
-    const findMonth = new Date().getMonth() + 1;
-
-    console.log('aaa', statusResult);
-
-    const filterMonthPlan = statusResult.filter(
-      (el: FindPlanProperty) => el.month === findMonth
-    );
-
-    filterMonthPlan.sort(function (a: FindPlanProperty, b: FindPlanProperty) {
-      if (a.date > b.date) {
-        return 1;
-      }
-      if (a.date < b.date) {
-        return -1;
-      }
-      // a must be equal to b
-      return 0;
-    });
-
-    setPlanDatas(filterMonthPlan);
+    setPlanDatas(sortFliterMonthPlan);
   }, []);
 
   const handleDragEnd = (result: DropResult, provided?: ResponderProvided) => {
@@ -84,6 +99,54 @@ function MonthPlan() {
     }
   };
 
+  const clickWorkingStatus = (e: any) => {
+    if (e.currentTarget.value === '전체') {
+      setChangeColor({
+        firstBtn: true,
+        secontBtn: false,
+        thirdBtn: false,
+        fourthBtn: false,
+      });
+      setPlanDatas(sortFliterMonthPlan);
+    } else if (e.currentTarget.value === '시작 안 함') {
+      setChangeColor({
+        firstBtn: false,
+        secontBtn: true,
+        thirdBtn: false,
+        fourthBtn: false,
+      });
+
+      const filter1 = sortFliterMonthPlan.filter(
+        (el: FindPlanProperty) => el.workingStatus === '시작 안 함'
+      );
+      setPlanDatas(filter1);
+    } else if (e.currentTarget.value === '진행 중') {
+      setChangeColor({
+        firstBtn: false,
+        secontBtn: false,
+        thirdBtn: true,
+        fourthBtn: false,
+      });
+
+      const filter2 = sortFliterMonthPlan.filter(
+        (el: FindPlanProperty) => el.workingStatus === '진행 중'
+      );
+      setPlanDatas(filter2);
+    } else if (e.currentTarget.value === '완료') {
+      setChangeColor({
+        firstBtn: false,
+        secontBtn: false,
+        thirdBtn: false,
+        fourthBtn: true,
+      });
+      const filter3 = sortFliterMonthPlan.filter(
+        (el: FindPlanProperty) => el.workingStatus === '완료'
+      );
+
+      setPlanDatas(filter3);
+    }
+  };
+
   return (
     <PlanWrap>
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -91,10 +154,34 @@ function MonthPlan() {
           {(droppableProvided: DroppableProvided) => (
             <PlanDataDiv>
               <WorkingStatusFilterButtonWrap>
-                <button>전체</button>
-                <button>시작 안 함</button>
-                <button>진행 중</button>
-                <button>완료</button>
+                <button
+                  value='전체'
+                  onClick={clickWorkingStatus}
+                  className={changeColor.firstBtn ? 'colorChange' : ''}
+                >
+                  전체
+                </button>
+                <button
+                  value='시작 안 함'
+                  onClick={clickWorkingStatus}
+                  className={changeColor.secontBtn ? 'colorChange' : ''}
+                >
+                  시작 안 함
+                </button>
+                <button
+                  value='진행 중'
+                  onClick={clickWorkingStatus}
+                  className={changeColor.thirdBtn ? 'colorChange' : ''}
+                >
+                  진행 중
+                </button>
+                <button
+                  value='완료'
+                  onClick={clickWorkingStatus}
+                  className={changeColor.fourthBtn ? 'colorChange' : ''}
+                >
+                  완료
+                </button>
               </WorkingStatusFilterButtonWrap>
               <ul
                 className='tags'

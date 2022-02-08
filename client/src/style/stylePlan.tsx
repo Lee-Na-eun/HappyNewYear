@@ -231,7 +231,7 @@ export const CompleteButton = styled.div`
 export const PlanDataDiv = styled.div`
   height: 500px;
   @media (max-width: 600px) {
-    width: 400px;
+    width: 500px;
   }
   @media (max-width: 400px) {
     width: 300px;
@@ -240,6 +240,7 @@ export const PlanDataDiv = styled.div`
     width: 280px;
   }
   > ul {
+    width: 600px;
     height: 400px;
     overflow-y: scroll;
     margin-top: 20px;
@@ -274,7 +275,7 @@ export const FindPlanTextWrap = styled.div`
   display: flex;
   align-items: center;
   > span {
-    width: 10%;
+    width: 15%;
     border-right: 2px solid #fff;
     font-size: 12px;
     text-align: center;
@@ -286,7 +287,7 @@ export const FindPlanTextWrap = styled.div`
     }
   }
   > p {
-    width: 50%;
+    width: 45%;
     padding-left: 20px;
     white-space: nowrap;
     overflow: hidden;
@@ -341,6 +342,10 @@ export const FindPlanTextWrap = styled.div`
       @media (max-width: 600px) {
         font-size: 15px;
       }
+      @media (max-width: 400px) {
+        font-size: 12px;
+        margin-left: 15px;
+      }
       @media (max-width: 300px) {
         font-size: 10px;
       }
@@ -353,6 +358,11 @@ export const WorkingStatusFilterButtonWrap = styled.div`
   /* border-bottom: 3px solid #fff; */
   @media (max-width: 600px) {
     width: 100%;
+  }
+  > .colorChange {
+    background-color: #878bbe;
+    color: #fff;
+    border: none;
   }
   > button {
     height: 40px;
