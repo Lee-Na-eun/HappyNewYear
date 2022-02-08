@@ -315,6 +315,12 @@ export const FindPlanTextWrap = styled.div`
         width: 60px;
         font-size: 10px;
       }
+      @media (max-width: 300px) {
+        width: 50px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 8px;
+      }
     }
     > .findPlanIcon {
       display: inline-block;
@@ -323,6 +329,9 @@ export const FindPlanTextWrap = styled.div`
       margin-left: 20px;
       @media (max-width: 600px) {
         font-size: 15px;
+      }
+      @media (max-width: 300px) {
+        font-size: 10px;
       }
     }
   }

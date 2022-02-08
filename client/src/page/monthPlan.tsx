@@ -77,7 +77,8 @@ function MonthPlan() {
   };
 
   const sortFindPlanData = () => {
-    planDatas.sort(function (a: FindPlanProperty, b: FindPlanProperty) {
+    const planDatasSlice = planDatas.slice(0);
+    planDatasSlice.sort(function (a: FindPlanProperty, b: FindPlanProperty) {
       if (a.date > b.date) {
         return 1;
       }
@@ -88,7 +89,7 @@ function MonthPlan() {
       return 0;
     });
 
-    console.log(planDatas);
+    return planDatasSlice;
   };
 
   return (
@@ -109,34 +110,36 @@ function MonthPlan() {
                 ref={droppableProvided.innerRef}
               >
                 {planDatas.length !== 0 ? (
-                  planDatas.map((el: FindPlanProperty, index: number) => (
-                    <Draggable key={el.id} draggableId={el.id} index={index}>
-                      {(draggableProvided: DraggableProvided) => (
-                        <li
-                          ref={draggableProvided.innerRef}
-                          {...draggableProvided.dragHandleProps}
-                          {...draggableProvided.draggableProps}
-                        >
-                          <FindPlanTextWrap>
-                            <p>{el.planText}</p>
-                            <div>
-                              <span className={workingStatusName(el)}>
-                                {el.workingStatus}
-                              </span>
-                              <FontAwesomeIcon
-                                className='findPlanIcon'
-                                icon={faPenSquare}
-                              />
-                              <FontAwesomeIcon
-                                className='findPlanIcon'
-                                icon={faTrashAlt}
-                              />
-                            </div>
-                          </FindPlanTextWrap>
-                        </li>
-                      )}
-                    </Draggable>
-                  ))
+                  sortFindPlanData().map(
+                    (el: FindPlanProperty, index: number) => (
+                      <Draggable key={el.id} draggableId={el.id} index={index}>
+                        {(draggableProvided: DraggableProvided) => (
+                          <li
+                            ref={draggableProvided.innerRef}
+                            {...draggableProvided.dragHandleProps}
+                            {...draggableProvided.draggableProps}
+                          >
+                            <FindPlanTextWrap>
+                              <p>{el.planText}</p>
+                              <div>
+                                <span className={workingStatusName(el)}>
+                                  {el.workingStatus}
+                                </span>
+                                <FontAwesomeIcon
+                                  className='findPlanIcon'
+                                  icon={faPenSquare}
+                                />
+                                <FontAwesomeIcon
+                                  className='findPlanIcon'
+                                  icon={faTrashAlt}
+                                />
+                              </div>
+                            </FindPlanTextWrap>
+                          </li>
+                        )}
+                      </Draggable>
+                    )
+                  )
                 ) : (
                   <div>이 달의 계획이 아직 없습니다.</div>
                 )}
