@@ -8,15 +8,16 @@ import { ModalWrap, EditPlanBox } from '../style/styleModal';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 import { monthChange, dateChange } from '../redux/plan/planData';
 import { planTypeStatus } from '../redux/plan/planData';
+import { useState } from 'react';
 
 function EditPlanModal() {
   const editId = useSelector(editPlanIdStatus);
   const findPlanStatus = useSelector(findPlanTypeStatus);
   const dispatch = useDispatch();
-
   const filterEditPlan = findPlanStatus.filter(
     (el: FindPlanProperty) => el.id === editId
   );
+  const [inputText, setInputText] = useState(filterEditPlan[0].planText);
 
   const optionMonth = (): number[] => {
     const monthArr = [];
@@ -62,6 +63,10 @@ function EditPlanModal() {
   };
   // 일 저장하기
 
+  const handleInputTextChange = (e: any) => {
+    setInputText(e.currentTarget.value);
+  };
+
   return (
     <ModalWrap>
       <EditPlanBox>
@@ -89,7 +94,7 @@ function EditPlanModal() {
               ))}
             </select>
 
-            {/* <input value='' />   */}
+            <input onChange={handleInputTextChange} value={inputText} />
           </div>
         </MonthDaySelectWrap>
       </EditPlanBox>
