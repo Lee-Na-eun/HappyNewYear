@@ -13,17 +13,37 @@ import {
 } from '../style/styleModal';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 import { monthChange, dateChange } from '../redux/plan/planData';
-import { planTypeStatus } from '../redux/plan/planData';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function EditPlanModal() {
   const editId = useSelector(editPlanIdStatus);
   const findPlanStatus = useSelector(findPlanTypeStatus);
   const dispatch = useDispatch();
+
   const filterEditPlan = findPlanStatus.filter(
     (el: FindPlanProperty) => el.id === editId
   );
+
+  const [workingStatus, setWorkingStatus] = useState(
+    filterEditPlan[0].workingStatus
+  );
+
+  const [colorChange, setColorChange] = useState({
+    first: false,
+    second: false,
+    third: false,
+  });
   const [inputText, setInputText] = useState(filterEditPlan[0].planText);
+
+  useEffect(() => {
+    if (filterEditPlan[0].workingStatus === '시작 안 함') {
+      setColorChange({ first: true, second: false, third: false });
+    } else if (filterEditPlan[0].workingStatus === '진행 중') {
+      setColorChange({ first: false, second: true, third: false });
+    } else if (filterEditPlan[0].workingStatus === '완료') {
+      setColorChange({ first: false, second: false, third: true });
+    }
+  }, []);
 
   const optionMonth = (): number[] => {
     const monthArr = [];
@@ -73,12 +93,28 @@ function EditPlanModal() {
     setInputText(e.currentTarget.value);
   };
 
-  console.log(filterEditPlan);
+  const handleColorChange = (e: any) => {
+    setWorkingStatus(e.currentTarget.value);
+    if (e.currentTarget.value === '시작 안 함') {
+      setColorChange({ first: true, second: false, third: false });
+    } else if (e.currentTarget.value === '진행 중') {
+      setColorChange({ first: false, second: true, third: false });
+    } else if (e.currentTarget.value === '완료') {
+      setColorChange({ first: false, second: false, third: true });
+    }
+    console.log(e.currentTarget.value);
+  };
+
+  const closeEditModal = () => {
+    dispatch(editModalClose());
+  };
+
+  // console.log(workingStatus);
 
   return (
     <ModalWrap>
       <EditPlanBox>
-        <p>&times;</p>
+        <p onClick={closeEditModal}>&times;</p>
         <div>
           <MonthDaySelectWrap>
             <p>날짜 선택하기</p>
@@ -112,9 +148,27 @@ function EditPlanModal() {
           <WorkingStatusWrap>
             <p>계획 상태 선택</p>
             <div>
-              <button value='시작 안 함'>시작 안 함</button>
-              <button value='진행 중'>진행 중</button>
-              <button value='완료'>완료</button>
+              <button
+                value='시작 안 함'
+                onClick={handleColorChange}
+                className={colorChange.first ? 'onChageColor' : ''}
+              >
+                시작 안 함
+              </button>
+              <button
+                value='진행 중'
+                onClick={handleColorChange}
+                className={colorChange.second ? 'onChageColor' : ''}
+              >
+                진행 중
+              </button>
+              <button
+                value='완료'
+                onClick={handleColorChange}
+                className={colorChange.third ? 'onChageColor' : ''}
+              >
+                완료
+              </button>
             </div>
           </WorkingStatusWrap>
           <EditButtonWrap>

@@ -96,20 +96,13 @@ export const EditPlanBox = styled.div`
     width: 250px;
   }
   > p {
-    width: 450px;
     text-align: right;
     font-size: 50px;
     margin-top: -50px;
+    margin-left: 85%;
     color: #fff;
     cursor: pointer;
-    @media (max-width: 500px) {
-      width: 350px;
-    }
-    @media (max-width: 400px) {
-      width: 250px;
-    }
     @media (max-width: 300px) {
-      width: 230px;
       font-size: 40px;
     }
   }
@@ -261,9 +254,8 @@ export const WorkingStatusWrap = styled.div`
     > button:nth-child(1) {
       margin-left: 0;
     }
-    > .colorChange {
-      background-color: #878bbe;
-      border: 2px solid #878bbe;
+    > .onChageColor {
+      background-color: #4950ac;
       color: #fff;
     }
   }
@@ -278,7 +270,6 @@ export const EditButtonWrap = styled.div`
     border: none;
     border-radius: 10px;
     background-color: #fff;
-
     color: #b7baea;
     font-size: 12px;
     font-weight: bold;
