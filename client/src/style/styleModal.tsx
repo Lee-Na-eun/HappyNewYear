@@ -257,6 +257,7 @@ export const WorkingStatusWrap = styled.div`
     > .onChageColor {
       background-color: #4950ac;
       color: #fff;
+      border: none;
     }
   }
 `;

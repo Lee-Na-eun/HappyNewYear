@@ -12,13 +12,20 @@ import {
   EditButtonWrap,
 } from '../style/styleModal';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
-import { monthChange, dateChange } from '../redux/plan/planData';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { resultStatus } from '../redux/quiz/result';
+
+axios.defaults.withCredentials = true;
 
 function EditPlanModal() {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const editId = useSelector(editPlanIdStatus);
   const findPlanStatus = useSelector(findPlanTypeStatus);
+
   const dispatch = useDispatch();
+  const statusResult = useSelector(resultStatus);
 
   const filterEditPlan = findPlanStatus.filter(
     (el: FindPlanProperty) => el.id === editId
@@ -27,6 +34,9 @@ function EditPlanModal() {
   const [workingStatus, setWorkingStatus] = useState(
     filterEditPlan[0].workingStatus
   );
+
+  const [month, setMonth] = useState(filterEditPlan[0].month);
+  const [date, setDate] = useState(filterEditPlan[0].date);
 
   const [colorChange, setColorChange] = useState({
     first: false,
@@ -56,7 +66,7 @@ function EditPlanModal() {
   // 한달 선택을 위한 배열
 
   const handleMonthChange = (e: any) => {
-    dispatch(monthChange(Number(e.currentTarget.value)));
+    setMonth(Number(e.currentTarget.value));
   };
   // 달 저장하기
 
@@ -85,7 +95,7 @@ function EditPlanModal() {
   // 일 선택을 위한 배열
 
   const handleDateChange = (e: any) => {
-    dispatch(dateChange(Number(e.currentTarget.value)));
+    setDate(Number(e.currentTarget.value));
   };
   // 일 저장하기
 
@@ -109,7 +119,50 @@ function EditPlanModal() {
     dispatch(editModalClose());
   };
 
-  // console.log(workingStatus);
+  const handleEditPlanSave = async () => {
+    try {
+      if (inputText === '') {
+        swal({
+          title: '아직 작성하지 않은 부분이 있습니다.',
+          text: '모두 작성 후 다시 시도 해주세요.',
+          icon: 'warning',
+        });
+      } else {
+        const result = await axios.patch(
+          `${url}/myRoom/findPlan`,
+          {
+            id: Number(filterEditPlan[0].id),
+            month: month,
+            date: date,
+            planText: inputText,
+            workingStatus: workingStatus,
+          },
+          {
+            headers: {
+              authorization: `bearer ${statusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+        if (result.data.message === 'ok') {
+          swal({
+            title: '수정이 완료 되었습니다.',
+            text: '언제든지 계획을 수정해보세요!',
+            icon: 'success',
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      }
+    } catch (err: any) {
+      swal({
+        title: '재로그인이 필요합니다.',
+        text: '다시 로그인 후 이용 부탁드립니다.',
+        icon: 'warning',
+      }).then(() => {
+        window.location.replace('/');
+      });
+    }
+  };
 
   return (
     <ModalWrap>
@@ -133,7 +186,7 @@ function EditPlanModal() {
                 defaultValue={filterEditPlan[0].date}
                 onChange={handleDateChange}
               >
-                {optionDay(filterEditPlan[0].month).map((el, index) => (
+                {optionDay(month).map((el, index) => (
                   <option key={index} value={el}>
                     {el}일
                   </option>
@@ -172,7 +225,7 @@ function EditPlanModal() {
             </div>
           </WorkingStatusWrap>
           <EditButtonWrap>
-            <button>저장하기</button>
+            <button onClick={handleEditPlanSave}>저장하기</button>
           </EditButtonWrap>
         </div>
       </EditPlanBox>
