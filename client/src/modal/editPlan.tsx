@@ -73,9 +73,12 @@ function EditPlanModal() {
     setInputText(e.currentTarget.value);
   };
 
+  console.log(filterEditPlan);
+
   return (
     <ModalWrap>
       <EditPlanBox>
+        <p>&times;</p>
         <div>
           <MonthDaySelectWrap>
             <p>날짜 선택하기</p>
@@ -116,7 +119,6 @@ function EditPlanModal() {
           </WorkingStatusWrap>
           <EditButtonWrap>
             <button>저장하기</button>
-            <button>취소하기</button>
           </EditButtonWrap>
         </div>
       </EditPlanBox>

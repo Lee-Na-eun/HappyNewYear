@@ -83,14 +83,48 @@ export const EditPlanBox = styled.div`
   background-color: #878bbe;
   border-radius: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 500px) {
+    width: 400px;
+  }
+  @media (max-width: 400px) {
+    width: 300px;
+  }
+  @media (max-width: 300px) {
+    width: 250px;
+  }
+  > p {
+    width: 450px;
+    text-align: right;
+    font-size: 50px;
+    margin-top: -50px;
+    color: #fff;
+    cursor: pointer;
+    @media (max-width: 500px) {
+      width: 350px;
+    }
+    @media (max-width: 400px) {
+      width: 250px;
+    }
+    @media (max-width: 300px) {
+      width: 230px;
+      font-size: 40px;
+    }
+  }
   > div {
     width: 500px;
     height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @media (max-width: 400px) {
+      width: 250px;
+    }
+    @media (max-width: 300px) {
+      width: 230px;
+    }
   }
 `;
 
@@ -236,15 +270,15 @@ export const WorkingStatusWrap = styled.div`
 `;
 
 export const EditButtonWrap = styled.div`
-  width: 250px;
   margin: 0 auto;
   margin-top: 40px;
   > button {
-    width: 120px;
+    width: 250px;
     height: 40px;
     border: none;
     border-radius: 10px;
     background-color: #fff;
+
     color: #b7baea;
     font-size: 12px;
     font-weight: bold;
@@ -255,8 +289,5 @@ export const EditButtonWrap = styled.div`
       height: 30px;
       font-size: 10px;
     }
-  }
-  > button:nth-child(2) {
-    margin-left: 10px;
   }
 `;
