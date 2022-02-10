@@ -3,8 +3,14 @@ import {
   editModalClose,
   editPlanIdStatus,
 } from '../redux/plan/editOrDeleteModal';
-import { MonthDaySelectWrap, PlanTextWrap } from '../style/stylePlan';
-import { ModalWrap, EditPlanBox } from '../style/styleModal';
+import {
+  ModalWrap,
+  EditPlanBox,
+  PlanTextWrap,
+  MonthDaySelectWrap,
+  WorkingStatusWrap,
+  EditButtonWrap,
+} from '../style/styleModal';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 import { monthChange, dateChange } from '../redux/plan/planData';
 import { planTypeStatus } from '../redux/plan/planData';
@@ -70,42 +76,48 @@ function EditPlanModal() {
   return (
     <ModalWrap>
       <EditPlanBox>
-        <MonthDaySelectWrap>
-          <p>날짜 선택하기</p>
-          <div>
-            <select
-              defaultValue={filterEditPlan[0].month}
-              onChange={handleMonthChange}
-            >
-              {optionMonth().map((el: number, index) => (
-                <option key={index} value={el}>
-                  {el}월
-                </option>
-              ))}
-            </select>
-            <select
-              defaultValue={filterEditPlan[0].date}
-              onChange={handleDateChange}
-            >
-              {optionDay(filterEditPlan[0].month).map((el, index) => (
-                <option key={index} value={el}>
-                  {el}일
-                </option>
-              ))}
-            </select>
-          </div>
-        </MonthDaySelectWrap>
         <div>
-          <p>계획 쓰기</p>
-          <input onChange={handleInputTextChange} value={inputText} />
-        </div>
-        <div>
-          <p>계획 상태 선택</p>
-          <div>
-            <button value='시작 안 함'>시작 안 함</button>
-            <button value='진행 중'>진행 중</button>
-            <button value='완료'>완료</button>
-          </div>
+          <MonthDaySelectWrap>
+            <p>날짜 선택하기</p>
+            <div>
+              <select
+                defaultValue={filterEditPlan[0].month}
+                onChange={handleMonthChange}
+              >
+                {optionMonth().map((el: number, index) => (
+                  <option key={index} value={el}>
+                    {el}월
+                  </option>
+                ))}
+              </select>
+              <select
+                defaultValue={filterEditPlan[0].date}
+                onChange={handleDateChange}
+              >
+                {optionDay(filterEditPlan[0].month).map((el, index) => (
+                  <option key={index} value={el}>
+                    {el}일
+                  </option>
+                ))}
+              </select>
+            </div>
+          </MonthDaySelectWrap>
+          <PlanTextWrap>
+            <p>계획 쓰기</p>
+            <input onChange={handleInputTextChange} value={inputText} />
+          </PlanTextWrap>
+          <WorkingStatusWrap>
+            <p>계획 상태 선택</p>
+            <div>
+              <button value='시작 안 함'>시작 안 함</button>
+              <button value='진행 중'>진행 중</button>
+              <button value='완료'>완료</button>
+            </div>
+          </WorkingStatusWrap>
+          <EditButtonWrap>
+            <button>저장하기</button>
+            <button>취소하기</button>
+          </EditButtonWrap>
         </div>
       </EditPlanBox>
     </ModalWrap>
