@@ -3,7 +3,7 @@ import {
   editModalClose,
   editPlanIdStatus,
 } from '../redux/plan/editOrDeleteModal';
-import { MonthDaySelectWrap } from '../style/stylePlan';
+import { MonthDaySelectWrap, PlanTextWrap } from '../style/stylePlan';
 import { ModalWrap, EditPlanBox } from '../style/styleModal';
 import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
 import { monthChange, dateChange } from '../redux/plan/planData';
@@ -93,10 +93,20 @@ function EditPlanModal() {
                 </option>
               ))}
             </select>
-
-            <input onChange={handleInputTextChange} value={inputText} />
           </div>
         </MonthDaySelectWrap>
+        <div>
+          <p>계획 쓰기</p>
+          <input onChange={handleInputTextChange} value={inputText} />
+        </div>
+        <div>
+          <p>계획 상태 선택</p>
+          <div>
+            <button value='시작 안 함'>시작 안 함</button>
+            <button value='진행 중'>진행 중</button>
+            <button value='완료'>완료</button>
+          </div>
+        </div>
       </EditPlanBox>
     </ModalWrap>
   );
