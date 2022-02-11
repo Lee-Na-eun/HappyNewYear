@@ -3,6 +3,7 @@ import {
   PlanDataDiv,
   WorkingStatusFilterButtonWrap,
   FindPlanTextWrap,
+  NoPlanText,
 } from '../style/stylePlan';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -289,7 +290,7 @@ function MonthPlan() {
                     </Draggable>
                   ))
                 ) : (
-                  <div>조건에 맞는 계획이 아직 없습니다.</div>
+                  <NoPlanText>조건에 맞는 계획이 아직 없습니다.</NoPlanText>
                 )}
               </ul>
 
