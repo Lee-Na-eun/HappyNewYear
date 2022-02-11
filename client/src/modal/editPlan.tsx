@@ -16,6 +16,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { resultStatus } from '../redux/quiz/result';
+import { navClose } from '../redux/nav/nav';
+import { logout } from '../redux/user/user';
 
 axios.defaults.withCredentials = true;
 
@@ -159,6 +161,8 @@ function EditPlanModal() {
         text: '다시 로그인 후 이용 부탁드립니다.',
         icon: 'warning',
       }).then(() => {
+        dispatch(logout());
+        dispatch(navClose());
         window.location.replace('/');
       });
     }
