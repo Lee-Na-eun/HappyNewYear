@@ -5,7 +5,11 @@ import {
   FindPlanTextWrap,
 } from '../style/stylePlan';
 import { useSelector, useDispatch } from 'react-redux';
-import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
+import {
+  FindPlanProperty,
+  findPlanTypeStatus,
+  savePlanData,
+} from '../redux/plan/findPlan';
 import {
   DragDropContext,
   Droppable,
@@ -26,14 +30,41 @@ import {
 import { resultStatus } from '../redux/quiz/result';
 import EditPlanModal from '../modal/editPlan';
 import DeletePlanModal from '../modal/deletePlan';
+import axios from 'axios';
 
 function MonthPlan() {
   const dispatch = useDispatch();
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+
+  useEffect(() => {
+    const reloadPlanData = async () => {
+      try {
+        const findPlanData = await axios.get(
+          `${url}/myRoom/findPlan?userId=${statusResult.userInfo.id}`,
+          {
+            headers: {
+              authorization: `bearer ${statusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+        findPlanData.data.data.map(
+          (el: FindPlanProperty) => (el.id = String(el.id))
+        );
+
+        setPlanDatas(findPlanData.data.data);
+      } catch (err: any) {
+        console.log(err);
+      }
+    };
+
+    reloadPlanData();
+
+    setPlanDatas(sortFliterMonthPlan);
+  }, []);
+
   const statusResult = useSelector(resultStatus);
   const findPlanStatus = useSelector(findPlanTypeStatus);
   const [planDatas, setPlanDatas] = useState(findPlanStatus);
-
-  console.log(statusResult);
 
   type ColorType = {
     firstBtn: boolean;
@@ -68,10 +99,6 @@ function MonthPlan() {
     // a must be equal to b
     return 0;
   });
-
-  useEffect(() => {
-    setPlanDatas(sortFliterMonthPlan);
-  }, []);
 
   const handleDragEnd = (result: DropResult, provided?: ResponderProvided) => {
     if (!result.destination) {
