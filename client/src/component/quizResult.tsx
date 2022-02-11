@@ -14,7 +14,6 @@ import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { faGrinHearts } from '@fortawesome/free-solid-svg-icons';
 import { faHatWizard } from '@fortawesome/free-solid-svg-icons';
 import { faPlane } from '@fortawesome/free-solid-svg-icons';
-import { FindPlanProperty, savePlanData } from '../redux/plan/findPlan';
 
 function QuizResult() {
   const dispatch = useDispatch();
@@ -35,21 +34,6 @@ function QuizResult() {
           },
         }
       );
-
-      const findPlanData = await axios.get(
-        `${url}/myRoom/findPlan?userId=${statusResult.userInfo.id}`,
-        {
-          headers: {
-            authorization: `bearer ${statusResult.userInfo.accessToken}`,
-          },
-        }
-      );
-
-      findPlanData.data.data.map(
-        (el: FindPlanProperty) => (el.id = String(el.id))
-      );
-
-      dispatch(savePlanData(findPlanData.data.data));
 
       if (result.data.message === 'ok') {
         console.log(result);

@@ -14,7 +14,6 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FindPlanProperty, savePlanData } from '../redux/plan/findPlan';
 
 // require('dotenv').config();
 axios.defaults.withCredentials = true;
@@ -58,21 +57,6 @@ function Nav() {
           },
         }
       );
-
-      const findPlanData = await axios.get(
-        `${url}/myRoom/findPlan?userId=${statusResult.userInfo.id}`,
-        {
-          headers: {
-            authorization: `bearer ${statusResult.userInfo.accessToken}`,
-          },
-        }
-      );
-
-      findPlanData.data.data.map(
-        (el: FindPlanProperty) => (el.id = String(el.id))
-      );
-
-      dispatch(savePlanData(findPlanData.data.data));
 
       if (result.data.message === 'ok') {
         console.log(result);
