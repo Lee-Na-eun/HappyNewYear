@@ -35,6 +35,9 @@ import axios from 'axios';
 function MonthPlan() {
   const dispatch = useDispatch();
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const statusResult = useSelector(resultStatus);
+  const findPlanStatus = useSelector(findPlanTypeStatus);
+  const [planDatas, setPlanDatas] = useState(findPlanStatus);
 
   useEffect(() => {
     const reloadPlanData = async () => {
@@ -51,20 +54,34 @@ function MonthPlan() {
           (el: FindPlanProperty) => (el.id = String(el.id))
         );
 
-        setPlanDatas(findPlanData.data.data);
+        const findMonth = new Date().getMonth() + 1;
+
+        const filterMonthPlan1 = findPlanData.data.data.filter(
+          (el: FindPlanProperty) => el.month === findMonth
+        );
+
+        const sortFliterMonthPlan1 = filterMonthPlan1.sort(function (
+          a: FindPlanProperty,
+          b: FindPlanProperty
+        ) {
+          if (a.date > b.date) {
+            return 1;
+          }
+          if (a.date < b.date) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+        dispatch(savePlanData(sortFliterMonthPlan1));
+        setPlanDatas(sortFliterMonthPlan1);
       } catch (err: any) {
         console.log(err);
       }
     };
 
     reloadPlanData();
-
-    setPlanDatas(sortFliterMonthPlan);
   }, []);
-
-  const statusResult = useSelector(resultStatus);
-  const findPlanStatus = useSelector(findPlanTypeStatus);
-  const [planDatas, setPlanDatas] = useState(findPlanStatus);
 
   type ColorType = {
     firstBtn: boolean;
@@ -78,26 +95,6 @@ function MonthPlan() {
     secontBtn: false,
     thirdBtn: false,
     fourthBtn: false,
-  });
-
-  const findMonth = new Date().getMonth() + 1;
-
-  const filterMonthPlan = findPlanStatus.filter(
-    (el: FindPlanProperty) => el.month === findMonth
-  );
-
-  const sortFliterMonthPlan = filterMonthPlan.sort(function (
-    a: FindPlanProperty,
-    b: FindPlanProperty
-  ) {
-    if (a.date > b.date) {
-      return 1;
-    }
-    if (a.date < b.date) {
-      return -1;
-    }
-    // a must be equal to b
-    return 0;
   });
 
   const handleDragEnd = (result: DropResult, provided?: ResponderProvided) => {
@@ -145,7 +142,7 @@ function MonthPlan() {
         thirdBtn: false,
         fourthBtn: false,
       });
-      setPlanDatas(sortFliterMonthPlan);
+      setPlanDatas(findPlanStatus.slice(0));
     } else if (e.currentTarget.value === '시작 안 함') {
       setChangeColor({
         firstBtn: false,
@@ -154,9 +151,9 @@ function MonthPlan() {
         fourthBtn: false,
       });
 
-      const filter1 = sortFliterMonthPlan.filter(
-        (el: FindPlanProperty) => el.workingStatus === '시작 안 함'
-      );
+      const filter1 = findPlanStatus
+        .slice(0)
+        .filter((el: FindPlanProperty) => el.workingStatus === '시작 안 함');
       setPlanDatas(filter1);
     } else if (e.currentTarget.value === '진행 중') {
       setChangeColor({
@@ -166,9 +163,9 @@ function MonthPlan() {
         fourthBtn: false,
       });
 
-      const filter2 = sortFliterMonthPlan.filter(
-        (el: FindPlanProperty) => el.workingStatus === '진행 중'
-      );
+      const filter2 = findPlanStatus
+        .slice(0)
+        .filter((el: FindPlanProperty) => el.workingStatus === '진행 중');
       setPlanDatas(filter2);
     } else if (e.currentTarget.value === '완료') {
       setChangeColor({
@@ -177,9 +174,9 @@ function MonthPlan() {
         thirdBtn: false,
         fourthBtn: true,
       });
-      const filter3 = sortFliterMonthPlan.filter(
-        (el: FindPlanProperty) => el.workingStatus === '완료'
-      );
+      const filter3 = findPlanStatus
+        .slice(0)
+        .filter((el: FindPlanProperty) => el.workingStatus === '완료');
 
       setPlanDatas(filter3);
     }
@@ -273,7 +270,7 @@ function MonthPlan() {
                     </Draggable>
                   ))
                 ) : (
-                  <div>이 달의 계획이 아직 없습니다.</div>
+                  <div>조건에 맞는 계획이 아직 없습니다.</div>
                 )}
               </ul>
 
