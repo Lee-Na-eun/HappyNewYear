@@ -5,10 +5,9 @@ const { isAuthorized, basicAccessToken } = require('../token/accessToken');
 module.exports = {
   post: async (req, res) => {
     const newPlanData = req.body;
-    const { month, date, planText, workingStatus } = newPlanData;
+    const { date, planText, workingStatus } = newPlanData;
     const accessVerify = isAuthorized(req);
     await Plan.create({
-      month,
       date,
       planText,
       workingStatus,
