@@ -36,6 +36,8 @@ import axios from 'axios';
 import { navClose } from '../redux/nav/nav';
 import { logout } from '../redux/user/user';
 
+axios.defaults.withCredentials = true;
+
 function DayPlan() {
   const dispatch = useDispatch();
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;

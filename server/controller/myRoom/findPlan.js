@@ -61,6 +61,8 @@ module.exports = {
   delete: async (req, res) => {
     const accessVerify = isAuthorized(req);
 
+    console.log(req.query.planId);
+
     if (!accessVerify) {
       const refreshVerify = refreshAuthorized(req);
       if (!refreshVerify) {

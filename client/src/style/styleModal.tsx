@@ -283,3 +283,5 @@ export const EditButtonWrap = styled.div`
     }
   }
 `;
+
+export const DeleteModal = styled.div``;
