@@ -54,24 +54,32 @@ function AllPlan() {
             },
           }
         );
+
+        console.log(findPlanData.data.data);
         findPlanData.data.data.map(
           (el: FindPlanProperty) => (el.id = String(el.id))
         );
 
-        const sortFliterMonthPlan1 = findPlanData.data.data.sort(function (
+        const findMonth = new Date().getMonth();
+
+        const filterMonthPlan1 = findPlanData.data.data.filter(
+          (el: FindPlanProperty) =>
+            new Date(`${el.date}`).getMonth() === findMonth
+        );
+
+        const sortFliterMonthPlan1 = filterMonthPlan1.sort(function (
           a: FindPlanProperty,
           b: FindPlanProperty
         ) {
-          if (a.month > b.month) {
+          if (a.date > b.date) {
             return 1;
           }
-          if (a.month < b.month) {
+          if (a.date < b.date) {
             return -1;
           }
           // a must be equal to b
           return 0;
         });
-        console.log(sortFliterMonthPlan1);
         dispatch(savePlanData(sortFliterMonthPlan1));
         setPlanDatas(sortFliterMonthPlan1);
       } catch (err: any) {
@@ -261,7 +269,8 @@ function AllPlan() {
                         >
                           <FindPlanTextWrap>
                             <span>
-                              {el.month}월 {el.date}일
+                              {new Date(el.date).getMonth() + 1}월{' '}
+                              {new Date(el.date).getDate()}일
                             </span>
                             <p>{el.planText}</p>
                             <div>

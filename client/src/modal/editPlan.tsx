@@ -37,8 +37,12 @@ function EditPlanModal() {
     filterEditPlan[0].workingStatus
   );
 
-  const [month, setMonth] = useState(filterEditPlan[0].month);
-  const [date, setDate] = useState(filterEditPlan[0].date);
+  const dateData = filterEditPlan[0].date;
+
+  const [month, setMonth] = useState(new Date(dateData).getMonth() + 1);
+  const [date, setDate] = useState(new Date(dateData).getDate());
+
+  console.log(filterEditPlan[0]);
 
   const [colorChange, setColorChange] = useState({
     first: false,
@@ -177,7 +181,7 @@ function EditPlanModal() {
             <p>날짜 선택하기</p>
             <div>
               <select
-                defaultValue={filterEditPlan[0].month}
+                defaultValue={new Date(filterEditPlan[0].date).getMonth() + 1}
                 onChange={handleMonthChange}
               >
                 {optionMonth().map((el: number, index) => (
@@ -187,7 +191,7 @@ function EditPlanModal() {
                 ))}
               </select>
               <select
-                defaultValue={filterEditPlan[0].date}
+                defaultValue={new Date(filterEditPlan[0].date).getDate()}
                 onChange={handleDateChange}
               >
                 {optionDay(month).map((el, index) => (
