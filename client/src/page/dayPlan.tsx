@@ -61,27 +61,16 @@ function DayPlan() {
         );
 
         const findMonth = new Date().getMonth();
+        const findDate = new Date().getDate();
 
         const filterMonthPlan1 = findPlanData.data.data.filter(
           (el: FindPlanProperty) =>
-            new Date(`${el.date}`).getMonth() === findMonth
+            new Date(`${el.date}`).getMonth() === findMonth &&
+            new Date(`${el.date}`).getDate() === findDate
         );
 
-        const sortFliterMonthPlan1 = filterMonthPlan1.sort(function (
-          a: FindPlanProperty,
-          b: FindPlanProperty
-        ) {
-          if (a.date > b.date) {
-            return 1;
-          }
-          if (a.date < b.date) {
-            return -1;
-          }
-          // a must be equal to b
-          return 0;
-        });
-        dispatch(savePlanData(sortFliterMonthPlan1));
-        setPlanDatas(sortFliterMonthPlan1);
+        dispatch(savePlanData(filterMonthPlan1));
+        setPlanDatas(filterMonthPlan1);
       } catch (err: any) {
         if (err.message === 'Network Error') {
           swal({
