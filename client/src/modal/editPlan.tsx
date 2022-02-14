@@ -42,8 +42,6 @@ function EditPlanModal() {
   const [month, setMonth] = useState(new Date(dateData).getMonth() + 1);
   const [date, setDate] = useState(new Date(dateData).getDate());
 
-  console.log(filterEditPlan[0]);
-
   const [colorChange, setColorChange] = useState({
     first: false,
     second: false,

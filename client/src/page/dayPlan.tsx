@@ -54,8 +54,6 @@ function DayPlan() {
             },
           }
         );
-
-        console.log(findPlanData.data.data);
         findPlanData.data.data.map(
           (el: FindPlanProperty) => (el.id = String(el.id))
         );
@@ -118,22 +116,16 @@ function DayPlan() {
       const afterDragItemIndex: number | undefined = result.destination?.index;
 
       if (result.destination.index === 0) {
-        console.log('joj');
         const removeTags = currentTags.splice(draggingItemIndex, 1);
         currentTags.unshift(removeTags[0]);
       } else {
         const removeTag = currentTags.splice(draggingItemIndex, 1);
-
-        console.log('draggingIndex', draggingItemIndex);
-        console.log('removeTag', removeTag);
         if (afterDragItemIndex) {
           currentTags.splice(afterDragItemIndex, 0, removeTag[0]);
         }
       }
       setPlanDatas(currentTags);
     }
-
-    console.log(result);
   };
 
   const workingStatusName = (el: FindPlanProperty) => {
