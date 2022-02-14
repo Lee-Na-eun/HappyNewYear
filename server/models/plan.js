@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Plan.init(
     {
-      month: DataTypes.INTEGER,
-      date: DataTypes.INTEGER,
+      date: DataTypes.DATE,
       planText: DataTypes.STRING,
       workingStatus: DataTypes.STRING,
       userId: DataTypes.INTEGER,

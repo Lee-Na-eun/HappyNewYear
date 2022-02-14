@@ -15,6 +15,8 @@ module.exports = {
     const allPlanClear = findAllPlan.map((el) => el.dataValues);
     // plan 전체 보기
 
+    console.log('aaa');
+
     if (!findAllPlan) {
       res.status(200).json({ data: [] });
     } else {
@@ -35,7 +37,7 @@ module.exports = {
   patch: async (req, res) => {
     const accessVerify = isAuthorized(req);
     const data = req.body;
-    const { id, month, date, planText, workingStatus } = data;
+    const { id, date, planText, workingStatus } = data;
 
     if (!accessVerify) {
       const refreshVerify = refreshAuthorized(req);
@@ -43,14 +45,14 @@ module.exports = {
         res.status(401).json({ message: 'Send new Login Request' });
       }
       await Plan.update(
-        { month, date, planText, workingStatus },
+        { date, planText, workingStatus },
         { where: { userId: refreshVerify.id } }
       );
       res.status(201).json({ message: 'ok' });
     }
 
     await Plan.update(
-      { month, date, planText, workingStatus },
+      { date, planText, workingStatus },
       { where: { id: id, userId: accessVerify.id } }
     );
     res.status(200).json({ message: 'ok' });

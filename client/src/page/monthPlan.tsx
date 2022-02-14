@@ -54,14 +54,17 @@ function MonthPlan() {
             },
           }
         );
+
+        console.log(findPlanData.data.data);
         findPlanData.data.data.map(
           (el: FindPlanProperty) => (el.id = String(el.id))
         );
 
-        const findMonth = new Date().getMonth() + 1;
+        const findMonth = new Date().getMonth();
 
         const filterMonthPlan1 = findPlanData.data.data.filter(
-          (el: FindPlanProperty) => el.month === findMonth
+          (el: FindPlanProperty) =>
+            new Date(`${el.date}`).getMonth() === findMonth
         );
 
         const sortFliterMonthPlan1 = filterMonthPlan1.sort(function (
@@ -266,7 +269,8 @@ function MonthPlan() {
                         >
                           <FindPlanTextWrap>
                             <span>
-                              {el.month}월 {el.date}일
+                              {new Date(el.date).getMonth() + 1}월{' '}
+                              {new Date(el.date).getDate()}일
                             </span>
                             <p>{el.planText}</p>
                             <div>
