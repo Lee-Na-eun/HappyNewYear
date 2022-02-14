@@ -10,8 +10,7 @@ const initialState: FindPlanType = {
 
 export type FindPlanProperty = {
   id: string;
-  month: number;
-  date: number;
+  date: string;
   planText: string;
   workingStatus: string;
 };

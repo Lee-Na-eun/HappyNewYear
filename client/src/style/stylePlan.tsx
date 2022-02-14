@@ -384,3 +384,13 @@ export const WorkingStatusFilterButtonWrap = styled.div`
     margin-left: 0;
   }
 `;
+
+export const NoPlanText = styled.div`
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 2px solid #fff;
+  color: #fff;
+  line-height: 120px;
+  font-weight: bold;
+`;

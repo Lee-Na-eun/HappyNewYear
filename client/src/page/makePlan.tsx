@@ -99,6 +99,9 @@ function MakePlan() {
   };
 
   const handleSendPlan = async () => {
+    const yearData = new Date().getFullYear();
+    const monthData = planStatusResult.planData.month;
+    const dateData = planStatusResult.planData.date;
     try {
       if (planTextChange === '' || workingStatus === '') {
         swal({
@@ -110,8 +113,7 @@ function MakePlan() {
         const result = await axios.post(
           `${url}/myRoom/makePlan`,
           {
-            month: planStatusResult.planData.month,
-            date: planStatusResult.planData.date,
+            date: `${yearData}-${monthData}-${dateData}`,
             planText: planTextChange,
             workingStatus: workingStatus,
           },
@@ -140,8 +142,6 @@ function MakePlan() {
       });
     }
   };
-
-  // console.log(planStatusResult);
 
   return (
     <PlanWrap>

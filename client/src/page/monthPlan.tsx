@@ -3,9 +3,14 @@ import {
   PlanDataDiv,
   WorkingStatusFilterButtonWrap,
   FindPlanTextWrap,
+  NoPlanText,
 } from '../style/stylePlan';
-import { useSelector } from 'react-redux';
-import { FindPlanProperty, findPlanTypeStatus } from '../redux/plan/findPlan';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  FindPlanProperty,
+  findPlanTypeStatus,
+  savePlanData,
+} from '../redux/plan/findPlan';
 import {
   DragDropContext,
   Droppable,
@@ -19,10 +24,85 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  editModalOpen,
+  deleteModalOpen,
+} from '../redux/plan/editOrDeleteModal';
+import { resultStatus } from '../redux/quiz/result';
+import EditPlanModal from '../modal/editPlan';
+import DeletePlanModal from '../modal/deletePlan';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { navClose } from '../redux/nav/nav';
+import { logout } from '../redux/user/user';
 
 function MonthPlan() {
-  const statusResult = useSelector(findPlanTypeStatus);
-  const [planDatas, setPlanDatas] = useState(statusResult);
+  const dispatch = useDispatch();
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const statusResult = useSelector(resultStatus);
+  const findPlanStatus = useSelector(findPlanTypeStatus);
+  const [planDatas, setPlanDatas] = useState(findPlanStatus);
+
+  useEffect(() => {
+    const reloadPlanData = async () => {
+      try {
+        const findPlanData = await axios.get(
+          `${url}/myRoom/findPlan?userId=${statusResult.userInfo.id}`,
+          {
+            headers: {
+              authorization: `bearer ${statusResult.userInfo.accessToken}`,
+            },
+          }
+        );
+        findPlanData.data.data.map(
+          (el: FindPlanProperty) => (el.id = String(el.id))
+        );
+
+        const findMonth = new Date().getMonth();
+
+        const filterMonthPlan1 = findPlanData.data.data.filter(
+          (el: FindPlanProperty) =>
+            new Date(`${el.date}`).getMonth() === findMonth
+        );
+
+        const sortFliterMonthPlan1 = filterMonthPlan1.sort(function (
+          a: FindPlanProperty,
+          b: FindPlanProperty
+        ) {
+          if (a.date > b.date) {
+            return 1;
+          }
+          if (a.date < b.date) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+        dispatch(savePlanData(sortFliterMonthPlan1));
+        setPlanDatas(sortFliterMonthPlan1);
+      } catch (err: any) {
+        if (err.message === 'Network Error') {
+          swal({
+            title: '네트워크가 불안정 합니다.',
+            text: '잠시 후에 이용 부탁드립니다.',
+            icon: 'error',
+          });
+        } else if (err.response.data.message === 'same userId') {
+          swal({
+            title: '재로그인이 필요합니다.',
+            text: '다시 로그인 후 이용 부탁드립니다.',
+            icon: 'warning',
+          }).then(() => {
+            dispatch(logout());
+            dispatch(navClose());
+            window.location.replace('/');
+          });
+        }
+      }
+    };
+
+    reloadPlanData();
+  }, []);
 
   type ColorType = {
     firstBtn: boolean;
@@ -38,30 +118,6 @@ function MonthPlan() {
     fourthBtn: false,
   });
 
-  const findMonth = new Date().getMonth() + 1;
-
-  const filterMonthPlan = statusResult.filter(
-    (el: FindPlanProperty) => el.month === findMonth
-  );
-
-  const sortFliterMonthPlan = filterMonthPlan.sort(function (
-    a: FindPlanProperty,
-    b: FindPlanProperty
-  ) {
-    if (a.date > b.date) {
-      return 1;
-    }
-    if (a.date < b.date) {
-      return -1;
-    }
-    // a must be equal to b
-    return 0;
-  });
-
-  useEffect(() => {
-    setPlanDatas(sortFliterMonthPlan);
-  }, []);
-
   const handleDragEnd = (result: DropResult, provided?: ResponderProvided) => {
     if (!result.destination) {
       return;
@@ -71,22 +127,17 @@ function MonthPlan() {
       const afterDragItemIndex: number | undefined = result.destination?.index;
 
       if (result.destination.index === 0) {
-        console.log('joj');
         const removeTags = currentTags.splice(draggingItemIndex, 1);
         currentTags.unshift(removeTags[0]);
       } else {
         const removeTag = currentTags.splice(draggingItemIndex, 1);
 
-        console.log('draggingIndex', draggingItemIndex);
-        console.log('removeTag', removeTag);
         if (afterDragItemIndex) {
           currentTags.splice(afterDragItemIndex, 0, removeTag[0]);
         }
       }
       setPlanDatas(currentTags);
     }
-
-    console.log(result);
   };
 
   const workingStatusName = (el: FindPlanProperty) => {
@@ -107,7 +158,7 @@ function MonthPlan() {
         thirdBtn: false,
         fourthBtn: false,
       });
-      setPlanDatas(sortFliterMonthPlan);
+      setPlanDatas(findPlanStatus.slice(0));
     } else if (e.currentTarget.value === '시작 안 함') {
       setChangeColor({
         firstBtn: false,
@@ -116,9 +167,9 @@ function MonthPlan() {
         fourthBtn: false,
       });
 
-      const filter1 = sortFliterMonthPlan.filter(
-        (el: FindPlanProperty) => el.workingStatus === '시작 안 함'
-      );
+      const filter1 = findPlanStatus
+        .slice(0)
+        .filter((el: FindPlanProperty) => el.workingStatus === '시작 안 함');
       setPlanDatas(filter1);
     } else if (e.currentTarget.value === '진행 중') {
       setChangeColor({
@@ -128,9 +179,9 @@ function MonthPlan() {
         fourthBtn: false,
       });
 
-      const filter2 = sortFliterMonthPlan.filter(
-        (el: FindPlanProperty) => el.workingStatus === '진행 중'
-      );
+      const filter2 = findPlanStatus
+        .slice(0)
+        .filter((el: FindPlanProperty) => el.workingStatus === '진행 중');
       setPlanDatas(filter2);
     } else if (e.currentTarget.value === '완료') {
       setChangeColor({
@@ -139,16 +190,28 @@ function MonthPlan() {
         thirdBtn: false,
         fourthBtn: true,
       });
-      const filter3 = sortFliterMonthPlan.filter(
-        (el: FindPlanProperty) => el.workingStatus === '완료'
-      );
+      const filter3 = findPlanStatus
+        .slice(0)
+        .filter((el: FindPlanProperty) => el.workingStatus === '완료');
 
       setPlanDatas(filter3);
     }
   };
 
+  const modalOpen = (el: string, planId: string) => {
+    if (el === 'edit') {
+      dispatch(editModalOpen(planId));
+    } else if (el === 'delete') {
+      dispatch(deleteModalOpen(planId));
+    }
+  };
+
   return (
     <PlanWrap>
+      {statusResult.isEditOrDeleteModal.isEditOpen ? <EditPlanModal /> : null}
+      {statusResult.isEditOrDeleteModal.isDeleteOpen ? (
+        <DeletePlanModal />
+      ) : null}
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId='dropTags'>
           {(droppableProvided: DroppableProvided) => (
@@ -199,7 +262,8 @@ function MonthPlan() {
                         >
                           <FindPlanTextWrap>
                             <span>
-                              {el.month}월 {el.date}일
+                              {new Date(el.date).getMonth() + 1}월{' '}
+                              {new Date(el.date).getDate()}일
                             </span>
                             <p>{el.planText}</p>
                             <div>
@@ -209,10 +273,12 @@ function MonthPlan() {
                               <FontAwesomeIcon
                                 className='findPlanIcon'
                                 icon={faPenSquare}
+                                onClick={() => modalOpen('edit', el.id)}
                               />
                               <FontAwesomeIcon
                                 className='findPlanIcon'
                                 icon={faTrashAlt}
+                                onClick={() => modalOpen('delete', el.id)}
                               />
                             </div>
                           </FindPlanTextWrap>
@@ -221,7 +287,7 @@ function MonthPlan() {
                     </Draggable>
                   ))
                 ) : (
-                  <div>이 달의 계획이 아직 없습니다.</div>
+                  <NoPlanText>조건에 맞는 계획이 아직 없습니다.</NoPlanText>
                 )}
               </ul>
 
