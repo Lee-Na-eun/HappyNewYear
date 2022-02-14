@@ -138,8 +138,7 @@ function EditPlanModal() {
           `${url}/myRoom/findPlan`,
           {
             id: Number(filterEditPlan[0].id),
-            month: month,
-            date: date,
+            date: `${new Date().getFullYear()}-${month}-${date}`,
             planText: inputText,
             workingStatus: workingStatus,
           },

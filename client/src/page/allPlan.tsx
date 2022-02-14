@@ -60,14 +60,7 @@ function AllPlan() {
           (el: FindPlanProperty) => (el.id = String(el.id))
         );
 
-        const findMonth = new Date().getMonth();
-
-        const filterMonthPlan1 = findPlanData.data.data.filter(
-          (el: FindPlanProperty) =>
-            new Date(`${el.date}`).getMonth() === findMonth
-        );
-
-        const sortFliterMonthPlan1 = filterMonthPlan1.sort(function (
+        const sortFliterMonthPlan1 = findPlanData.data.data.sort(function (
           a: FindPlanProperty,
           b: FindPlanProperty
         ) {
