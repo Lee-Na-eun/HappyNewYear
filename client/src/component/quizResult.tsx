@@ -1,4 +1,4 @@
-import result, { resultStatus } from '../redux/quiz/result';
+import { resultStatus } from '../redux/quiz/result';
 import { useSelector, useDispatch } from 'react-redux';
 import { resultTest } from '../quizData/quizData';
 import { ResultWrap, GoRoomButton } from '../style/StyleQuiz';
