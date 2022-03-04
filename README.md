@@ -6,8 +6,6 @@
 
 ## **Main page**
 
-![메인 페이지](https://media.discordapp.net/attachments/885202056355397686/892300259458428938/LandingPage_Changed.gif?width=1098&height=549)
-
 ### **흐지부지 되는 목표를 이번해는 반드시!**
 
 신년이라는 이름으로 계획했던 일들이 언젠가부터 흐지부지 되지 않으셨나요?
@@ -31,13 +29,13 @@
 
 ### 💌 **로그인 하지 않아도 쉽게 즐기는 심리테스트**
 
-![심리테스트 진행](https://media.discordapp.net/attachments/885202056355397686/892300303431528469/Signup_Changed.gif?width=1098&height=549)
+![심리테스트 진행](https://cdn.discordapp.com/attachments/850189052379922463/949138329587294228/HappyNewYear_.gif)
 
 <br>
 
 ### 🔐 **일반 로그인**
 
-![일반 로그인](https://media.discordapp.net/attachments/885202056355397686/892389674088288287/Kakao_Login_Changed.gif?width=1100&height=549)
+![일반 로그인](https://cdn.discordapp.com/attachments/850189052379922463/949138329960603658/HappyNewYear_.gif)
 
 <br>
 
@@ -45,24 +43,24 @@
 
 #### 📝 **계획표 작성하기**
 
-![계획표 작성](https://cdn.discordapp.com/attachments/892308009194258502/893449285033680946/mainsearch.gif)
+![계획표 작성](https://cdn.discordapp.com/attachments/850189052379922463/949138330644258846/HappyNewYear_.gif)
 
 <br>
 
 ### ✅ **전체/월/하루로 내 계획표 확인하기**
 
-![계획표 날짜별 필터](https://cdn.discordapp.com/attachments/892308009194258502/893449297146806302/soundsearch.gif)
+![계획표 날짜별 필터](https://cdn.discordapp.com/attachments/850189052379922463/949138330874961980/HappyNewYear_.gif)
 
 <br>
 
 ### ✅ **드래그 앤 드롭 기능 구현**
 
-![드래그앤드롭](https://cdn.discordapp.com/attachments/892308009194258502/893449297146806302/soundsearch.gif)
+![드래그앤드롭](https://cdn.discordapp.com/attachments/850189052379922463/949138330166116422/HappyNewYear_.gif)
 
 <br>
 
 ### ✅ **계획 수정 및 삭제**
 
-![계획 수정 및 삭제](https://cdn.discordapp.com/attachments/892308009194258502/893449297146806302/soundsearch.gif)
+![계획 수정 및 삭제](https://cdn.discordapp.com/attachments/850189052379922463/949138330371624980/HappyNewYear_.gif)
 
 </div>
