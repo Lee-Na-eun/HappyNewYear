@@ -158,13 +158,13 @@ export const ResultWrap = styled.div`
       @media (max-width: 420px) {
         font-size: 15px;
       }
-      > p {
-      }
-      padding: 20px 30px;
-      @media (max-width: 420px) {
-        font-size: 10px;
-        padding: 0 20px 20px 20px;
-      }
+    }
+    > p {
+      padding: 20px 40px;
+    }
+    @media (max-width: 420px) {
+      font-size: 10px;
+      padding: 0 20px 20px 20px;
     }
     > .fontIcon {
       color: #878bbe;
