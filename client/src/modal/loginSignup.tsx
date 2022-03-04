@@ -143,8 +143,6 @@ function LoginSignup() {
           password: encrypted,
         });
 
-        console.log(result);
-
         if (result.data.message === 'ok') {
           swal({
             title: '로그인이 완료되었습니다.',
@@ -156,7 +154,6 @@ function LoginSignup() {
             dispatch(modalClose());
             dispatch(navClose());
           });
-          console.log(result);
         }
       }
     } catch (err: any) {
@@ -181,9 +178,6 @@ function LoginSignup() {
       }
     }
   };
-
-  // console.log(statusResult);
-  // console.log(loginInfo);
 
   return (
     <LoginSignupModal>
